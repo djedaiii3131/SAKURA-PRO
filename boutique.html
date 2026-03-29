@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boutique — Sakura Group™</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --pink:     #e8a0be;
+  --pink-d:   #c4608e;
+  --pink-dd:  #9b3868;
+  --pink-l:   #f5cede;
+  --gold:     #c8a96e;
+  --gold-l:   #e8d0a0;
+  --ink:      #08050c;
+  --ink-2:    #110c18;
+  --ink-3:    #1a1226;
+  --white:    #fdf8fb;
+  --white-60: rgba(253,248,251,.6);
+  --white-30: rgba(253,248,251,.3);
+  --white-10: rgba(253,248,251,.1);
+  --white-05: rgba(253,248,251,.05);
+}
+
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--ink);
+  color: var(--white);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* CURSOR */
+#cur-dot {
+  position: fixed; z-index: 9999;
+  width: 5px; height: 5px;
+  background: var(--pink);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%,-50%);
+}
+#cur-ring {
+  position: fixed; z-index: 9998;
+  width: 36px; height: 36px;
+  border: 1px solid rgba(232,160,190,.45);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%,-50%);
+  transition: width .4s cubic-bezier(.19,1,.22,1), height .4s cubic-bezier(.19,1,.22,1), border-color .3s, background .3s;
+}
+body.hov #cur-ring {
+  width: 56px; height: 56px;
+  border-color: var(--pink);
+  background: rgba(232,160,190,.06);
+}
+
+/* BG CANVAS */
+#bg-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 1;
+  pointer-events: none; opacity: .032;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='f'%3E%3CfeTurbulence baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23f)'/%3E%3C/svg%3E");
+  background-size: 300px;
+}
+
+/* NAV */
+#nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+  height: 72px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 4rem;
+  background: rgba(8,5,12,.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(232,160,190,.1);
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem; font-weight: 300; letter-spacing: .18em;
+  color: var(--white); text-decoration: none;
+  display: flex; align-items: center; gap: .5rem;
+}
+.nav-logo .dot { color: var(--pink); }
+.nav-back {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-size: .62rem; font-weight: 300; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--white-60);
+  text-decoration: none; transition: color .25s;
+}
+.nav-back:hover { color: var(--pink); }
+.nav-back svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; transition: transform .3s; }
+.nav-back:hover svg { transform: translateX(-3px); }
+
+/* PAGE HEADER */
+.page-header {
+  position: relative; z-index: 10;
+  padding: 10rem 4rem 5rem;
+  text-align: center;
+}
+.eyebrow {
+  display: inline-flex; align-items: center; gap: .75rem;
+  font-size: .58rem; letter-spacing: .3em; text-transform: uppercase;
+  color: var(--pink); margin-bottom: 1.2rem;
+}
+.eyebrow::before { content: ''; display: block; width: 22px; height: 1px; background: var(--pink); flex-shrink: 0; }
+.page-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 300; line-height: 1.05; letter-spacing: -.01em;
+  margin-bottom: 1.5rem;
+}
+.page-title em { font-style: italic; color: var(--pink); }
+.page-sub {
+  font-size: .88rem; font-weight: 200; color: var(--white-60);
+  line-height: 1.9; max-width: 500px; margin: 0 auto;
+}
+
+/* SECTION */
+.section { position: relative; z-index: 10; padding: 6rem 4rem; }
+.section--alt { background: var(--ink-2); }
+.sec-eyebrow {
+  display: flex; align-items: center; gap: .75rem;
+  font-size: .58rem; letter-spacing: .3em; text-transform: uppercase;
+  color: var(--pink); margin-bottom: 1.2rem;
+}
+.sec-eyebrow::before { content: ''; display: block; width: 22px; height: 1px; background: var(--pink); flex-shrink: 0; }
+.sec-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  font-weight: 300; line-height: 1.1; letter-spacing: -.01em;
+  margin-bottom: 4rem;
+}
+.sec-title em { font-style: italic; color: var(--pink); }
+
+/* SHOP CARDS (existing products) */
+.shop-grid { display: flex; flex-direction: column; gap: 1.5rem; }
+.shop-card {
+  background: var(--ink-3);
+  border: 1px solid var(--white-10);
+  border-radius: 14px; padding: 2.5rem 3rem;
+  position: relative; overflow: hidden; cursor: none;
+  transition: all .45s cubic-bezier(.19,1,.22,1);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0 3rem;
+}
+.shop-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(232,160,190,.22);
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+}
+.shop-card .top-line {
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--pink), transparent);
+  transform: scaleX(0);
+  transition: transform .6s cubic-bezier(.19,1,.22,1);
+}
+.shop-card:hover .top-line { transform: scaleX(1); }
+.shop-glow {
+  position: absolute; width: 280px; height: 280px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,160,190,.06), transparent 70%);
+  top: -80px; right: -80px; transition: all .5s; pointer-events: none;
+}
+.shop-card:hover .shop-glow { width: 380px; height: 380px; top: -100px; right: -100px; }
+.shop-badge {
+  position: absolute; top: 1.4rem; right: 1.4rem;
+  background: linear-gradient(135deg, var(--pink-dd), var(--pink));
+  color: var(--ink); font-size: .52rem; font-weight: 500;
+  letter-spacing: .12em; text-transform: uppercase;
+  padding: .28rem .75rem; border-radius: 100px; z-index: 2;
+}
+.shop-left-col { display: flex; align-items: center; justify-content: center; width: 56px; flex-shrink: 0; }
+.shop-num {
+  font-family: 'Cormorant Garamond', serif; font-size: 3.5rem;
+  font-weight: 300; color: rgba(232,160,190,.12); line-height: 1; transition: color .4s;
+}
+.shop-card:hover .shop-num { color: rgba(232,160,190,.25); }
+.shop-body { flex: 1; min-width: 0; }
+.shop-type {
+  font-size: .55rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--pink); margin-bottom: .6rem;
+  display: flex; align-items: center; gap: .5rem;
+}
+.shop-type::before { content: ''; display: block; width: 14px; height: 1px; background: var(--pink); }
+.shop-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; line-height: 1.2; margin-bottom: .6rem; }
+.shop-desc { font-size: .78rem; font-weight: 200; color: var(--white-60); line-height: 1.85; }
+.shop-list { list-style: none; margin: .8rem 0 0; display: flex; flex-direction: column; gap: .55rem; }
+.shop-list li { font-size: .75rem; font-weight: 200; color: var(--white-60); display: flex; align-items: center; gap: .6rem; line-height: 1.5; }
+.shop-list li::before { content: ''; display: block; width: 5px; height: 5px; border-radius: 50%; background: var(--pink); flex-shrink: 0; opacity: .7; }
+.shop-foot { display: flex; flex-direction: column; align-items: flex-end; gap: 1rem; min-width: 140px; text-align: right; }
+.shop-price { font-family: 'Cormorant Garamond', serif; font-size: 2.6rem; font-weight: 300; color: var(--gold-l); line-height: 1; white-space: nowrap; }
+.shop-price small { font-family: 'Jost', sans-serif; font-size: .55rem; font-weight: 200; color: var(--white-30); letter-spacing: .1em; text-transform: uppercase; display: block; margin-top: .3rem; text-align: right; }
+.shop-btn {
+  display: inline-flex; align-items: center; gap: .4rem;
+  padding: .5rem 1.2rem; border: 1px solid rgba(232,160,190,.2); border-radius: 100px;
+  font-family: 'Jost', sans-serif; font-size: .6rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--pink); background: transparent; cursor: none; transition: all .3s; text-decoration: none;
+}
+.shop-card:hover .shop-btn { border-color: var(--pink); }
+
+/* DIVIDER */
+.section-divider {
+  position: relative; z-index: 10;
+  display: flex; align-items: center; gap: 2rem;
+  padding: 0 4rem;
+}
+.section-divider::before, .section-divider::after {
+  content: ''; flex: 1; height: 1px; background: var(--white-10);
+}
+.section-divider span {
+  font-size: .55rem; letter-spacing: .28em; text-transform: uppercase;
+  color: var(--pink); white-space: nowrap; flex-shrink: 0;
+}
+
+/* PACKAGING CARDS */
+.pkg-intro-text { margin-bottom: 4rem; }
+.pkg-intro-text p { font-size: .85rem; font-weight: 200; color: var(--white-60); line-height: 2; max-width: 520px; margin-top: 1rem; }
+
+.pkg-includes {
+  background: rgba(232,160,190,.04); border: 1px solid rgba(232,160,190,.1);
+  border-radius: 12px; padding: 1.6rem 2rem; margin-bottom: 4rem;
+}
+.pkg-includes-label {
+  font-size: .56rem; letter-spacing: .26em; text-transform: uppercase;
+  color: var(--pink); margin-bottom: 1.2rem;
+  display: flex; align-items: center; gap: .75rem;
+}
+.pkg-includes-label::before { content: ''; display: block; width: 16px; height: 1px; background: var(--pink); }
+.pkg-includes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: .8rem; }
+.pkg-inc-item { display: flex; align-items: center; gap: .7rem; font-size: .75rem; font-weight: 200; color: var(--white-60); }
+.pkg-inc-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--pink); flex-shrink: 0; opacity: .8; }
+
+.pkg-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+@media (max-width: 900px) { .pkg-grid { grid-template-columns: 1fr; } }
+
+.pkg-card {
+  background: var(--ink-3); border: 1px solid rgba(232,160,190,.1);
+  border-radius: 16px; padding: 2.5rem; position: relative;
+  overflow: hidden; cursor: none;
+  transition: all .45s cubic-bezier(.19,1,.22,1);
+  display: flex; flex-direction: column;
+}
+.pkg-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(232,160,190,.22);
+  box-shadow: 0 24px 60px rgba(0,0,0,.5);
+}
+.pkg-card.pkg-featured { border-color: rgba(232,160,190,.3); }
+.pkg-card .top-line {
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--pink), transparent);
+  transform: scaleX(0); transition: transform .6s cubic-bezier(.19,1,.22,1);
+}
+.pkg-card:hover .top-line, .pkg-card.pkg-featured .top-line { transform: scaleX(1); }
+.pkg-glow {
+  position: absolute; width: 240px; height: 240px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,160,190,.05), transparent 70%);
+  top: -80px; right: -80px; pointer-events: none; transition: all .5s;
+}
+.pkg-card:hover .pkg-glow { width: 320px; height: 320px; }
+.pkg-popular {
+  position: absolute; top: 1.4rem; right: 1.4rem;
+  background: linear-gradient(135deg, var(--pink-dd), var(--pink));
+  color: var(--ink); font-size: .5rem; font-weight: 500;
+  letter-spacing: .14em; text-transform: uppercase;
+  padding: .28rem .85rem; border-radius: 100px; z-index: 2;
+}
+.pkg-tier {
+  font-size: .55rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--pink); margin-bottom: .7rem;
+  display: flex; align-items: center; gap: .5rem;
+}
+.pkg-tier::before { content: ''; display: block; width: 14px; height: 1px; background: var(--pink); }
+.pkg-name { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; line-height: 1.1; margin-bottom: .6rem; }
+.pkg-name em { font-style: italic; color: var(--pink); }
+.pkg-desc { font-size: .78rem; font-weight: 200; color: var(--white-60); line-height: 1.85; margin-bottom: 1.8rem; }
+.pkg-price-row { display: flex; align-items: baseline; gap: .4rem; margin-bottom: 2rem; }
+.pkg-price-amount { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300; color: var(--gold-l); line-height: 1; }
+.pkg-price-cur { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; color: rgba(232,208,160,.5); }
+.pkg-price-old { font-size: .75rem; font-weight: 200; color: var(--white-30); text-decoration: line-through; margin-left: .4rem; }
+.pkg-list { list-style: none; display: flex; flex-direction: column; gap: 0; margin-bottom: 2.5rem; flex: 1; }
+.pkg-list li {
+  font-size: .78rem; font-weight: 200; color: var(--white-60);
+  display: flex; align-items: flex-start; gap: .7rem; line-height: 1.5;
+  padding: .65rem 0; border-bottom: 1px solid var(--white-10);
+}
+.pkg-list li:last-child { border-bottom: none; }
+.pkg-list li::before { content: ''; display: block; width: 5px; height: 5px; border-radius: 50%; background: var(--pink); flex-shrink: 0; margin-top: .4rem; opacity: .8; }
+.pkg-cta {
+  display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
+  padding: .85rem 1.8rem; border-radius: 100px;
+  font-family: 'Jost', sans-serif; font-size: .62rem; font-weight: 400;
+  letter-spacing: .16em; text-transform: uppercase; text-decoration: none;
+  cursor: none; transition: all .35s cubic-bezier(.19,1,.22,1); white-space: nowrap;
+}
+.pkg-cta svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
+.pkg-cta-outline {
+  border: 1px solid rgba(37,211,102,.25); color: rgba(37,211,102,.7); background: transparent;
+}
+.pkg-cta-outline:hover {
+  border-color: rgba(37,211,102,.6); color: #25D366; transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(37,211,102,.15);
+}
+.pkg-cta-fill {
+  background: rgba(37,211,102,.1); border: 1px solid rgba(37,211,102,.35); color: #25D366;
+}
+.pkg-cta-fill:hover {
+  background: rgba(37,211,102,.2); border-color: rgba(37,211,102,.7); transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(37,211,102,.25);
+}
+.pkg-footer-note {
+  text-align: center; font-size: .6rem; letter-spacing: .14em; text-transform: uppercase; color: var(--white-30);
+}
+
+/* FOOTER */
+footer {
+  position: relative; z-index: 10;
+  padding: 3rem 4rem;
+  border-top: 1px solid var(--white-10);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1.5rem;
+}
+.f-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 300; letter-spacing: .12em; }
+.f-logo em { font-style: italic; color: var(--pink); }
+.f-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+.f-links a { font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--white-30); text-decoration: none; transition: color .25s; }
+.f-links a:hover { color: var(--pink); }
+.f-copy { font-size: .58rem; letter-spacing: .1em; color: var(--white-30); }
+
+/* ANIMATIONS */
+@keyframes rise { to { transform: translateY(0); opacity: 1; } }
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s cubic-bezier(.19,1,.22,1), transform .7s cubic-bezier(.19,1,.22,1); }
+.reveal.up { opacity: 1; transform: none; }
+
+/* WA FLOAT */
+#wa-float {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 9000;
+  width: 52px; height: 52px; background: #25D366; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; color: #fff;
+  box-shadow: 0 4px 24px rgba(37,211,102,.4);
+  transition: transform .3s cubic-bezier(.19,1,.22,1), box-shadow .3s;
+  cursor: none;
+}
+#wa-float:hover { transform: scale(1.1) translateY(-2px); box-shadow: 0 8px 32px rgba(37,211,102,.55); }
+
+@media (max-width: 768px) {
+  #nav { padding: 0 1.5rem; }
+  .page-header { padding: 8rem 1.5rem 3rem; }
+  .section { padding: 4rem 1.5rem; }
+  .shop-card { grid-template-columns: 1fr; gap: 1rem; padding: 1.8rem; }
+  .shop-foot { align-items: flex-start; }
+  .section-divider { padding: 0 1.5rem; }
+  footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
+  .f-links { justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<div id="cur-dot"></div>
+<div id="cur-ring"></div>
+<canvas id="bg-canvas"></canvas>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="index.html">Sakura <span class="dot">Group</span>™</a>
+  <a class="nav-back" href="index.html">
+    <svg viewBox="0 0 24 24"><path d="M19 12H5M5 12l7-7M5 12l7 7"/></svg>
+    Retour au site
+  </a>
+</nav>
+
+<!-- HEADER -->
+<div class="page-header">
+  <div class="eyebrow">Boutique</div>
+  <h1 class="page-title">Tout pour votre<br><em>empire</em> digital</h1>
+  <p class="page-sub">Des ressources, services et packagings conçus pour propulser votre business en ligne. Choisissez ce dont vous avez besoin.</p>
+</div>
+
+<!-- ════════ PRODUITS ════════ -->
+<section class="section">
+  <div class="sec-eyebrow">Produits & Services</div>
+  <h2 class="sec-title">Nos ressources <em>digitales</em></h2>
+
+  <div class="shop-grid">
+
+    <div class="shop-card reveal">
+      <div class="top-line"></div>
+      <div class="shop-glow"></div>
+      <div class="shop-badge">Offre phare</div>
+      <div class="shop-left-col"><div class="shop-num">01</div></div>
+      <div class="shop-body">
+        <div class="shop-type">Création Shopify</div>
+        <div class="shop-title">Boutique Shopify Pro — Clé en mains</div>
+        <p class="shop-desc">On crée votre boutique Shopify complète : design premium, produits configurés, paiement activé et domaine connecté. Prête à vendre dès le premier jour.</p>
+        <ul class="shop-list">
+          <li>Design personnalisé & responsive</li>
+          <li>Produits + fiches configurés</li>
+          <li>Paiement, livraison & domaine inclus</li>
+          <li>Formation prise en main offerte</li>
+        </ul>
+      </div>
+      <div class="shop-foot">
+        <div class="shop-price">50€<small>Livraison sous 5 jours</small></div>
+        <a href="https://wa.me/33601747023?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20la%20Boutique%20Shopify%20Pro%20%C3%A0%2050%E2%82%AC." target="_blank" class="shop-btn">Commander →</a>
+      </div>
+    </div>
+
+    <div class="shop-card reveal">
+      <div class="top-line"></div>
+      <div class="shop-glow"></div>
+      <div class="shop-badge">Populaire</div>
+      <div class="shop-left-col"><div class="shop-num">02</div></div>
+      <div class="shop-body">
+        <div class="shop-type">Création de Site Web</div>
+        <div class="shop-title">Site Web Professionnel — Clé en mains</div>
+        <p class="shop-desc">Site vitrine, landing page ou portfolio livré clé en mains. Design sur-mesure, optimisé SEO, rapide et mobile-first. Idéal pour entrepreneurs et TPE/PME.</p>
+        <ul class="shop-list">
+          <li>Design premium sur-mesure</li>
+          <li>Optimisé SEO & performance</li>
+          <li>Formulaire de contact + hébergement</li>
+          <li>Modifications incluses 30 jours</li>
+        </ul>
+      </div>
+      <div class="shop-foot">
+        <div class="shop-price">180€<small>Au lieu de 297€</small></div>
+        <a href="https://wa.me/33601747023?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20la%20cr%C3%A9ation%20d'un%20site%20web%20professionnel%20%C3%A0%20180%E2%82%AC." target="_blank" class="shop-btn">Commander →</a>
+      </div>
+    </div>
+
+    <div class="shop-card reveal">
+      <div class="top-line"></div>
+      <div class="shop-glow"></div>
+      <div class="shop-badge">Exclusif</div>
+      <div class="shop-left-col"><div class="shop-num">03</div></div>
+      <div class="shop-body">
+        <div class="shop-type">Formation Complète</div>
+        <div class="shop-title">DropEat — Lancer son Business avec les Restaurateurs</div>
+        <p class="shop-desc">Formation complète pour créer et gérer des boutiques virtuelles sur Uber Eats pour des restaurateurs. Commissions récurrentes chaque mois — un vrai business passif et scalable.</p>
+        <ul class="shop-list">
+          <li>Comment approcher & convaincre les restaurateurs</li>
+          <li>Création de la boutique virtuelle Uber Eats</li>
+          <li>Optimisation du menu pour maximiser les commandes</li>
+          <li>Modèle de commission & contrat type inclus</li>
+        </ul>
+      </div>
+      <div class="shop-foot">
+        <div class="shop-price">90€<small>Accès à vie</small></div>
+        <a href="https://wa.me/33601747023?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20la%20formation%20DropEat%20%C3%A0%2090%E2%82%AC." target="_blank" class="shop-btn">Obtenir →</a>
+      </div>
+    </div>
+
+    <div class="shop-card reveal">
+      <div class="top-line"></div>
+      <div class="shop-glow"></div>
+      <div class="shop-badge">Service premium</div>
+      <div class="shop-left-col"><div class="shop-num">04</div></div>
+      <div class="shop-body">
+        <div class="shop-type">Service DropEat — Géré pour vous</div>
+        <div class="shop-title">On Lance & Gère votre Boutique Uber Eats à votre place</div>
+        <p class="shop-desc">Vous êtes restaurateur ? On s'occupe de tout : création, optimisation, gestion quotidienne. Vous cuisinez, on gère le digital. Revenus supplémentaires dès le premier mois.</p>
+        <ul class="shop-list">
+          <li>Création & référencement complet sur Uber Eats</li>
+          <li>Menu pro optimisé pour maximiser les commandes</li>
+          <li>Gestion quotidienne & support inclus</li>
+          <li>Rapport mensuel des performances & revenus</li>
+        </ul>
+      </div>
+      <div class="shop-foot">
+        <div class="shop-price">Sur devis<small>Commission mensuelle</small></div>
+        <a href="https://wa.me/33601747023?text=Bonjour%2C%20je%20suis%20restaurateur(trice)%20et%20int%C3%A9ress%C3%A9(e)%20par%20le%20service%20DropEat%20g%C3%A9r%C3%A9%20pour%20moi." target="_blank" class="shop-btn">Nous contacter →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="section-divider">
+  <span>✦ Packagings Complets ✦</span>
+</div>
+
+<!-- ════════ PACKAGINGS ════════ -->
+<section class="section section--alt">
+  <div class="sec-eyebrow">Packagings</div>
+  <h2 class="sec-title">Votre présence digitale,<br><em>tout-en-un</em></h2>
+
+  <div class="pkg-intro-text reveal">
+    <p>Page de vente, boutique Shopify, site web complet — réunis dans une offre pensée pour convertir et faire grandir votre business dès le premier jour.</p>
+  </div>
+
+  <div class="pkg-includes reveal">
+    <div class="pkg-includes-label">Inclus dans chaque packaging</div>
+    <div class="pkg-includes-grid">
+      <div class="pkg-inc-item"><div class="pkg-inc-dot"></div>Design sur-mesure</div>
+      <div class="pkg-inc-item"><div class="pkg-inc-dot"></div>Page de vente optimisée</div>
+      <div class="pkg-inc-item"><div class="pkg-inc-dot"></div>Bouton WhatsApp intégré</div>
+      <div class="pkg-inc-item"><div class="pkg-inc-dot"></div>Version mobile responsive</div>
+      <div class="pkg-inc-item"><div class="pkg-inc-dot"></div>Livraison rapide garantie</div>
+      <div class="pkg-inc-item"><div class="pkg-inc-dot"></div>Révisions incluses</div>
+    </div>
+  </div>
+
+  <div class="pkg-grid">
+
+    <!-- STARTER -->
+    <div class="pkg-card reveal">
+      <div class="top-line"></div>
+      <div class="pkg-glow"></div>
+      <div class="pkg-tier">Essentiel</div>
+      <div class="pkg-name">Pack <em>Starter</em></div>
+      <p class="pkg-desc">La base parfaite pour démarrer. Une page de vente percutante pour générer vos premiers clients rapidement.</p>
+      <div class="pkg-price-row">
+        <span class="pkg-price-cur">€</span>
+        <span class="pkg-price-amount">297</span>
+      </div>
+      <ul class="pkg-list">
+        <li>1 page de vente complète</li>
+        <li>Intégration WhatsApp directe</li>
+        <li>Design responsive mobile</li>
+        <li>2 révisions incluses</li>
+        <li>Livraison sous 5 jours</li>
+      </ul>
+      <a class="pkg-cta pkg-cta-outline" href="https://wa.me/33601747023?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20le%20Pack%20Starter%20%C3%A0%20297%E2%82%AC%20%F0%9F%9A%80" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Je veux cette offre
+      </a>
+    </div>
+
+    <!-- GROWTH -->
+    <div class="pkg-card pkg-featured reveal">
+      <div class="top-line"></div>
+      <div class="pkg-glow"></div>
+      <div class="pkg-popular">Le plus choisi</div>
+      <div class="pkg-tier">Complet</div>
+      <div class="pkg-name">Pack <em>Growth</em></div>
+      <p class="pkg-desc">Page de vente + site web vitrine professionnel. L'offre idéale pour asseoir votre crédibilité en ligne.</p>
+      <div class="pkg-price-row">
+        <span class="pkg-price-cur">€</span>
+        <span class="pkg-price-amount">550</span>
+      </div>
+      <ul class="pkg-list">
+        <li>Page de vente haute conversion</li>
+        <li>Site web vitrine (3–5 pages)</li>
+        <li>Intégration WhatsApp + formulaire</li>
+        <li>SEO de base configuré</li>
+        <li>4 révisions incluses</li>
+        <li>Livraison sous 10 jours</li>
+      </ul>
+      <a class="pkg-cta pkg-cta-fill" href="https://wa.me/33601747023?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20le%20Pack%20Growth%20%C3%A0%20550%E2%82%AC%20%F0%9F%9A%80" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Je veux cette offre
+      </a>
+    </div>
+
+    <!-- FULL STACK -->
+    <div class="pkg-card reveal">
+      <div class="top-line"></div>
+      <div class="pkg-glow"></div>
+      <div class="pkg-tier">Premium</div>
+      <div class="pkg-name">Pack <em>Full Stack</em></div>
+      <p class="pkg-desc">L'écosystème complet : page de vente, site web et boutique Shopify pour vendre partout, tout le temps.</p>
+      <div class="pkg-price-row">
+        <span class="pkg-price-cur">€</span>
+        <span class="pkg-price-amount">965</span>
+      </div>
+      <ul class="pkg-list">
+        <li>Tout le Pack Growth inclus</li>
+        <li>Boutique Shopify complète</li>
+        <li>Jusqu'à 20 produits configurés</li>
+        <li>Paiement en ligne activé</li>
+        <li>Révisions illimitées (30 jours)</li>
+        <li>Support 1 mois offert</li>
+      </ul>
+      <a class="pkg-cta pkg-cta-outline" href="https://wa.me/33601747023?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20le%20Pack%20Full%20Stack%20%C3%A0%20965%E2%82%AC%20%F0%9F%9A%80" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Je veux cette offre
+      </a>
+    </div>
+
+  </div>
+
+  <p class="pkg-footer-note reveal">Tous les prix sont en euros · Acompte 50% au démarrage · Satisfaction garantie</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">Sakura <em>Group</em>™</div>
+  <div class="f-links">
+    <a href="index.html#about">À propos</a>
+    <a href="index.html#services">Services</a>
+    <a href="index.html#why">Avantages</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+  <div class="f-copy">© 2025 Sakura Group™ — Tous droits réservés</div>
+</footer>
+
+<!-- WA FLOAT -->
+<a href="https://wa.me/33601747023?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20vos%20services." target="_blank" id="wa-float" title="Nous contacter sur WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+/* CURSOR */
+const dot = document.getElementById('cur-dot');
+const ring = document.getElementById('cur-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+(function loop() {
+  rx += (mx - rx) * .12; ry += (my - ry) * .12;
+  dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  requestAnimationFrame(loop);
+})();
+document.querySelectorAll('a, button, .shop-card, .pkg-card').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('hov'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('hov'));
+});
+
+/* BACKGROUND */
+const cvs = document.getElementById('bg-canvas');
+const cx = cvs.getContext('2d');
+let W, H, T = 0;
+function resizeCvs() { W = cvs.width = window.innerWidth; H = cvs.height = window.innerHeight; }
+resizeCvs();
+window.addEventListener('resize', resizeCvs, { passive: true });
+const PCOLS = [[240,130,175],[220,90,145],[255,175,205],[200,75,130],[250,155,190],[235,110,160]];
+const petals = [];
+function newPetal(randomY) {
+  const c = PCOLS[Math.floor(Math.random() * PCOLS.length)];
+  return { x: Math.random()*W, y: randomY ? Math.random()*H : -20, vx: (Math.random()-.5)*1.3, vy: Math.random()*.75+.3, rot: Math.random()*Math.PI*2, vrot: (Math.random()-.5)*.038, sz: Math.random()*12+5, a: Math.random()*.5+.18, wb: Math.random()*Math.PI*2, ws: Math.random()*.018+.007, sw: Math.random()*1.1+.35, r: c[0], g: c[1], b: c[2] };
+}
+for (let i = 0; i < 65; i++) petals.push(newPetal(true));
+function drawPetal(p) {
+  cx.save(); cx.translate(p.x, p.y); cx.rotate(p.rot); cx.globalAlpha = p.a;
+  cx.beginPath(); cx.moveTo(0,-p.sz*.55); cx.bezierCurveTo(p.sz*.52,-p.sz*.48,p.sz*.52,p.sz*.42,0,p.sz*.55); cx.bezierCurveTo(-p.sz*.52,p.sz*.42,-p.sz*.52,-p.sz*.48,0,-p.sz*.55);
+  cx.fillStyle = `rgba(${p.r},${p.g},${p.b},1)`; cx.fill();
+  cx.beginPath(); cx.moveTo(0,-p.sz*.28); cx.bezierCurveTo(p.sz*.22,-p.sz*.22,p.sz*.22,p.sz*.2,0,p.sz*.28); cx.bezierCurveTo(-p.sz*.22,p.sz*.2,-p.sz*.22,-p.sz*.22,0,-p.sz*.28);
+  cx.fillStyle = 'rgba(255,228,238,.32)'; cx.fill(); cx.restore();
+}
+function bgLoop() {
+  cx.clearRect(0,0,W,H); T += .0035;
+  cx.fillStyle = '#08050c'; cx.fillRect(0,0,W,H);
+  function blob(xf,yf,r,cr,cg,cb,alpha,sx,sy,st,sr) {
+    const x=W*xf+Math.sin(T*st)*W*sx, y=H*yf+Math.cos(T*sr)*H*sy;
+    const gr=cx.createRadialGradient(x,y,0,x,y,W*r);
+    gr.addColorStop(0,`rgba(${cr},${cg},${cb},${alpha})`); gr.addColorStop(.5,`rgba(${cr},${cg},${cb},${alpha*.4})`); gr.addColorStop(1,'transparent');
+    cx.fillStyle=gr; cx.fillRect(0,0,W,H);
+  }
+  blob(.50,.35,.55,215,55,118,.26,.10,.08,.42,.35); blob(.82,.52,.40,240,80,148,.20,.08,.10,.55,.40);
+  blob(.18,.72,.38,255,115,155,.16,.07,.08,.60,.50); blob(.88,.14,.30,160,28,98,.18,.05,.07,.38,.60);
+  petals.forEach(p => {
+    p.wb+=p.ws; p.x+=p.vx+Math.sin(p.wb)*p.sw; p.y+=p.vy; p.rot+=p.vrot; p.a=.2+Math.sin(p.wb*2.1)*.12;
+    if (p.y>H+24||p.x<-40||p.x>W+40) Object.assign(p,newPetal(false));
+    drawPetal(p);
+  });
+  requestAnimationFrame(bgLoop);
+}
+bgLoop();
+
+/* SCROLL REVEAL */
+const revEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const el = entry.target;
+    const sib = Array.from(el.parentElement.children).filter(c => c.classList.contains('reveal'));
+    const idx = sib.indexOf(el);
+    setTimeout(() => el.classList.add('up'), idx * 70);
+    io.unobserve(el);
+  });
+}, { threshold: .1, rootMargin: '0px 0px -40px 0px' });
+revEls.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
