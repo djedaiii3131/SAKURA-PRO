@@ -1,0 +1,1795 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sakura Group™ — Agence Digitale</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ═══════════════════════════════
+   RESET & ROOT
+═══════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --pink:     #e8a0be;
+  --pink-d:   #c4608e;
+  --pink-dd:  #9b3868;
+  --pink-l:   #f5cede;
+  --gold:     #c8a96e;
+  --gold-l:   #e8d0a0;
+  --ink:      #08050c;
+  --ink-2:    #110c18;
+  --ink-3:    #1a1226;
+  --white:    #fdf8fb;
+  --white-60: rgba(253,248,251,.6);
+  --white-30: rgba(253,248,251,.3);
+  --white-10: rgba(253,248,251,.1);
+  --white-05: rgba(253,248,251,.05);
+}
+
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--ink);
+  color: var(--white);
+  overflow-x: hidden;
+}
+
+
+
+
+/* ═══════════════════════════════
+   BACKGROUND CANVAS
+═══════════════════════════════ */
+#bg-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* grain overlay */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: .032;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='f'%3E%3CfeTurbulence baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23f)'/%3E%3C/svg%3E");
+  background-size: 300px;
+}
+
+/* ═══════════════════════════════
+   NAVIGATION  ← fixed, clean, no bugs
+═══════════════════════════════ */
+#nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 900;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4rem;
+  /* starts fully transparent */
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background .5s ease, border-color .5s ease;
+}
+#nav.scrolled {
+  background: rgba(8,5,12,.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom-color: rgba(232,160,190,.1);
+}
+
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem;
+  font-weight: 300;
+  letter-spacing: .18em;
+  color: var(--white);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.nav-logo .dot { color: var(--pink); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  list-style: none;
+}
+.nav-links a {
+  font-size: .62rem;
+  font-weight: 300;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--white-60);
+  text-decoration: none;
+  transition: color .25s;
+}
+.nav-links a:hover { color: var(--white); }
+
+.nav-cta {
+  font-size: .62rem;
+  font-weight: 400;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--pink) !important;
+  border: 1px solid rgba(232,160,190,.35);
+  padding: .45rem 1.4rem;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: background .25s, border-color .25s !important;
+  white-space: nowrap;
+}
+.nav-cta:hover {
+  background: var(--pink) !important;
+  color: var(--ink) !important;
+  border-color: var(--pink) !important;
+}
+
+/* ═══════════════════════════════
+   HERO
+═══════════════════════════════ */
+#hero {
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 0 4rem 4rem;
+  padding-top: 72px;
+}
+.hero-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 2rem;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .7rem;
+  background: rgba(232,160,190,.07);
+  border: 1px solid rgba(232,160,190,.18);
+  border-radius: 100px;
+  padding: .35rem 1rem .35rem .6rem;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: rise .8s .1s cubic-bezier(.19,1,.22,1) forwards;
+}
+.hero-badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--pink);
+  box-shadow: 0 0 8px var(--pink);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+.hero-badge span {
+  font-size: .6rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: rgba(232,160,190,.75);
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.8rem, 8.5vw, 8.5rem);
+  font-weight: 300;
+  line-height: 1.0;
+  letter-spacing: -.01em;
+  margin-bottom: 2.5rem;
+  overflow: hidden;
+}
+.hero-title .line {
+  display: block;
+  overflow: hidden;
+}
+.hero-title .line span {
+  display: block;
+  transform: translateY(110%);
+}
+.hero-title .line:nth-child(1) span { animation: rise .9s .25s cubic-bezier(.19,1,.22,1) forwards; }
+.hero-title .line:nth-child(2) span { animation: rise .9s .38s cubic-bezier(.19,1,.22,1) forwards; }
+.hero-title .line:nth-child(3) span { animation: rise .9s .51s cubic-bezier(.19,1,.22,1) forwards; }
+.hero-title em { font-style: italic; color: var(--pink); }
+
+/* typewriter removed — replaced by .hero-words */
+
+.hero-words {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  margin-bottom: 2.5rem;
+  height: 4rem;
+  line-height: 1;
+}
+.hw {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.8rem, 5.5vw, 5.5rem);
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(232,160,190,.18);
+  transition: color .5s ease, opacity .5s ease;
+  letter-spacing: -.01em;
+  white-space: nowrap;
+}
+.hw.active {
+  color: var(--pink);
+}
+.hw-sep {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.5rem, 3vw, 3rem);
+  color: rgba(232,160,190,.2);
+  font-weight: 300;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.hero-sub {
+  max-width: 440px;
+  font-size: .9rem;
+  font-weight: 200;
+  line-height: 1.9;
+  color: var(--white-60);
+  margin-bottom: 3rem;
+  opacity: 0;
+  animation: rise .8s .7s cubic-bezier(.19,1,.22,1) forwards;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: rise .8s .85s cubic-bezier(.19,1,.22,1) forwards;
+}
+
+/* scroll hint */
+.hero-scroll {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  font-size: .58rem;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--white-30);
+  opacity: 0;
+  animation: rise .8s 1.1s cubic-bezier(.19,1,.22,1) forwards;
+  line-height: 1;
+  border: none;
+  background: none;
+  align-self: flex-start;
+  margin-top: 2rem;
+}
+.scroll-track {
+  width: 48px;
+  height: 1px;
+  background: rgba(232,160,190,.15);
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: none;
+  display: block;
+}
+.scroll-track::after {
+  content: '';
+  position: absolute;
+  left: -48px;
+  top: 0;
+  width: 48px;
+  height: 1px;
+  background: var(--pink);
+  animation: track-slide 1.8s ease-in-out infinite;
+  border: none;
+  display: block;
+}
+
+/* vertical side label */
+.hero-side {
+  position: absolute;
+  right: 3.5rem;
+  top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+  font-size: .55rem;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--white-30);
+  opacity: 0;
+  animation: rise .8s 1.3s cubic-bezier(.19,1,.22,1) forwards;
+  white-space: nowrap;
+}
+
+/* ═══════════════════════════════
+   MARQUEE
+═══════════════════════════════ */
+.marquee-band {
+  position: relative; z-index: 10;
+  overflow: hidden;
+  border-top: 1px solid var(--white-10);
+  border-bottom: 1px solid var(--white-10);
+  padding: .8rem 0;
+  background: rgba(8,5,12,.3);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+.marquee-track:hover { animation-play-state: paused; }
+.m-item {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  padding: 0 2.5rem;
+  font-size: .58rem;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--white-30);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.m-item::after {
+  content: '✦';
+  color: rgba(232,160,190,.3);
+  font-size: .45rem;
+}
+
+/* ═══════════════════════════════
+   SHARED SECTION STYLES
+═══════════════════════════════ */
+.section {
+  position: relative;
+  z-index: 10;
+  padding: 8rem 4rem;
+}
+.section--alt { background: var(--ink-2); }
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  font-size: .58rem;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--pink);
+  margin-bottom: 1.2rem;
+}
+.eyebrow::before {
+  content: '';
+  display: block;
+  width: 22px; height: 1px;
+  background: var(--pink);
+  flex-shrink: 0;
+}
+
+.sec-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 4vw, 3.8rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -.01em;
+}
+.sec-title em { font-style: italic; color: var(--pink); }
+
+/* ═══════════════════════════════
+   BUTTONS
+═══════════════════════════════ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  padding: .82rem 2.2rem;
+  font-family: 'Jost', sans-serif;
+  font-size: .65rem;
+  font-weight: 400;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 100px;
+  transition: all .35s cubic-bezier(.19,1,.22,1);
+  white-space: nowrap;
+}
+.btn svg {
+  width: 13px; height: 13px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform .3s;
+}
+.btn:hover svg { transform: translate(3px,-3px); }
+
+.btn-fill {
+  background: var(--pink);
+  color: var(--ink);
+  border: 1px solid var(--pink);
+}
+.btn-fill:hover {
+  background: var(--pink-d);
+  border-color: var(--pink-d);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(196,96,142,.35);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--white-60);
+  border: 1px solid var(--white-10);
+}
+.btn-outline:hover {
+  border-color: rgba(232,160,190,.4);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════
+   ABOUT
+═══════════════════════════════ */
+#about .inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7rem;
+  align-items: center;
+}
+.about-text .sec-title { margin-bottom: 1.8rem; }
+.about-text p {
+  font-size: .88rem;
+  font-weight: 200;
+  color: var(--white-60);
+  line-height: 2;
+  margin-bottom: 1.2rem;
+}
+.about-quote {
+  border-left: 1px solid var(--pink);
+  padding-left: 1.6rem;
+  margin: 2rem 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(253,248,251,.8);
+  line-height: 1.6;
+}
+
+.about-card {
+  background: var(--ink-3);
+  border: 1px solid rgba(232,160,190,.1);
+  border-radius: 16px;
+  padding: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+.about-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(232,160,190,.07), transparent 65%);
+  pointer-events: none;
+}
+.card-kanji {
+  position: absolute;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13rem;
+  color: rgba(232,160,190,.04);
+  top: -1rem; right: -1rem;
+  line-height: 1;
+  pointer-events: none;
+  animation: float 7s ease-in-out infinite;
+}
+.card-stats {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 1.2rem;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 2rem;
+}
+.card-stat {
+  background: var(--white-05);
+  border: 1px solid var(--white-10);
+  border-radius: 10px;
+  padding: 1.4rem 1rem;
+  text-align: center;
+  transition: border-color .3s;
+}
+.card-stat:hover { border-color: rgba(232,160,190,.3); }
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: var(--pink);
+  line-height: 1;
+  margin-bottom: .3rem;
+}
+.stat-lbl {
+  font-size: .55rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--white-30);
+}
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  position: relative;
+  z-index: 1;
+}
+.ctag {
+  font-size: .58rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  border: 1px solid rgba(232,160,190,.15);
+  padding: .3rem .85rem;
+  border-radius: 100px;
+  color: var(--white-30);
+  transition: all .25s;
+}
+.ctag:hover { border-color: rgba(232,160,190,.5); color: var(--pink); }
+
+/* ═══════════════════════════════
+   SERVICES
+═══════════════════════════════ */
+#services .srv-hd {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 4rem;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.srv-list { display: flex; flex-direction: column; }
+
+.srv-row {
+  display: grid;
+  grid-template-columns: 64px 1fr 1fr auto;
+  align-items: start;
+  gap: 2.5rem;
+  padding: 2.2rem 0;
+  border-bottom: 1px solid var(--white-10);
+  transition: background .3s;
+  border-radius: 8px;
+  position: relative;
+}
+.srv-row:first-child { border-top: 1px solid var(--white-10); }
+.srv-row::before {
+  content: '';
+  position: absolute;
+  inset: 0 -2rem;
+  background: rgba(232,160,190,.025);
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity .3s;
+}
+.srv-row:hover::before { opacity: 1; }
+
+.srv-n {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3rem;
+  font-weight: 300;
+  color: rgba(232,160,190,.1);
+  line-height: 1;
+  transition: color .35s;
+  padding-top: .1rem;
+}
+.srv-row:hover .srv-n { color: rgba(232,160,190,.25); }
+
+.srv-info {}
+.srv-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 300;
+  line-height: 1.1;
+  margin-bottom: .35rem;
+  transition: color .3s;
+}
+.srv-row:hover .srv-name { color: var(--pink); }
+.srv-cat {
+  font-size: .58rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--white-30);
+}
+
+.srv-desc {
+  font-size: .8rem;
+  font-weight: 200;
+  color: var(--white-60);
+  line-height: 1.85;
+  max-width: 360px;
+}
+.srv-extra { margin-top: .7rem; }
+
+.price-pill {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .4rem;
+  background: rgba(196,96,142,.1);
+  border: 1px solid rgba(196,96,142,.22);
+  border-radius: 6px;
+  padding: .38rem .85rem;
+  margin-top: .65rem;
+}
+.price-pill .from { font-size: .52rem; letter-spacing: .1em; text-transform: uppercase; color: var(--white-30); }
+.price-pill .old  { font-size: .72rem; color: var(--white-30); text-decoration: line-through; }
+.price-pill .new  { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; color: var(--pink); }
+
+.skool-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  margin-top: .65rem;
+  font-size: .62rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--pink);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(232,160,190,.25);
+  padding-bottom: .15rem;
+  transition: all .25s;
+  cursor: pointer !important;
+  pointer-events: all !important;
+  -webkit-tap-highlight-color: rgba(232,160,190,.2);
+}
+.skool-link:hover { gap: .7rem; border-bottom-color: var(--pink); }
+
+.srv-arrow {
+  width: 34px; height: 34px;
+  border: 1px solid rgba(232,160,190,.18);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all .35s cubic-bezier(.19,1,.22,1);
+  margin-top: .15rem;
+}
+.srv-row:hover .srv-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+.srv-arrow svg { width: 13px; height: 13px; stroke: var(--pink); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ═══════════════════════════════
+   BOUTIQUE
+═══════════════════════════════ */
+#boutique .shop-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 4rem;
+}
+
+.shop-card {
+  background: var(--ink-3);
+  border: 1px solid var(--white-10);
+  border-radius: 14px;
+  padding: 2.5rem 3rem;
+  position: relative;
+  overflow: hidden;
+  transition: all .45s cubic-bezier(.19,1,.22,1);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: auto;
+  align-items: center;
+  gap: 0 3rem;
+}
+.shop-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(232,160,190,.22);
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+}
+.shop-card .top-line {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--pink), transparent);
+  transform: scaleX(0);
+  transition: transform .6s cubic-bezier(.19,1,.22,1);
+  grid-column: 1 / -1;
+}
+.shop-card:hover .top-line { transform: scaleX(1); }
+
+.shop-glow {
+  position: absolute;
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,160,190,.06), transparent 70%);
+  top: -80px; right: -80px;
+  transition: all .5s;
+  pointer-events: none;
+}
+.shop-card:hover .shop-glow { width: 380px; height: 380px; top: -100px; right: -100px; }
+
+.shop-badge {
+  position: absolute;
+  top: 1.4rem; right: 1.4rem;
+  background: linear-gradient(135deg, var(--pink-dd), var(--pink));
+  color: var(--ink);
+  font-size: .52rem;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: .28rem .75rem;
+  border-radius: 100px;
+  z-index: 2;
+}
+.shop-type {
+  font-size: .55rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--pink);
+  margin-bottom: .6rem;
+  display: flex; align-items: center; gap: .5rem;
+}
+.shop-type::before { content: ''; display: block; width: 14px; height: 1px; background: var(--pink); }
+
+.shop-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.2;
+  margin-bottom: .6rem;
+}
+.shop-desc {
+  font-size: .78rem;
+  font-weight: 200;
+  color: var(--white-60);
+  line-height: 1.85;
+  margin-bottom: 0;
+}
+.shop-foot {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+  min-width: 140px;
+  text-align: right;
+}
+.shop-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.6rem;
+  font-weight: 300;
+  color: var(--gold-l);
+  line-height: 1;
+  white-space: nowrap;
+}
+.shop-price small {
+  font-family: 'Jost', sans-serif;
+  font-size: .55rem;
+  font-weight: 200;
+  color: var(--white-30);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  display: block;
+  margin-top: .3rem;
+  text-align: right;
+}
+.shop-left-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  flex-shrink: 0;
+}
+.shop-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.5rem;
+  font-weight: 300;
+  color: rgba(232,160,190,.12);
+  line-height: 1;
+  transition: color .4s;
+}
+.shop-card:hover .shop-num { color: rgba(232,160,190,.25); }
+.shop-body {
+  flex: 1;
+  min-width: 0;
+}
+.shop-list {
+  list-style: none;
+  margin: .8rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: .55rem;
+}
+.shop-list li {
+  font-size: .75rem;
+  font-weight: 200;
+  color: var(--white-60);
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  line-height: 1.5;
+}
+.shop-list li::before {
+  content: '';
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--pink);
+  flex-shrink: 0;
+  opacity: .7;
+}
+.shop-btn {
+  display: inline-flex; align-items: center; gap: .4rem;
+  padding: .5rem 1.2rem;
+  border: 1px solid rgba(232,160,190,.2);
+  border-radius: 100px;
+  font-family: 'Jost', sans-serif;
+  font-size: .6rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--white-60);
+  background: transparent;
+  transition: all .3s;
+}
+.shop-card:hover .shop-left-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  flex-shrink: 0;
+}
+.shop-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.5rem;
+  font-weight: 300;
+  color: rgba(232,160,190,.12);
+  line-height: 1;
+  transition: color .4s;
+}
+.shop-card:hover .shop-num { color: rgba(232,160,190,.25); }
+.shop-body {
+  flex: 1;
+  min-width: 0;
+}
+.shop-list {
+  list-style: none;
+  margin: .8rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: .55rem;
+}
+.shop-list li {
+  font-size: .75rem;
+  font-weight: 200;
+  color: var(--white-60);
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  line-height: 1.5;
+}
+.shop-list li::before {
+  content: '';
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--pink);
+  flex-shrink: 0;
+  opacity: .7;
+}
+.shop-btn { border-color: var(--pink); color: var(--pink); }
+
+.shop-locked {
+  position: absolute; inset: 0;
+  background: rgba(8,5,12,.72);
+  backdrop-filter: blur(8px);
+  border-radius: 14px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: .7rem;
+}
+.lock-icon {
+  width: 34px; height: 34px;
+  border: 1px solid rgba(232,160,190,.2);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.lock-icon svg { width: 14px; height: 14px; stroke: rgba(232,160,190,.4); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.shop-locked span {
+  font-size: .58rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--white-30);
+}
+
+/* ═══════════════════════════════
+   WHY US
+═══════════════════════════════ */
+#why .why-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: start;
+  margin-top: 4rem;
+}
+.why-list { display: flex; flex-direction: column; }
+.why-row {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  gap: 1.2rem;
+  padding: 1.6rem 0;
+  border-bottom: 1px solid var(--white-10);
+  transition: all .3s;
+}
+.why-row:first-child { border-top: 1px solid var(--white-10); }
+.why-row:hover { padding-left: .5rem; }
+.why-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  color: rgba(232,160,190,.3);
+  padding-top: .1rem;
+  transition: color .3s;
+}
+.why-row:hover .why-num { color: var(--pink); }
+.why-body {}
+.why-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin-bottom: .35rem;
+  transition: color .3s;
+}
+.why-row:hover .why-title { color: var(--pink); }
+.why-desc {
+  font-size: .78rem;
+  font-weight: 200;
+  color: var(--white-60);
+  line-height: 1.85;
+}
+
+.why-feature {
+  background: var(--ink-3);
+  border: 1px solid rgba(232,160,190,.1);
+  border-radius: 16px;
+  padding: 3rem;
+  position: sticky;
+  top: 7rem;
+  overflow: hidden;
+}
+.why-feature::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 30% 100%, rgba(196,96,142,.09), transparent 60%);
+  pointer-events: none;
+}
+.wf-icon {
+  width: 50px; height: 50px;
+  background: rgba(232,160,190,.07);
+  border: 1px solid rgba(232,160,190,.15);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 2rem;
+}
+.wf-icon svg { width: 22px; height: 22px; stroke: var(--pink); fill: none; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
+.wf-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  position: relative;
+}
+.wf-title em { font-style: italic; color: var(--pink); }
+.wf-text {
+  font-size: .8rem;
+  font-weight: 200;
+  color: var(--white-60);
+  line-height: 1.95;
+  margin-bottom: 2rem;
+  position: relative;
+}
+.wf-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  position: relative;
+}
+.wf-cell {
+  background: var(--white-05);
+  border: 1px solid var(--white-10);
+  border-radius: 8px;
+  padding: 1rem;
+}
+.wf-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--gold-l);
+  line-height: 1;
+}
+.wf-lbl {
+  font-size: .55rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--white-30);
+  margin-top: .3rem;
+}
+
+/* ═══════════════════════════════
+   CONTACT
+═══════════════════════════════ */
+#contact { text-align: center; }
+#contact .contact-hd {
+  max-width: 640px;
+  margin: 0 auto 3.5rem;
+}
+#contact .eyebrow { justify-content: center; }
+#contact .eyebrow::before { display: none; }
+#contact .sec-title { margin-bottom: 1rem; }
+#contact .lead {
+  font-size: .88rem;
+  font-weight: 200;
+  color: var(--white-60);
+  line-height: 1.9;
+}
+
+.cform {
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: .9rem;
+}
+.cform-row { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem; }
+.ci {
+  width: 100%;
+  background: var(--white-05);
+  border: 1px solid var(--white-10);
+  color: var(--white);
+  padding: .95rem 1.3rem;
+  font-family: 'Jost', sans-serif;
+  font-size: .82rem;
+  font-weight: 200;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color .25s, background .25s;
+}
+.ci::placeholder { color: var(--white-30); }
+.ci:focus { border-color: rgba(232,160,190,.4); background: rgba(232,160,190,.03); }
+textarea.ci { resize: none; min-height: 120px; }
+.cform-send { padding-top: .5rem; display: flex; justify-content: center; }
+
+/* ═══════════════════════════════
+   FOOTER
+═══════════════════════════════ */
+footer {
+  position: relative; z-index: 10;
+  background: var(--ink);
+  border-top: 1px solid var(--white-10);
+  padding: 2.5rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+.f-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 300;
+  letter-spacing: .16em;
+  color: var(--white);
+}
+.f-logo em { font-style: italic; color: var(--pink); }
+.f-links { display: flex; gap: 2.2rem; flex-wrap: wrap; }
+.f-links a {
+  font-size: .58rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--white-30);
+  text-decoration: none;
+  transition: color .25s;
+}
+.f-links a:hover { color: var(--pink); }
+.f-copy { font-size: .58rem; letter-spacing: .1em; color: rgba(253,248,251,.18); }
+
+/* ═══════════════════════════════
+   REVEAL ANIMATION
+═══════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .9s cubic-bezier(.19,1,.22,1),
+              transform .9s cubic-bezier(.19,1,.22,1);
+}
+.reveal.up { opacity: 1; transform: translateY(0); }
+.reveal-r { opacity: 0; transform: translateX(28px); transition: opacity .9s cubic-bezier(.19,1,.22,1), transform .9s cubic-bezier(.19,1,.22,1); }
+.reveal-r.up { opacity: 1; transform: translateX(0); }
+
+/* ═══════════════════════════════
+   KEYFRAMES
+═══════════════════════════════ */
+.hero-title { border: none !important; }
+@keyframes rise {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 6px var(--pink); }
+  50%       { box-shadow: 0 0 14px var(--pink); }
+}
+@keyframes track-slide {
+  0%   { left: -48px; }
+  100% { left: 48px; }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%       { transform: translateY(-16px) rotate(4deg); }
+}
+
+/* ═══════════════════════════════
+   RESPONSIVE
+═══════════════════════════════ */
+@media (max-width: 900px) {
+  #nav { padding: 0 1.5rem; }
+  .nav-links { display: none; }
+  .section { padding: 5rem 1.5rem; }
+  #hero { padding: 72px 1.5rem 4rem; }
+  .hero-side { display: none; }
+  #about .inner,
+  #why .why-inner,
+  .cform-row { grid-template-columns: 1fr; gap: 3rem; }
+  .about-card { display: none; }
+  .why-feature { display: none; }
+  .srv-row { grid-template-columns: 48px 1fr; }
+  .srv-desc, .srv-arrow { display: none; }
+  #boutique .shop-grid { gap: 1rem; }
+  .shop-card { grid-template-columns: 1fr; }
+  .shop-left-col { display: none; }
+  .shop-foot { flex-direction: row; align-items: center; justify-content: space-between; margin-top: 1.2rem; }
+  footer { flex-direction: column; text-align: center; padding: 2rem 1.5rem; }
+  .f-links { justify-content: center; }
+}
+
+
+/* BOUTIQUE BIG CTA */
+@keyframes btn-shimmer {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.btn-boutique-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.4rem 3.5rem;
+  background: linear-gradient(270deg, #e8a0be, #9b3868, #c4608e, #e8d0a0, #e8a0be);
+  background-size: 300% 300%;
+  animation: btn-shimmer 4s ease infinite;
+  color: var(--ink);
+  font-family: 'Jost', sans-serif;
+  font-size: .85rem;
+  font-weight: 500;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 100px;
+  transition: transform .4s cubic-bezier(.19,1,.22,1), box-shadow .4s;
+  box-shadow: 0 8px 40px rgba(196,96,142,.3);
+}
+.btn-boutique-cta:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 20px 60px rgba(196,96,142,.55);
+}
+.btn-boutique-cta svg { transition: transform .3s; flex-shrink: 0; }
+.btn-boutique-cta:hover svg { transform: translate(3px,-3px); }
+
+/* WHATSAPP FLOAT */
+#wa-float {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 800;
+  width: 52px; height: 52px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+  box-shadow: 0 4px 24px rgba(37,211,102,.4);
+  transition: transform .3s cubic-bezier(.19,1,.22,1), box-shadow .3s;
+}
+#wa-float:hover {
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 0 8px 32px rgba(37,211,102,.55);
+}
+
+/* ═══════════════════════════════
+   BOUTIQUE TEASER
+═══════════════════════════════ */
+.boutique-teaser {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.bteaser-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  width: 100%;
+  max-width: 780px;
+  background: rgba(232,160,190,.08);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(232,160,190,.1);
+}
+.bteaser-item {
+  display: grid;
+  grid-template-columns: 48px 1fr auto;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.4rem 2rem;
+  background: var(--ink-3);
+  transition: background .3s;
+}
+.bteaser-item:hover { background: rgba(26,18,38,.95); }
+.bteaser-icon {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 300;
+  color: rgba(232,160,190,.25);
+  text-align: center;
+  line-height: 1;
+}
+.bteaser-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: var(--white);
+  margin-bottom: .2rem;
+}
+.bteaser-desc {
+  font-size: .68rem;
+  font-weight: 200;
+  color: var(--white-30);
+  letter-spacing: .06em;
+}
+.bteaser-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: var(--gold-l);
+  white-space: nowrap;
+  text-align: right;
+}
+@media (max-width: 600px) {
+  .bteaser-item { grid-template-columns: 36px 1fr; gap: 1rem; padding: 1.1rem 1.2rem; }
+  .bteaser-price { display: none; }
+}</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<!-- BACKGROUND -->
+<canvas id="bg-canvas"></canvas>
+
+<!-- ════════════════ NAV ════════════════ -->
+<nav id="nav">
+  <a class="nav-logo" href="#hero">
+    Sakura <span class="dot">Group</span>™
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#boutique">Boutique</a></li>
+    <li><a href="#why">Avantages</a></li>
+    <li><a href="#contact" class="nav-cta">Travailler ensemble</a></li>
+  </ul>
+</nav>
+
+<!-- ════════════════ HERO ════════════════ -->
+<section id="hero">
+  <div class="hero-main">
+  <div class="hero-badge">
+    <div class="hero-badge-dot"></div>
+    <span>Sakura Group™ — Agence Digitale Premium</span>
+  </div>
+
+  <h1 class="hero-title">
+    <span class="line"><span>Votre <em>empire</em></span></span>
+    <span class="line"><span>digital commence</span></span>
+  </h1>
+  <div class="hero-words">
+    <span class="hw" id="hw-0">ici</span><span class="hw-sep">·</span><span class="hw" id="hw-1">maintenant</span><span class="hw-sep">·</span><span class="hw" id="hw-2">avec nous</span>
+  </div>
+
+  <p class="hero-sub">
+    Marketing, formation, IA, création de sites, optimisation —
+    nous construisons votre présence digitale avec précision et ambition.
+  </p>
+
+  <div class="hero-btns">
+    <a href="#services" class="btn btn-fill">
+      Nos services
+      <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+    </a>
+    <a href="boutique.html" class="btn btn-outline">Boutique</a>
+  </div>
+
+  </div><!-- /hero-main -->
+
+  <div class="hero-scroll">
+    <div class="scroll-track"></div>
+    <span>Défiler</span>
+  </div>
+  <div class="hero-side">Sakura Group™ — Paris — 2025</div>
+</section>
+
+<!-- ════════════════ MARQUEE ════════════════ -->
+<div class="marquee-band">
+  <div class="marquee-track">
+    <div class="m-item">Marketing Digital</div>
+    <div class="m-item">Création de Sites</div>
+    <div class="m-item">Formation Skool</div>
+    <div class="m-item">Agents IA</div>
+    <div class="m-item">Optimisation</div>
+    <div class="m-item">Réseaux Sociaux</div>
+    <div class="m-item">Ebooks & Guides</div>
+    <div class="m-item">Packs & Bundles</div>
+    <div class="m-item">Marketing Digital</div>
+    <div class="m-item">Création de Sites</div>
+    <div class="m-item">Formation Skool</div>
+    <div class="m-item">Agents IA</div>
+    <div class="m-item">Optimisation</div>
+    <div class="m-item">Réseaux Sociaux</div>
+    <div class="m-item">Ebooks & Guides</div>
+    <div class="m-item">Packs & Bundles</div>
+  </div>
+</div>
+
+<!-- ════════════════ ABOUT ════════════════ -->
+<section id="about" class="section section--alt">
+  <div class="inner">
+    <div class="about-text">
+      <div class="eyebrow reveal">À propos</div>
+      <h2 class="sec-title reveal">L'agence qui fait<br><em>vraiment</em> la différence</h2>
+      <blockquote class="about-quote reveal">
+        "Comme la fleur de cerisier — éphémère dans sa beauté, impactante dans son éclat."
+      </blockquote>
+      <p class="reveal">Sakura Group™ est une agence digitale complète. Notre mission : donner à chaque entrepreneur les mêmes outils que les grandes marques pour dominer son marché en ligne.</p>
+      <p class="reveal">Du marketing digital à la création d'agents IA, en passant par la création de sites web clé en mains, la formation et l'optimisation — votre partenaire à 360°.</p>
+      <div class="reveal" style="margin-top:2rem;">
+        <a href="#contact" class="btn btn-outline">
+          Discutons de votre projet
+          <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="reveal-r">
+      <div class="about-card">
+        <div class="card-kanji">桜</div>
+        <div class="card-stats">
+          <div class="card-stat"><div class="stat-num">360°</div><div class="stat-lbl">Digital</div></div>
+          <div class="card-stat"><div class="stat-num">100%</div><div class="stat-lbl">Résultats</div></div>
+          <div class="card-stat"><div class="stat-num">∞</div><div class="stat-lbl">Potentiel</div></div>
+        </div>
+        <div class="card-tags">
+          <span class="ctag">Marketing</span>
+          <span class="ctag">Création Web</span>
+          <span class="ctag">Agents IA</span>
+          <span class="ctag">Formation</span>
+          <span class="ctag">Skool</span>
+          <span class="ctag">Stratégie</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ SERVICES ════════════════ -->
+<section id="services" class="section">
+  <div class="srv-hd">
+    <div>
+      <div class="eyebrow reveal">Services</div>
+      <h2 class="sec-title reveal">Ce que nous<br><em>créons</em> pour vous</h2>
+    </div>
+    <a href="#contact" class="btn btn-outline reveal">
+      Demander un devis
+      <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+    </a>
+  </div>
+
+  <div class="srv-list">
+
+    <div class="srv-row reveal">
+      <div class="srv-n">01</div>
+      <div class="srv-info">
+        <div class="srv-name">Marketing Digital</div>
+        <div class="srv-cat">Stratégie & Croissance</div>
+      </div>
+      <div class="srv-desc">Campagnes social media, paid ads Meta & Google, acquisition organique. Votre audience transformée en revenus mesurables.</div>
+      <div class="srv-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+    </div>
+
+    <div class="srv-row reveal">
+      <div class="srv-n">02</div>
+      <div class="srv-info">
+        <div class="srv-name">Création de Contenu</div>
+        <div class="srv-cat">Branding & Réseaux Sociaux</div>
+      </div>
+      <div class="srv-desc">Scripts, visuels, stratégie éditoriale, branding digital. Votre image de marque construite avec cohérence et impact durable.</div>
+      <div class="srv-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+    </div>
+
+    <div class="srv-row reveal">
+      <div class="srv-n">03</div>
+      <div class="srv-info">
+        <div class="srv-name">Création de Sites Web</div>
+        <div class="srv-cat">Clé en mains</div>
+      </div>
+      <div class="srv-desc">Site vitrine, landing page, e-commerce — livré clé en mains. Design premium, optimisé conversion, prix imbattable sur le marché.</div>
+      <div class="srv-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+    </div>
+
+    <div class="srv-row reveal">
+      <div class="srv-n">04</div>
+      <div class="srv-info">
+        <div class="srv-name">Agents IA & Chatbots</div>
+        <div class="srv-cat">Intelligence Artificielle</div>
+      </div>
+      <div class="srv-desc">Agents conversationnels IA sur-mesure, chatbots intelligents, automatisation de processus. Votre business en pilote automatique.</div>
+      <div class="srv-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+    </div>
+
+    <div class="srv-row reveal">
+      <div class="srv-n">05</div>
+      <div class="srv-info">
+        <div class="srv-name">Optimisation & Stratégie</div>
+        <div class="srv-cat">Conseil & Growth</div>
+      </div>
+      <div class="srv-desc">Audit digital complet, optimisation des processus, stratégie de croissance personnalisée. Des résultats concrets et mesurables.</div>
+      <div class="srv-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+    </div>
+
+    <div class="srv-row reveal">
+      <div class="srv-n">06</div>
+      <div class="srv-info">
+        <div class="srv-name">Formation & Skool</div>
+        <div class="srv-cat">E-learning & Communauté</div>
+        <div class="srv-extra">
+          <a href="https://www.skool.com/sakura-business-academy-9729" target="_blank" rel="noopener noreferrer" class="skool-link" style="cursor:pointer;">
+            Rejoindre la Skool Academy →
+          </a>
+        </div>
+      </div>
+      <div class="srv-desc">Formations business, coaching digital, communautés privées sur Skool. Monétisez votre expertise à grande échelle.</div>
+      <div class="srv-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════ BOUTIQUE CTA ════════════════ -->
+<section id="boutique" style="text-align:center;padding:6rem 4rem;position:relative;z-index:10;">
+  <div class="reveal">
+    <a href="boutique.html" class="btn-boutique-cta">
+      Voir toutes nos offres & tarifs
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+    </a>
+  </div>
+</section>
+<section id="why" class="section">
+  <div class="eyebrow reveal">Pourquoi nous</div>
+  <h2 class="sec-title reveal">La différence<br><em>Sakura Group</em></h2>
+  <div class="why-inner">
+    <div class="why-list">
+      <div class="why-row reveal">
+        <div class="why-num">01</div>
+        <div class="why-body">
+          <div class="why-title">Résultats avant tout</div>
+          <p class="why-desc">Pas de bla-bla. Chaque action orientée conversion, croissance et ROI mesurable avec des KPIs clairs dès le départ.</p>
+        </div>
+      </div>
+      <div class="why-row reveal">
+        <div class="why-num">02</div>
+        <div class="why-body">
+          <div class="why-title">Maîtrise de l'IA</div>
+          <p class="why-desc">Nous intégrons les dernières technologies d'IA pour vous donner une longueur d'avance décisive sur la concurrence.</p>
+        </div>
+      </div>
+      <div class="why-row reveal">
+        <div class="why-num">03</div>
+        <div class="why-body">
+          <div class="why-title">Sur-mesure uniquement</div>
+          <p class="why-desc">Aucune solution copiée-collée. Chaque client reçoit une stratégie entièrement personnalisée à son marché et ses objectifs.</p>
+        </div>
+      </div>
+      <div class="why-row reveal">
+        <div class="why-num">04</div>
+        <div class="why-body">
+          <div class="why-title">Approche 360°</div>
+          <p class="why-desc">Un seul partenaire pour tous vos besoins : marketing, formation, automatisation, sites web, contenu.</p>
+        </div>
+      </div>
+      <div class="why-row reveal">
+        <div class="why-num">05</div>
+        <div class="why-body">
+          <div class="why-title">Croissance durable</div>
+          <p class="why-desc">Nous construisons des systèmes qui fonctionnent sur le long terme — pas des hacks éphémères qui s'effondrent.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal-r">
+      <div class="why-feature">
+        <div class="wf-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3 class="wf-title">Une agence qui pense <em>business</em></h3>
+        <p class="wf-text">Nous ne vendons pas des prestations. Nous construisons des systèmes de croissance. Chaque décision est guidée par une logique business claire et des objectifs mesurables.</p>
+        <div class="wf-grid">
+          <div class="wf-cell"><div class="wf-num">6</div><div class="wf-lbl">Services intégrés</div></div>
+          <div class="wf-cell"><div class="wf-num">360°</div><div class="wf-lbl">Couverture digitale</div></div>
+          <div class="wf-cell"><div class="wf-num">700€</div><div class="wf-lbl">Site clé en mains</div></div>
+          <div class="wf-cell"><div class="wf-num">IA</div><div class="wf-lbl">Technologie intégrée</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ CONTACT ════════════════ -->
+<section id="contact" class="section section--alt">
+  <div class="contact-hd">
+    <div class="eyebrow reveal">Contact</div>
+    <h2 class="sec-title reveal">Prêt à <em>décoller</em> ?</h2>
+    <p class="lead reveal">Vous avez un projet ou l'envie de passer au niveau supérieur ?<br>Chaque grande réussite commence par une première conversation.</p>
+  </div>
+  <div class="cform reveal">
+    <div class="cform-row">
+      <input class="ci" type="text" id="cf-nom" placeholder="Votre nom">
+      <input class="ci" type="email" id="cf-email" placeholder="Votre email">
+    </div>
+    <input class="ci" type="text" id="cf-sujet" placeholder="Sujet / Type de projet">
+    <textarea class="ci" id="cf-msg" placeholder="Décrivez votre projet et vos objectifs..."></textarea>
+    <div class="cform-send">
+      <button class="btn btn-fill" id="cf-send" style="cursor:none;border:none;">
+        Envoyer via WhatsApp
+        <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ FOOTER ════════════════ -->
+<footer>
+  <div class="f-logo">Sakura <em>Group</em>™</div>
+  <div class="f-links">
+    <a href="#about">À propos</a>
+    <a href="#services">Services</a>
+    <a href="#boutique">Boutique</a>
+    <a href="https://www.skool.com/sakura-business-academy-9729" target="_blank">Skool Academy</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="f-copy">© 2025 Sakura Group™ — Tous droits réservés</div>
+</footer>
+
+<script>
+
+
+
+
+/* ══════════════════════════════
+   NAV — scroll state only
+══════════════════════════════ */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+/* ══════════════════════════════
+   BACKGROUND — vivid sakura canvas
+══════════════════════════════ */
+const cvs = document.getElementById('bg-canvas');
+const cx  = cvs.getContext('2d');
+let W, H, T = 0;
+
+function resizeCvs() {
+  W = cvs.width  = window.innerWidth;
+  H = cvs.height = window.innerHeight;
+}
+resizeCvs();
+window.addEventListener('resize', resizeCvs, { passive: true });
+
+// --- petals ---
+const PCOLS = [
+  [240,130,175], [220,90,145], [255,175,205],
+  [200,75,130],  [250,155,190], [235,110,160]
+];
+const petals = [];
+
+function newPetal(randomY) {
+  const c = PCOLS[Math.floor(Math.random() * PCOLS.length)];
+  return {
+    x:  Math.random() * W,
+    y:  randomY ? Math.random() * H : -20,
+    vx: (Math.random() - .5) * 1.3,
+    vy: Math.random() * .75 + .3,
+    rot:  Math.random() * Math.PI * 2,
+    vrot: (Math.random() - .5) * .038,
+    sz:   Math.random() * 12 + 5,
+    a:    Math.random() * .5 + .18,
+    wb:   Math.random() * Math.PI * 2,
+    ws:   Math.random() * .018 + .007,
+    sw:   Math.random() * 1.1 + .35,
+    r: c[0], g: c[1], b: c[2]
+  };
+}
+
+for (let i = 0; i < 65; i++) petals.push(newPetal(true));
+
+function drawPetal(p) {
+  cx.save();
+  cx.translate(p.x, p.y);
+  cx.rotate(p.rot);
+  cx.globalAlpha = p.a;
+
+  // outer shape
+  cx.beginPath();
+  cx.moveTo(0, -p.sz * .55);
+  cx.bezierCurveTo( p.sz*.52, -p.sz*.48,  p.sz*.52,  p.sz*.42, 0,  p.sz*.55);
+  cx.bezierCurveTo(-p.sz*.52,  p.sz*.42, -p.sz*.52, -p.sz*.48, 0, -p.sz*.55);
+  cx.fillStyle = `rgba(${p.r},${p.g},${p.b},1)`;
+  cx.fill();
+
+  // inner shimmer
+  cx.beginPath();
+  cx.moveTo(0, -p.sz * .28);
+  cx.bezierCurveTo( p.sz*.22, -p.sz*.22,  p.sz*.22,  p.sz*.2, 0,  p.sz*.28);
+  cx.bezierCurveTo(-p.sz*.22,  p.sz*.2,  -p.sz*.22, -p.sz*.22, 0, -p.sz*.28);
+  cx.fillStyle = 'rgba(255,228,238,.32)';
+  cx.fill();
+
+  cx.restore();
+}
+
+function bgBlobs() {
+  // deep dark base
+  cx.fillStyle = '#08050c';
+  cx.fillRect(0, 0, W, H);
+
+  // blob helper
+  function blob(xf, yf, r, cr, cg, cb, alpha, sx, sy, st, sr) {
+    const x = W * xf + Math.sin(T * st) * W * sx;
+    const y = H * yf + Math.cos(T * sr) * H * sy;
+    const gr = cx.createRadialGradient(x, y, 0, x, y, W * r);
+    gr.addColorStop(0,   `rgba(${cr},${cg},${cb},${alpha})`);
+    gr.addColorStop(.5,  `rgba(${cr},${cg},${cb},${alpha * .4})`);
+    gr.addColorStop(1,   'transparent');
+    cx.fillStyle = gr;
+    cx.fillRect(0, 0, W, H);
+  }
+
+  blob(.50, .35, .55,  215, 55, 118,  .26,  .10, .08, .42, .35);  // hot pink centre
+  blob(.82, .52, .40,  240, 80, 148,  .20,  .08, .10, .55, .40);  // vivid rose right
+  blob(.18, .72, .38,  255,115, 155,  .16,  .07, .08, .60, .50);  // coral bottom-left
+  blob(.88, .14, .30,  160, 28,  98,  .18,  .05, .07, .38, .60);  // deep magenta top-right
+  blob(.08, .22, .26,  180, 70, 155,  .10,  .04, .06, .50, .45);  // lilac accent
+  blob(.45, .80, .32,  220, 60, 130,  .12,  .09, .06, .48, .38);  // mid-low bloom
+}
+
+function bgLoop() {
+  cx.clearRect(0, 0, W, H);
+  T += .0035;
+
+  bgBlobs();
+
+  petals.forEach(p => {
+    p.wb  += p.ws;
+    p.x   += p.vx + Math.sin(p.wb) * p.sw;
+    p.y   += p.vy;
+    p.rot += p.vrot;
+    p.a    = .2 + Math.sin(p.wb * 2.1) * .12;
+    if (p.y > H + 24 || p.x < -40 || p.x > W + 40) {
+      Object.assign(p, newPetal(false));
+    }
+    drawPetal(p);
+  });
+
+  if (Math.random() < .025 && petals.length < 90) petals.push(newPetal(false));
+  requestAnimationFrame(bgLoop);
+}
+bgLoop();
+
+/* ══════════════════════════════
+   FORMULAIRE → WHATSAPP
+══════════════════════════════ */
+document.getElementById('cf-send').addEventListener('click', function() {
+  const nom    = document.getElementById('cf-nom').value.trim();
+  const email  = document.getElementById('cf-email').value.trim();
+  const sujet  = document.getElementById('cf-sujet').value.trim();
+  const msg    = document.getElementById('cf-msg').value.trim();
+
+  if (!nom && !msg) {
+    document.getElementById('cf-nom').focus();
+    return;
+  }
+
+  let text = 'Bonjour Sakura Group,%0A%0A';
+  if (nom)   text += 'Nom : ' + encodeURIComponent(nom) + '%0A';
+  if (email) text += 'Email : ' + encodeURIComponent(email) + '%0A';
+  if (sujet) text += 'Sujet : ' + encodeURIComponent(sujet) + '%0A';
+  if (msg)   text += '%0AMessage :%0A' + encodeURIComponent(msg);
+
+  window.open('https://wa.me/33601747023?text=' + text, '_blank');
+});
+
+/* ══════════════════════════════
+   WORD CYCLE — fixed height, no layout jump
+══════════════════════════════ */
+const hws = document.querySelectorAll('.hw');
+let hwi = 0;
+function cycleWord() {
+  hws.forEach(el => el.classList.remove('active'));
+  hws[hwi].classList.add('active');
+  hwi = (hwi + 1) % hws.length;
+}
+cycleWord();
+setInterval(cycleWord, 1800);
+
+/* ══════════════════════════════
+   SCROLL REVEAL
+══════════════════════════════ */
+const revEls = document.querySelectorAll('.reveal, .reveal-r');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const el  = entry.target;
+    const sib = Array.from(el.parentElement.children).filter(c => c.classList.contains('reveal') || c.classList.contains('reveal-r'));
+    const idx = sib.indexOf(el);
+    setTimeout(() => el.classList.add('up'), idx * 70);
+    io.unobserve(el);
+  });
+}, { threshold: .1, rootMargin: '0px 0px -40px 0px' });
+
+revEls.forEach(el => io.observe(el));
+
+/* ══════════════════════════════
+   SUBTLE PARALLAX ON HERO TITLE
+══════════════════════════════ */
+const heroTitle = document.querySelector('.hero-title');
+let ticking = false;
+window.addEventListener('scroll', () => {
+  if (ticking) return;
+  requestAnimationFrame(() => {
+    if (heroTitle) heroTitle.style.transform = `translateY(${scrollY * .15}px)`;
+    ticking = false;
+  });
+  ticking = true;
+}, { passive: true });
+
+</script>
+
+<!-- FLOATING WHATSAPP BUTTON -->
+<a href="https://wa.me/33601747023?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20vos%20services.%20Pouvez-vous%20m'en%20dire%20plus%20%3F" 
+   target="_blank" 
+   id="wa-float"
+   title="Nous contacter sur WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+</body>
+</html>
