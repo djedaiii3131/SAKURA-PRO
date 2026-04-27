@@ -14,15 +14,7 @@ body{font-family:'Josefin Sans',sans-serif;color:#fff;cursor:auto;}
 #bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
 #grid-canvas{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.15;}
 
-.diag-band{position:fixed;z-index:2;pointer-events:none;white-space:nowrap;overflow:hidden;display:flex;align-items:center;}
-.diag-band-1{top:28%;left:-100%;right:-100%;transform:rotate(-12deg);padding:.45rem 0;border-top:1px solid rgba(255,61,127,.1);border-bottom:1px solid rgba(255,61,127,.1);background:rgba(255,20,80,.025);}
-.diag-band-2{top:65%;left:-100%;right:-100%;transform:rotate(8deg);padding:.4rem 0;border-top:1px solid rgba(192,132,252,.08);border-bottom:1px solid rgba(192,132,252,.08);background:rgba(150,50,250,.02);}
-.diag-track{display:inline-flex;animation:diagscroll var(--spd,35s) linear infinite;}
-.diag-band-2 .diag-track{animation-direction:reverse;}
-.diag-item{font-family:'Josefin Sans',sans-serif;font-size:.56rem;font-weight:100;letter-spacing:.38em;text-transform:uppercase;padding:0 2rem;color:rgba(255,133,170,.3);flex-shrink:0;}
-.diag-band-2 .diag-item{color:rgba(192,132,252,.25);}
-.diag-sep{color:rgba(255,61,127,.2);font-size:.45rem;flex-shrink:0;}
-@keyframes diagscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* supprimé - bandes diagonales retirées de cette page */
 
 @keyframes gshift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 @keyframes logoshimmer{0%{background-position:200% center}100%{background-position:-200% center}}
@@ -140,17 +132,6 @@ body{font-family:'Josefin Sans',sans-serif;color:#fff;cursor:auto;}
 <canvas id="bg-canvas"></canvas>
 <canvas id="grid-canvas"></canvas>
 
-<div class="diag-band diag-band-1" style="--spd:40s;">
-  <div class="diag-track">
-    <span class="diag-item">Webdesign</span><span class="diag-sep">✦</span><span class="diag-item">Branding</span><span class="diag-sep">✦</span><span class="diag-item">UI / UX</span><span class="diag-sep">✦</span><span class="diag-item">Shopify</span><span class="diag-sep">✦</span><span class="diag-item">SEO</span><span class="diag-sep">✦</span><span class="diag-item">Agents IA</span><span class="diag-sep">✦</span><span class="diag-item">Identité Visuelle</span><span class="diag-sep">✦</span><span class="diag-item">Marketing Digital</span><span class="diag-sep">✦</span><span class="diag-item">Webdesign</span><span class="diag-sep">✦</span><span class="diag-item">Branding</span><span class="diag-sep">✦</span><span class="diag-item">UI / UX</span><span class="diag-sep">✦</span><span class="diag-item">Shopify</span><span class="diag-sep">✦</span><span class="diag-item">SEO</span><span class="diag-sep">✦</span><span class="diag-item">Agents IA</span><span class="diag-sep">✦</span><span class="diag-item">Identité Visuelle</span><span class="diag-sep">✦</span><span class="diag-item">Marketing Digital</span><span class="diag-sep">✦</span>
-  </div>
-</div>
-<div class="diag-band diag-band-2" style="--spd:28s;">
-  <div class="diag-track">
-    <span class="diag-item">E-Commerce</span><span class="diag-sep">✦</span><span class="diag-item">Création de Sites</span><span class="diag-sep">✦</span><span class="diag-item">Réseaux Sociaux</span><span class="diag-sep">✦</span><span class="diag-item">Landing Page</span><span class="diag-sep">✦</span><span class="diag-item">Chatbots</span><span class="diag-sep">✦</span><span class="diag-item">Automatisation</span><span class="diag-sep">✦</span><span class="diag-item">Logo Design</span><span class="diag-sep">✦</span><span class="diag-item">Growth Hacking</span><span class="diag-sep">✦</span><span class="diag-item">E-Commerce</span><span class="diag-sep">✦</span><span class="diag-item">Création de Sites</span><span class="diag-sep">✦</span><span class="diag-item">Réseaux Sociaux</span><span class="diag-sep">✦</span><span class="diag-item">Landing Page</span><span class="diag-sep">✦</span><span class="diag-item">Chatbots</span><span class="diag-sep">✦</span><span class="diag-item">Automatisation</span><span class="diag-sep">✦</span><span class="diag-item">Logo Design</span><span class="diag-sep">✦</span><span class="diag-item">Growth Hacking</span><span class="diag-sep">✦</span>
-  </div>
-</div>
-
 <!-- TOPBAR -->
 <div id="topbar">
   <div id="logo-wrap">
@@ -174,7 +155,7 @@ body{font-family:'Josefin Sans',sans-serif;color:#fff;cursor:auto;}
   <!-- SLIDER VIDÉO -->
   <div class="slider-wrap">
     <div class="slider-screen">
-      <video id="sliderVid" autoplay muted loop playsinline src="https://drive.google.com/uc?id=1adekoshmcTGMDeRcYvdaC1flElZvFw1X&export=download"></video>
+      <video id="sliderVid" autoplay muted loop playsinline src="https://drive.google.com/uc?export=preview&id=1adekoshmcTGMDeRcYvdaC1flElZvFw1X"></video>
       <div class="slider-glow"></div>
     </div>
     <div class="slider-nav">
@@ -335,9 +316,9 @@ document.addEventListener('mousemove',e=>{const r=((e.clientX/window.innerWidth)
 
 /* SLIDER */
 const slides=[
-  {src:'https://drive.google.com/uc?id=1adekoshmcTGMDeRcYvdaC1flElZvFw1X&export=download',title:'Salon de Coiffure',label:'01'},
+  {src:'https://drive.google.com/uc?export=preview&id=1adekoshmcTGMDeRcYvdaC1flElZvFw1X',title:'Salon de Coiffure',label:'01'},
   {src:'projet-pizzeria.mp4',title:'Pizzeria',label:'02'},
-  {src:'https://drive.google.com/uc?id=1x_q3z8NYyHUFJ_dPtcVPQB4UJ7uem7tc&export=download',title:'Agence Digitale',label:'03'},
+  {src:'https://drive.google.com/uc?export=preview&id=1x_q3z8NYyHUFJ_dPtcVPQB4UJ7uem7tc',title:'Agence Digitale',label:'03'},
 ];
 let current=0;
 const vid=document.getElementById('sliderVid');
