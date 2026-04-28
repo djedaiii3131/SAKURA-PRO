@@ -12,20 +12,22 @@ html,body{width:100%;overflow-x:hidden;background:#0a0015;}
 body{font-family:'Josefin Sans',sans-serif;color:#fff;cursor:auto;}
 
 #bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
-#grid-canvas{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.15;}
-
-/* supprimé - bandes diagonales retirées de cette page */
 
 @keyframes gshift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 @keyframes logoshimmer{0%{background-position:200% center}100%{background-position:-200% center}}
 @keyframes mqscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
+@keyframes shimmer-text{to{background-position:200% center}}
+
+.agrad{background:linear-gradient(270deg,#ff85aa,#fff,#f0c866,#ff3d7f,#c084fc,#fff,#ff85aa);background-size:400% 400%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gshift 5s ease infinite;}
 
 /* TOPBAR */
-#topbar{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;flex-direction:column;align-items:center;}
+#topbar{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;flex-direction:column;align-items:center;}
 #logo-wrap{padding:1rem 3rem .75rem;width:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(10,0,21,.96),rgba(10,0,21,.7));backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,61,127,.07);position:relative;}
 #logo{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,2.8vw,2.6rem);font-weight:200;letter-spacing:.38em;text-transform:uppercase;cursor:default;user-select:none;background:linear-gradient(90deg,#fff 0%,#ff85aa 15%,#fff 28%,#f0c866 42%,#fff 55%,#c084fc 68%,#ff3d7f 82%,#fff 100%);background-size:300% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:logoshimmer 4s linear infinite;filter:drop-shadow(0 0 16px rgba(255,61,127,.3));}
 .btn-back{position:absolute;right:3rem;display:inline-flex;align-items:center;gap:.5rem;font-family:'Josefin Sans',sans-serif;font-size:.55rem;font-weight:200;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,133,170,.7);text-decoration:none;border:1px solid rgba(255,61,127,.2);padding:.4rem 1.1rem;border-radius:100px;transition:all .3s;}
 .btn-back:hover{color:#ff85aa;border-color:rgba(255,133,170,.5);}
+
 #marquee-bar{width:100%;padding:.4rem 0;background:linear-gradient(90deg,rgba(255,20,80,.07),rgba(150,50,250,.07),rgba(255,20,80,.07));border-bottom:1px solid rgba(255,61,127,.08);overflow:hidden;position:relative;}
 #marquee-bar::before,#marquee-bar::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2;}
 #marquee-bar::before{left:0;background:linear-gradient(90deg,rgba(10,0,21,1),transparent);}
@@ -35,104 +37,67 @@ body{font-family:'Josefin Sans',sans-serif;color:#fff;cursor:auto;}
 .mq-dot{color:rgba(255,61,127,.7);font-size:.45rem;flex-shrink:0;}
 
 /* PAGE */
-.page{position:relative;z-index:20;padding:10rem 5rem 5rem;max-width:1200px;margin:0 auto;}
-
-/* TITRE */
-.page-eyebrow{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(1rem,2vw,1.4rem);
-  font-weight:200;letter-spacing:.45em;
-  text-transform:uppercase;
-  display:flex;align-items:center;gap:.8rem;
-  margin-bottom:1rem;
-  background:linear-gradient(270deg,#ff85aa,#fff,#f0c866,#ff3d7f,#c084fc,#fff,#ff85aa);
-  background-size:400% 400%;
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  animation:gshift 5s ease infinite;
-}
+.page{position:relative;z-index:10;padding:10rem 5rem 5rem;max-width:1200px;margin:0 auto;}
+.page-eyebrow{font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,2vw,1.4rem);font-weight:200;letter-spacing:.45em;text-transform:uppercase;display:flex;align-items:center;gap:.8rem;margin-bottom:1rem;background:linear-gradient(270deg,#ff85aa,#fff,#f0c866,#ff3d7f,#c084fc,#fff,#ff85aa);background-size:400% 400%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gshift 5s ease infinite;}
 .page-eyebrow::before{content:'';display:block;width:28px;height:1px;background:rgba(255,133,170,.6);flex-shrink:0;}
-.page-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,6vw,6rem);font-weight:200;line-height:1.05;letter-spacing:-.02em;margin-bottom:1rem;}
-.agrad{background:linear-gradient(270deg,#ff85aa,#fff,#f0c866,#ff3d7f,#c084fc,#fff,#ff85aa);background-size:400% 400%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gshift 5s ease infinite;}
+.page-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,6vw,6rem);font-weight:200;line-height:1.05;letter-spacing:-.02em;margin-bottom:3rem;}
 
-/* SLIDER VIDÉO */
-.slider-wrap{margin-top:4rem;display:flex;flex-direction:column;align-items:center;}
-.slider-screen{
-  width:100%;max-width:900px;
-  aspect-ratio:16/9;
-  border-radius:20px;overflow:hidden;
-  position:relative;
-  box-shadow:0 0 0 1px rgba(255,133,170,.15),0 40px 100px rgba(0,0,0,.7),0 0 80px rgba(255,61,127,.1);
-}
-.slider-screen video{width:100%;height:100%;object-fit:cover;display:block;}
-.slider-glow{position:absolute;inset:0;background:linear-gradient(180deg,transparent 70%,rgba(10,0,21,.5));pointer-events:none;}
+/* CARD STACK */
+.cstack-section{display:flex;flex-direction:column;align-items:center;margin-bottom:5rem;}
+.cstack-outer{display:flex;flex-direction:column;align-items:center;}
+.cstack-cards{position:relative;width:520px;height:420px;}
+.ccard{position:absolute;bottom:0;left:50%;width:500px;background:rgba(20,10,35,.98);border:1px solid rgba(255,255,255,.1);border-radius:12px 12px 0 0;overflow:hidden;will-change:transform;transition:transform 1s cubic-bezier(0.32,0,0,1);box-shadow:0 8px 32px rgba(0,0,0,.4);padding:4px;}
+.ccard:nth-child(1){transform:translateX(-50%) translateY(12px) scale(1);z-index:3;}
+.ccard:nth-child(2){transform:translateX(-50%) translateY(-20px) scale(0.95);z-index:2;}
+.ccard:nth-child(3){transform:translateX(-50%) translateY(-52px) scale(0.9);z-index:1;}
+.ccard-img{width:100%;height:280px;overflow:hidden;border-radius:8px 8px 0 0;outline:1px solid rgba(255,255,255,.1);}
+.ccard-img video{width:100%;height:100%;object-fit:cover;}
+.ccard-foot{display:flex;align-items:center;padding:.9rem 1.2rem;}
+.ccard-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:300;color:rgba(255,255,255,.9);}
+.ccard-desc{font-size:.55rem;font-weight:200;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,133,170,.7);margin-left:.8rem;}
+.cstack-btn{display:inline-flex;align-items:center;justify-content:center;height:36px;padding:0 20px;border:1px solid rgba(232,160,190,.3);border-radius:8px;font-family:'Josefin Sans',sans-serif;font-size:.7rem;font-weight:200;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .3s;margin-top:1.2rem;background:linear-gradient(90deg,#e8a0be,#e8d0a0,#c4608e,#e8a0be);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer-text 3s linear infinite;}
+.cstack-btn:hover{border-color:#e8a0be;transform:translateY(-2px);}
 
-/* NAVIGATION SLIDER */
-.slider-nav{display:flex;align-items:center;gap:2rem;margin-top:2rem;}
-.slider-btn{width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid rgba(255,61,127,.25);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;color:rgba(255,133,170,.8);font-size:1.2rem;}
-.slider-btn:hover{background:rgba(255,61,127,.15);border-color:rgba(255,133,170,.5);transform:scale(1.1);}
-.slider-info{text-align:center;flex:1;}
-.slider-title{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:200;background:linear-gradient(270deg,#ff85aa,#fff,#f0c866,#ff3d7f,#c084fc,#fff,#ff85aa);background-size:400% 400%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gshift 5s ease infinite;}
-.slider-count{font-family:'Josefin Sans',sans-serif;font-size:.55rem;font-weight:100;letter-spacing:.3em;color:rgba(255,133,170,.4);margin-top:.3rem;}
-.slider-dots{display:flex;gap:.5rem;margin-top:1rem;justify-content:center;}
-.slider-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,61,127,.2);transition:all .3s;cursor:pointer;}
-.slider-dot.active{background:#ff3d7f;transform:scale(1.3);box-shadow:0 0 8px rgba(255,61,127,.6);}
-
-/* PARAGRAPHE ANIMÉ */
-.real-para{margin-top:5rem;text-align:center;max-width:700px;margin-left:auto;margin-right:auto;}
+/* PARA */
+.real-para{margin:3rem auto;text-align:center;max-width:700px;}
 .real-para-text{font-family:'Cormorant Garamond',serif;font-size:clamp(1.3rem,2.5vw,2rem);font-weight:200;font-style:italic;line-height:1.7;background:linear-gradient(270deg,#ff85aa,#fff,#f0c866,#ff3d7f,#c084fc,#fff,#ff85aa);background-size:400% 400%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gshift 6s ease infinite;}
-.real-para-sub{font-family:'Josefin Sans',sans-serif;font-size:.7rem;font-weight:100;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:1.2rem;}
+.real-para-sub{font-family:'Josefin Sans',sans-serif;font-size:.7rem;font-weight:200;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,133,170,.85);margin-top:1rem;}
 
-/* PALETTES COULEURS */
-.palettes-section{margin-top:6rem;position:relative;z-index:10;}
+/* PALETTES */
+.palettes-section{margin-top:4rem;}
 .palettes-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,4rem);font-weight:200;text-align:center;margin-bottom:.8rem;}
-.palettes-sub{font-family:'Josefin Sans',sans-serif;font-size:.65rem;font-weight:200;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.6);text-align:center;margin-bottom:3rem;}
-.palettes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;position:relative;z-index:20;isolation:isolate;}
-.palette-card{background:rgba(10,0,20,.99);border:1px solid rgba(255,61,127,.25);border-radius:16px;padding:1.5rem;transition:all .4s cubic-bezier(.19,1,.22,1);cursor:default;position:relative;z-index:20;isolation:isolate;}
-.palette-card:hover{border-color:rgba(255,133,170,.45);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.6),0 0 30px rgba(255,61,127,.15);}
-
-/* CADRE PARAGRAPHE ANIMÉ */
-@property --pf-angle{syntax:'<angle>';initial-value:0deg;inherits:false;}
-@keyframes spin-pf{to{--pf-angle:360deg;}}
-@keyframes pglow{0%,100%{opacity:.6;}50%{opacity:1;}}
-@keyframes float-icon{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
-.para-frame-wrap{margin-top:3rem;display:flex;justify-content:center;position:relative;z-index:10;}
-.para-frame{position:relative;max-width:780px;width:100%;border-radius:20px;padding:3rem 3.5rem;background:rgba(15,3,28,.92);text-align:center;}
-.para-frame-border{position:absolute;inset:0;border-radius:20px;background:conic-gradient(from var(--pf-angle,0deg),#ff3d7f,#c084fc,#f0c866,#ff85aa,#ff3d7f);animation:spin-pf 4s linear infinite;-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;padding:1.5px;pointer-events:none;}
-.para-frame-glow{position:absolute;inset:-15px;border-radius:30px;background:radial-gradient(circle,rgba(255,61,127,.12),rgba(192,132,252,.08),transparent 70%);animation:pglow 3s ease-in-out infinite;pointer-events:none;}
-.para-frame-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;}
-.para-frame-icon{font-family:'Noto Serif JP',serif;font-size:2.5rem;color:rgba(255,61,127,.35);margin-bottom:1.2rem;animation:float-icon 4s ease-in-out infinite;}
-.para-frame-text{font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,2vw,1.6rem);font-weight:200;font-style:italic;line-height:1.9;color:rgba(255,255,255,.9);margin-bottom:1.2rem;text-align:center;max-width:620px;margin-left:auto;margin-right:auto;}
-.shimmer-word{background:linear-gradient(90deg,#fff 0%,#ff85aa 25%,#f0c866 50%,#c084fc 75%,#fff 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s linear infinite;font-style:normal;font-weight:300;}
-.para-frame-sub{font-family:'Josefin Sans',sans-serif;font-size:.65rem;font-weight:100;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,133,170,.55);text-align:center;}
-.palette-name{font-family:'Josefin Sans',sans-serif;font-size:.62rem;font-weight:200;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,133,170,.95);margin-bottom:1rem;}
-.palette-swatches{display:flex;gap:.5rem;margin-bottom:1rem;}
-.swatch{flex:1;height:45px;border-radius:8px;transition:transform .3s;box-shadow:0 4px 12px rgba(0,0,0,.3);}
-.palette-card:hover .swatch{transform:scaleY(1.1);}
-.palette-desc{font-family:'Josefin Sans',sans-serif;font-size:.65rem;font-weight:200;letter-spacing:.06em;color:rgba(255,255,255,.88);line-height:1.85;}
+.palettes-sub{font-family:'Josefin Sans',sans-serif;font-size:.65rem;font-weight:200;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.85);text-align:center;margin-bottom:2.5rem;}
+.palettes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.pal{background:#130825;border:1px solid rgba(255,61,127,.2);border-radius:16px;padding:1.5rem;transition:all .4s;}
+.pal:hover{border-color:rgba(255,133,170,.5);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.6);}
+.pal-name{font-family:'Josefin Sans',sans-serif;font-size:.62rem;font-weight:200;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,133,170,.95);margin-bottom:1rem;}
+.pal-swatches{display:flex;gap:.5rem;margin-bottom:1rem;}
+.sw{flex:1;height:45px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.4);transition:transform .3s;}
+.pal:hover .sw{transform:scaleY(1.1);}
+.pal-desc{font-size:.65rem;font-weight:200;color:rgba(255,255,255,.8);line-height:1.85;letter-spacing:.04em;}
 
 /* BOTTOM CTA */
-.bottom-cta{text-align:center;margin-top:6rem;padding-bottom:5rem;}
-.bottom-cta-text{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,3vw,3rem);font-weight:200;margin-bottom:2rem;color:rgba(255,255,255,.8);}
-.btn-wa-cta{display:inline-flex;align-items:center;gap:1rem;padding:1rem 2.5rem;background:linear-gradient(135deg,rgba(37,211,102,.15),rgba(37,211,102,.05));border:1px solid rgba(37,211,102,.3);border-radius:100px;font-family:'Josefin Sans',sans-serif;font-size:.65rem;font-weight:200;letter-spacing:.22em;text-transform:uppercase;color:#25D366;text-decoration:none;transition:all .35s;}
-.btn-wa-cta:hover{background:rgba(37,211,102,.2);border-color:rgba(37,211,102,.6);transform:translateY(-2px);box-shadow:0 12px 30px rgba(37,211,102,.2);}
+.bottom-cta{text-align:center;margin-top:5rem;padding-bottom:5rem;}
+.bottom-cta-text{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,3vw,3rem);font-weight:200;margin-bottom:2rem;color:rgba(255,255,255,.85);}
+.btn-wa{display:inline-flex;align-items:center;gap:1rem;padding:1rem 2.5rem;background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.3);border-radius:100px;font-family:'Josefin Sans',sans-serif;font-size:.65rem;font-weight:200;letter-spacing:.22em;text-transform:uppercase;color:#25D366;text-decoration:none;transition:all .35s;}
+.btn-wa:hover{background:rgba(37,211,102,.2);border-color:rgba(37,211,102,.6);transform:translateY(-2px);}
 
-/* WA FLOAT */
 #wa{position:fixed;bottom:2rem;right:2rem;z-index:600;width:52px;height:52px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.5);text-decoration:none;transition:transform .3s;}
 #wa:hover{transform:scale(1.12) translateY(-2px);}
 
 @media(max-width:768px){
   .page{padding:8rem 1.5rem 3rem;}
   .palettes-grid{grid-template-columns:1fr;}
-  .slider-screen{max-width:100%;}
+  .cstack-cards{width:340px;height:300px;}
+  .ccard{width:320px;}
+  .ccard-img{height:200px;}
 }
 </style>
 </head>
 <body>
 
 <canvas id="bg-canvas"></canvas>
-<canvas id="grid-canvas"></canvas>
 
-<!-- TOPBAR -->
 <div id="topbar">
   <div id="logo-wrap">
     <div id="logo">SAKURA GROUP™</div>
@@ -140,139 +105,123 @@ body{font-family:'Josefin Sans',sans-serif;color:#fff;cursor:auto;}
   </div>
   <div id="marquee-bar">
     <div class="mq-track">
-      <span class="mq-item">Agence Digitale Toulousaine</span><span class="mq-dot">✦</span><span class="mq-item">Webdesign</span><span class="mq-dot">✦</span><span class="mq-item">Branding</span><span class="mq-dot">✦</span><span class="mq-item">UI / UX Design</span><span class="mq-dot">✦</span><span class="mq-item">Création de Sites</span><span class="mq-dot">✦</span><span class="mq-item">Agents IA</span><span class="mq-dot">✦</span><span class="mq-item">Shopify</span><span class="mq-dot">✦</span><span class="mq-item">Marketing Digital</span><span class="mq-dot">✦</span><span class="mq-item">Identité Visuelle</span><span class="mq-dot">✦</span><span class="mq-item">SEO</span><span class="mq-dot">✦</span><span class="mq-item">Agence Digitale Toulousaine</span><span class="mq-dot">✦</span><span class="mq-item">Webdesign</span><span class="mq-dot">✦</span><span class="mq-item">Branding</span><span class="mq-dot">✦</span><span class="mq-item">UI / UX Design</span><span class="mq-dot">✦</span><span class="mq-item">Création de Sites</span><span class="mq-dot">✦</span><span class="mq-item">Agents IA</span><span class="mq-dot">✦</span><span class="mq-item">Shopify</span><span class="mq-dot">✦</span><span class="mq-item">Marketing Digital</span><span class="mq-dot">✦</span><span class="mq-item">Identité Visuelle</span><span class="mq-dot">✦</span><span class="mq-item">SEO</span><span class="mq-dot">✦</span>
+      <span class="mq-item">Agence Digitale Toulousaine</span><span class="mq-dot">✦</span><span class="mq-item">Webdesign</span><span class="mq-dot">✦</span><span class="mq-item">Branding</span><span class="mq-dot">✦</span><span class="mq-item">UI / UX Design</span><span class="mq-dot">✦</span><span class="mq-item">Création de Sites</span><span class="mq-dot">✦</span><span class="mq-item">Agents IA</span><span class="mq-dot">✦</span><span class="mq-item">Shopify</span><span class="mq-dot">✦</span><span class="mq-item">Marketing Digital</span><span class="mq-dot">✦</span><span class="mq-item">SEO</span><span class="mq-dot">✦</span><span class="mq-item">Agence Digitale Toulousaine</span><span class="mq-dot">✦</span><span class="mq-item">Webdesign</span><span class="mq-dot">✦</span><span class="mq-item">Branding</span><span class="mq-dot">✦</span><span class="mq-item">UI / UX Design</span><span class="mq-dot">✦</span><span class="mq-item">Création de Sites</span><span class="mq-dot">✦</span><span class="mq-item">Agents IA</span><span class="mq-dot">✦</span><span class="mq-item">Shopify</span><span class="mq-dot">✦</span><span class="mq-item">Marketing Digital</span><span class="mq-dot">✦</span><span class="mq-item">SEO</span><span class="mq-dot">✦</span>
     </div>
   </div>
 </div>
 
-<!-- PAGE -->
 <div class="page">
 
-  <!-- TITRE -->
   <div class="page-eyebrow">Nos Réalisations</div>
   <h1 class="page-title">Quelques exemples<br>de nos <span class="agrad">réalisations</span></h1>
 
-  <!-- SLIDER VIDÉO -->
-  <div class="slider-wrap">
-    <div class="slider-screen">
-      <iframe id="sliderVid" src="https://www.youtube.com/embed/Zwha1q3Yi08?autoplay=1&mute=1&loop=1&playlist=Zwha1q3Yi08&controls=0&showinfo=0&rel=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen style="width:100%;height:100%;position:absolute;inset:0;border-radius:20px;"></iframe>
-      <div class="slider-glow"></div>
-    </div>
-    <div class="slider-nav">
-      <button class="slider-btn" onclick="prevSlide()">←</button>
-      <div class="slider-info">
-        <div class="slider-title" id="sliderTitle">Salon de Coiffure</div>
-        <div class="slider-count" id="sliderCount">01 / 03</div>
+  <!-- CARD STACK VIDÉOS -->
+  <div class="cstack-section">
+    <div class="cstack-outer">
+      <div class="cstack-cards" id="cstack">
+        <div class="ccard">
+          <div class="ccard-img"><video autoplay muted loop playsinline src="coiffure.mp4"></video></div>
+          <div class="ccard-foot"><span class="ccard-title">Salon de Coiffure</span><span class="ccard-desc">Fariale Sabeg · Toulouse</span></div>
+        </div>
+        <div class="ccard">
+          <div class="ccard-img"><video autoplay muted loop playsinline src="projet-pizzeria.mp4"></video></div>
+          <div class="ccard-foot"><span class="ccard-title">Pizzeria</span><span class="ccard-desc">Site vitrine & menu</span></div>
+        </div>
+        <div class="ccard">
+          <div class="ccard-img"><video autoplay muted loop playsinline src="Site-pro.mp4"></video></div>
+          <div class="ccard-foot"><span class="ccard-title">Agence Digitale</span><span class="ccard-desc">Sakura Group · Toulouse</span></div>
+        </div>
       </div>
-      <button class="slider-btn" onclick="nextSlide()">→</button>
-    </div>
-    <div class="slider-dots">
-      <div class="slider-dot active" onclick="goSlide(0)"></div>
-      <div class="slider-dot" onclick="goSlide(1)"></div>
-      <div class="slider-dot" onclick="goSlide(2)"></div>
+      <button class="cstack-btn" onclick="animateStack()">Projet suivant →</button>
     </div>
   </div>
 
-  <!-- PARAGRAPHE ANIMÉ -->
+  <!-- PARAGRAPHE -->
   <div class="real-para">
     <div class="real-para-text">"Ce ne sont que quelques exemples parmi plus de 30 réalisations. Chaque projet est unique, pensé sur-mesure pour le client."</div>
-    <div class="real-para-sub">Plus de 30 sites réalisés · Toulouse &amp; partout en France</div>
+    <div class="real-para-sub">Plus de 30 sites réalisés · Toulouse & partout en France</div>
   </div>
 
-  <!-- PALETTES COULEURS -->
+  <!-- PALETTES -->
   <div class="palettes-section">
     <h2 class="palettes-title">Votre <span class="agrad">identité visuelle</span></h2>
     <p class="palettes-sub">Nous analysons votre univers et créons le site idéal, adapté à vous</p>
     <div class="palettes-grid">
 
-      <div class="palette-card">
-        <div class="palette-name">✦ Élégance &amp; Luxe</div>
-        <div class="palette-swatches">
-          <div class="swatch" style="background:#1a0a2e;"></div>
-          <div class="swatch" style="background:#c8a96e;"></div>
-          <div class="swatch" style="background:#e8d0a0;"></div>
-          <div class="swatch" style="background:#fdf8fb;"></div>
+      <div class="pal">
+        <div class="pal-name">✦ Élégance & Luxe</div>
+        <div class="pal-swatches">
+          <div class="sw" style="background:#1a0a2e;"></div>
+          <div class="sw" style="background:#c8a96e;"></div>
+          <div class="sw" style="background:#e8d0a0;"></div>
+          <div class="sw" style="background:#fdf8fb;"></div>
         </div>
-        <div class="palette-desc">Parfait pour les boutiques premium, coiffeurs, instituts de beauté. Crée une ambiance haut de gamme qui inspire confiance.</div>
+        <p class="pal-desc">Parfait pour les boutiques premium, coiffeurs, instituts de beauté. Crée une ambiance haut de gamme qui inspire confiance.</p>
       </div>
 
-      <div class="palette-card">
-        <div class="palette-name">✦ Énergie &amp; Modernité</div>
-        <div class="palette-swatches">
-          <div class="swatch" style="background:#0a0015;"></div>
-          <div class="swatch" style="background:#ff3d7f;"></div>
-          <div class="swatch" style="background:#c084fc;"></div>
-          <div class="swatch" style="background:#f0c866;"></div>
+      <div class="pal">
+        <div class="pal-name">✦ Énergie & Modernité</div>
+        <div class="pal-swatches">
+          <div class="sw" style="background:#0a0015;"></div>
+          <div class="sw" style="background:#ff3d7f;"></div>
+          <div class="sw" style="background:#c084fc;"></div>
+          <div class="sw" style="background:#f0c866;"></div>
         </div>
-        <div class="palette-desc">Idéal pour les agences digitales, startups, tech. Donne une image innovante et audacieuse qui marque les esprits.</div>
+        <p class="pal-desc">Idéal pour les agences digitales, startups, tech. Donne une image innovante et audacieuse qui marque les esprits.</p>
       </div>
 
-      <div class="palette-card">
-        <div class="palette-name">✦ Chaleur &amp; Authenticité</div>
-        <div class="palette-swatches">
-          <div class="swatch" style="background:#2d1a0e;"></div>
-          <div class="swatch" style="background:#c0392b;"></div>
-          <div class="swatch" style="background:#e67e22;"></div>
-          <div class="swatch" style="background:#f9e4b7;"></div>
+      <div class="pal">
+        <div class="pal-name">✦ Chaleur & Authenticité</div>
+        <div class="pal-swatches">
+          <div class="sw" style="background:#2d1a0e;"></div>
+          <div class="sw" style="background:#c0392b;"></div>
+          <div class="sw" style="background:#e67e22;"></div>
+          <div class="sw" style="background:#f9e4b7;"></div>
         </div>
-        <div class="palette-desc">Parfait pour les restaurants, pizzerias, commerces de bouche. Évoque la chaleur humaine et l'appétit.</div>
+        <p class="pal-desc">Parfait pour les restaurants, pizzerias, commerces de bouche. Évoque la chaleur humaine et l'appétit.</p>
       </div>
 
-      <div class="palette-card">
-        <div class="palette-name">✦ Fraîcheur &amp; Nature</div>
-        <div class="palette-swatches">
-          <div class="swatch" style="background:#0d2b1a;"></div>
-          <div class="swatch" style="background:#27ae60;"></div>
-          <div class="swatch" style="background:#82e0aa;"></div>
-          <div class="swatch" style="background:#f0fff4;"></div>
+      <div class="pal">
+        <div class="pal-name">✦ Fraîcheur & Nature</div>
+        <div class="pal-swatches">
+          <div class="sw" style="background:#0d2b1a;"></div>
+          <div class="sw" style="background:#27ae60;"></div>
+          <div class="sw" style="background:#82e0aa;"></div>
+          <div class="sw" style="background:#f0fff4;"></div>
         </div>
-        <div class="palette-desc">Idéal pour les épiceries, bio, santé, bien-être. Communique la fraîcheur, la qualité et le respect de la nature.</div>
+        <p class="pal-desc">Idéal pour les épiceries, bio, santé, bien-être. Communique la fraîcheur, la qualité et le respect de la nature.</p>
       </div>
 
-      <div class="palette-card">
-        <div class="palette-name">✦ Puissance &amp; Fiabilité</div>
-        <div class="palette-swatches">
-          <div class="swatch" style="background:#0d1117;"></div>
-          <div class="swatch" style="background:#1a3a5c;"></div>
-          <div class="swatch" style="background:#2980b9;"></div>
-          <div class="swatch" style="background:#ebf5fb;"></div>
+      <div class="pal">
+        <div class="pal-name">✦ Puissance & Fiabilité</div>
+        <div class="pal-swatches">
+          <div class="sw" style="background:#0d1117;"></div>
+          <div class="sw" style="background:#1a3a5c;"></div>
+          <div class="sw" style="background:#2980b9;"></div>
+          <div class="sw" style="background:#ebf5fb;"></div>
         </div>
-        <div class="palette-desc">Parfait pour les garages, automobiles, BTP. Inspire la confiance, la solidité et le professionnalisme.</div>
+        <p class="pal-desc">Parfait pour les garages, automobiles, BTP. Inspire la confiance, la solidité et le professionnalisme.</p>
       </div>
 
-      <div class="palette-card">
-        <div class="palette-name">✦ Mode &amp; Tendance</div>
-        <div class="palette-swatches">
-          <div class="swatch" style="background:#1a0a14;"></div>
-          <div class="swatch" style="background:#c0392b;"></div>
-          <div class="swatch" style="background:#f1948a;"></div>
-          <div class="swatch" style="background:#fdf2f8;"></div>
+      <div class="pal">
+        <div class="pal-name">✦ Mode & Tendance</div>
+        <div class="pal-swatches">
+          <div class="sw" style="background:#1a0a14;"></div>
+          <div class="sw" style="background:#c0392b;"></div>
+          <div class="sw" style="background:#f1948a;"></div>
+          <div class="sw" style="background:#fdf2f8;"></div>
         </div>
-        <div class="palette-desc">Pour les boutiques de mode, prêt-à-porter, lifestyle. Crée une atmosphère désirable et tendance qui séduit.</div>
+        <p class="pal-desc">Pour les boutiques de mode, prêt-à-porter, lifestyle. Crée une atmosphère désirable et tendance qui séduit.</p>
       </div>
 
     </div>
+    <p style="text-align:center;margin-top:2rem;font-family:'Josefin Sans',sans-serif;font-size:.7rem;font-weight:200;letter-spacing:.2em;color:rgba(255,255,255,.85);line-height:2;">Nous prenons en compte votre secteur, votre clientèle cible et vos valeurs<br>pour créer une identité visuelle unique qui vous ressemble vraiment.</p>
+  </div>
 
-    <!-- PARAGRAPHE ENCADRÉ ANIMÉ -->
-    <div class="para-frame-wrap">
-      <div class="para-frame">
-        <div class="para-frame-border"></div>
-        <div class="para-frame-glow"></div>
-        <div class="para-frame-content">
-          <div class="para-frame-icon">桜</div>
-          <p class="para-frame-text">
-            Nous prenons en compte <span class="agrad">votre secteur</span>, votre <span class="agrad">clientèle cible</span> et vos <span class="agrad">valeurs</span><br>
-            pour créer une identité visuelle <span class="shimmer-word">unique</span> qui vous ressemble <span class="shimmer-word">vraiment</span>.
-          </p>
-          <p class="para-frame-sub">Chaque couleur, chaque typographie, chaque pixel — pensés pour vous.</p>
-        </div>
-      </div>
-    </div>
-
-  <!-- BOTTOM CTA -->
+  <!-- CTA -->
   <div class="bottom-cta">
     <div class="bottom-cta-text">Votre projet mérite le meilleur.<br><span class="agrad">Parlons-en.</span></div>
-    <a href="https://wa.me/33601747023?text=Bonjour%2C%20j%27ai%20vu%20vos%20r%C3%A9alisations%20et%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20vos%20services." target="_blank" class="btn-wa-cta">
+    <a href="https://wa.me/33601747023?text=Bonjour%2C%20j%27ai%20vu%20vos%20r%C3%A9alisations%20et%20je%20suis%20int%C3%A9ress%C3%A9(e)." target="_blank" class="btn-wa">
       <svg viewBox="0 0 24 24" fill="#25D366" width="20" height="20"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       Discutons de votre projet
     </a>
@@ -280,71 +229,52 @@ body{font-family:'Josefin Sans',sans-serif;color:#fff;cursor:auto;}
 
 </div>
 
-<!-- WA FLOAT -->
 <a href="https://wa.me/33601747023" target="_blank" id="wa">
   <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
 <script>
-/* CANVAS BG */
+/* BG */
 const bgC=document.getElementById('bg-canvas'),bgX=bgC.getContext('2d');
 let W,H,BT=0;
 function resizeBg(){W=bgC.width=window.innerWidth;H=bgC.height=window.innerHeight;}
 resizeBg();window.addEventListener('resize',resizeBg,{passive:true});
-const ORBS=[{x:.2,y:.3,r:.45,cr:255,cg:20,cb:100,a:.2,sx:.06,sy:.05,st:.38,sr:.42},{x:.78,y:.5,r:.38,cr:180,cg:50,cb:255,a:.16,sx:.05,sy:.07,st:.52,sr:.35},{x:.5,y:.8,r:.32,cr:255,cg:80,cb:160,a:.13,sx:.07,sy:.04,st:.44,sr:.58},{x:.9,y:.12,r:.26,cr:140,cg:0,cb:210,a:.15,sx:.04,sy:.06,st:.36,sr:.62}];
+const ORBS=[{x:.2,y:.3,r:.45,cr:255,cg:20,cb:100,a:.2,sx:.06,sy:.05,st:.38,sr:.42},{x:.78,y:.5,r:.38,cr:180,cg:50,cb:255,a:.16,sx:.05,sy:.07,st:.52,sr:.35},{x:.5,y:.8,r:.32,cr:255,cg:80,cb:160,a:.13,sx:.07,sy:.04,st:.44,sr:.58}];
 const NEON=[[255,61,127],[210,40,180],[192,132,252],[255,133,170],[240,80,200]];
 const petals=[];
 function newPetal(ry){const c=NEON[Math.floor(Math.random()*NEON.length)];return{x:Math.random()*W,y:ry?Math.random()*H:-20,vx:(Math.random()-.5)*1.3,vy:Math.random()*.65+.22,rot:Math.random()*Math.PI*2,vrot:(Math.random()-.5)*.042,sz:Math.random()*11+4,a:.3,wb:Math.random()*Math.PI*2,ws:Math.random()*.018+.006,sw:Math.random()*1.3+.3,r:c[0],g:c[1],b:c[2],glow:Math.random()>.35};}
-for(let i=0;i<75;i++)petals.push(newPetal(true));
+for(let i=0;i<60;i++)petals.push(newPetal(true));
 function drawPetal(p){bgX.save();bgX.translate(p.x,p.y);bgX.rotate(p.rot);bgX.globalAlpha=p.a;if(p.glow){bgX.shadowBlur=14;bgX.shadowColor=`rgba(${p.r},${p.g},${p.b},.95)`;}bgX.beginPath();bgX.moveTo(0,-p.sz*.55);bgX.bezierCurveTo(p.sz*.52,-p.sz*.48,p.sz*.52,p.sz*.42,0,p.sz*.55);bgX.bezierCurveTo(-p.sz*.52,p.sz*.42,-p.sz*.52,-p.sz*.48,0,-p.sz*.55);bgX.fillStyle=`rgba(${p.r},${p.g},${p.b},1)`;bgX.fill();bgX.shadowBlur=0;bgX.restore();}
 function bgLoop(){bgX.clearRect(0,0,W,H);BT+=.003;bgX.fillStyle='#0a0015';bgX.fillRect(0,0,W,H);
 ORBS.forEach(o=>{const ox=W*o.x+Math.sin(BT*o.st)*W*o.sx,oy=H*o.y+Math.cos(BT*o.sr)*H*o.sy,gr=bgX.createRadialGradient(ox,oy,0,ox,oy,W*o.r);gr.addColorStop(0,`rgba(${o.cr},${o.cg},${o.cb},${o.a})`);gr.addColorStop(.5,`rgba(${o.cr},${o.cg},${o.cb},${o.a*.3})`);gr.addColorStop(1,'transparent');bgX.fillStyle=gr;bgX.fillRect(0,0,W,H);});
-for(let i=0;i<3;i++){if(Math.random()<.04){const sx=Math.random()*W,sy=Math.random()*H,sc=Math.random()>.5?`rgba(255,133,170,${Math.random()*.5+.1})`:`rgba(192,132,252,${Math.random()*.4+.1})`;bgX.beginPath();bgX.arc(sx,sy,Math.random()*1.8+.2,0,Math.PI*2);bgX.fillStyle=sc;bgX.shadowBlur=10;bgX.shadowColor=sc;bgX.fill();bgX.shadowBlur=0;}}
 petals.forEach(p=>{p.wb+=p.ws;p.x+=p.vx+Math.sin(p.wb)*p.sw;p.y+=p.vy;p.rot+=p.vrot;p.a=.18+Math.sin(p.wb*2.1)*.18;if(p.y>H+30||p.x<-50||p.x>W+50)Object.assign(p,newPetal(false));drawPetal(p);});
-if(Math.random()<.025&&petals.length<95)petals.push(newPetal(false));requestAnimationFrame(bgLoop);}
+requestAnimationFrame(bgLoop);}
 bgLoop();
 
-/* GRILLE */
-const gridC=document.getElementById('grid-canvas'),gridX=gridC.getContext('2d');let GT=0;
-function resizeGrid(){gridC.width=window.innerWidth;gridC.height=window.innerHeight;}resizeGrid();window.addEventListener('resize',resizeGrid,{passive:true});
-function drawGrid(){const gW=gridC.width,gH=gridC.height;gridX.clearRect(0,0,gW,gH);GT+=.0018;const vp={x:gW/2,y:gH*.32},cols=16,rows=12,rowSpacing=gH*.68/(rows-1),offset=(GT*55)%rowSpacing;gridX.strokeStyle='rgba(255,61,127,1)';gridX.lineWidth=.4;for(let r=0;r<=rows+1;r++){const y=gH*.32+(r*rowSpacing-offset);if(y<gH*.32||y>gH)continue;const prog=(y-gH*.32)/(gH*.68);gridX.globalAlpha=prog*.3;gridX.beginPath();gridX.moveTo(vp.x-prog*(gW*.52),y);gridX.lineTo(vp.x+prog*(gW*.52),y);gridX.stroke();}const spacing=gW/(cols-1);for(let c=0;c<cols;c++){gridX.globalAlpha=.1;gridX.beginPath();gridX.moveTo(vp.x,vp.y);gridX.lineTo(c*spacing,gH);gridX.stroke();}gridX.globalAlpha=1;requestAnimationFrame(drawGrid);}
-drawGrid();
-
-/* LOGO HOLO */
+/* LOGO */
 const logo=document.getElementById('logo');
 document.addEventListener('mousemove',e=>{const r=((e.clientX/window.innerWidth)-.5)*2;logo.style.filter=`drop-shadow(${r*10}px 0 20px rgba(255,61,127,.5)) drop-shadow(0 0 10px rgba(192,132,252,.3))`;});
 
-/* SLIDER */
-const slides=[
-  {yt:'Zwha1q3Yi08',title:'Salon de Coiffure',label:'01'},
-  {yt:'bRe9YB9h3C0',title:'Pizzeria',label:'02'},
-  {yt:'tPk-Aeobvbg',title:'Agence Digitale',label:'03'},
-];
-let current=0;
-const iframe=document.getElementById('sliderVid');
-const titleEl=document.getElementById('sliderTitle');
-const countEl=document.getElementById('sliderCount');
-const dots=document.querySelectorAll('.slider-dot');
-
-function goSlide(i){
-  current=i;
-  iframe.src=`https://www.youtube.com/embed/${slides[i].yt}?autoplay=1&mute=1&loop=1&playlist=${slides[i].yt}&controls=0&showinfo=0&rel=0`;
-  titleEl.textContent=slides[i].title;
-  countEl.textContent=`0${i+1} / 0${slides.length}`;
-  dots.forEach((d,j)=>{d.classList.toggle('active',j===i);});
+/* CARD STACK */
+let cAnimating=false;
+function animateStack(){
+  if(cAnimating)return;cAnimating=true;
+  const stack=document.getElementById('cstack');
+  const cards=Array.from(stack.children);
+  const first=cards[0];
+  first.style.transition='transform 1s cubic-bezier(0.32,0,0,1),opacity .4s';
+  first.style.transform='translateX(-50%) translateY(400px) scale(1)';
+  first.style.opacity='0';first.style.zIndex='10';
+  if(cards[1]){cards[1].style.transform='translateX(-50%) translateY(12px) scale(1)';cards[1].style.zIndex='3';}
+  if(cards[2]){cards[2].style.transform='translateX(-50%) translateY(-20px) scale(0.95)';cards[2].style.zIndex='2';}
+  setTimeout(()=>{
+    stack.appendChild(first);
+    first.style.transition='none';
+    first.style.transform='translateX(-50%) translateY(-52px) scale(0.9)';
+    first.style.opacity='1';first.style.zIndex='1';
+    setTimeout(()=>{first.style.transition='transform 1s cubic-bezier(0.32,0,0,1)';cAnimating=false;},50);
+  },700);
 }
-function nextSlide(){goSlide((current+1)%slides.length);}
-function prevSlide(){goSlide((current-1+slides.length)%slides.length);}
-
-/* KEYBOARD */
-document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')nextSlide();if(e.key==='ArrowLeft')prevSlide();});
-
-/* ANIMATIONS SCROLL */
-gsap.from('.page-eyebrow',{y:30,opacity:0,duration:1,ease:'expo.out',delay:.3});
-gsap.from('.page-title',{y:40,opacity:0,duration:1.2,ease:'expo.out',delay:.5});
-gsap.from('.slider-wrap',{y:50,opacity:0,duration:1.2,ease:'expo.out',delay:.7});
-gsap.from('.real-para',{y:40,opacity:0,duration:1,ease:'expo.out',scrollTrigger:{trigger:'.real-para',start:'top 80%'}});
-gsap.from('.palette-card',{y:30,opacity:0,duration:.8,stagger:.12,ease:'expo.out',scrollTrigger:{trigger:'.palettes-section',start:'top 75%'}});
 </script>
 </body>
 </html>
