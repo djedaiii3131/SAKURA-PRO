@@ -31,8 +31,8 @@ html,body{width:100%;overflow-x:hidden;background:#150926;}
 body{font-family:'Josefin Sans',sans-serif;color:#fff;cursor:auto;}
 
 /* CURSOR */
-#cr{position:fixed;z-index:99999;pointer-events:none;width:32px;height:32px;border-radius:50%;border:1.5px solid rgba(255,61,127,.6);transform:translate(-50%,-50%);transition:width .3s,height .3s;display:none;}
-#cd{position:fixed;z-index:99999;pointer-events:none;width:5px;height:5px;border-radius:50%;background:#ff3d7f;transform:translate(-50%,-50%);box-shadow:0 0 10px #ff3d7f;display:none;}
+#cr{position:fixed;z-index:99999;pointer-events:none;width:32px;height:32px;border-radius:50%;border:1.5px solid rgba(255,61,127,.6);transform:translate(-50%,-50%);transition:width .3s,height .3s;}
+#cd{position:fixed;z-index:99999;pointer-events:none;width:5px;height:5px;border-radius:50%;background:#ff3d7f;transform:translate(-50%,-50%);box-shadow:0 0 10px #ff3d7f;}
 body.hov #cr{width:48px;height:48px;}
 
 /* CANVAS BG */
@@ -187,114 +187,179 @@ body.hov #cr{width:48px;height:48px;}
   #logo{font-size:1.3rem;letter-spacing:.22em;}
 }
 
+/* ═══ CURSOR DESKTOP ONLY ═══ */
 @media(min-width:1024px){
-  #cr{display:block;}
-  #cd{display:block;}
   body{cursor:none;}
+  #cr,#cd{display:block!important;}
 }
+#cr,#cd{display:none;}
 
-/* ════ HAMBURGER MOBILE ════ */
+/* ═══ HAMBURGER ═══ */
 .nav-burger{
-  display:flex;flex-direction:column;justify-content:center;gap:5px;
+  display:none;
+  flex-direction:column;justify-content:center;gap:5px;
   width:44px;height:44px;cursor:pointer;border:none;background:none;
-  padding:10px;border-radius:8px;position:fixed;top:12px;right:1rem;z-index:9999;
+  padding:10px;border-radius:8px;position:fixed;top:10px;right:1rem;z-index:9999;
 }
 .nav-burger span{
-  display:block;height:1.5px;background:rgba(255,133,170,.85);border-radius:2px;
+  display:block;height:1.5px;
+  background:linear-gradient(90deg,#ff85aa,#fff,#f0c866,#ff3d7f);
+  border-radius:2px;
   transition:all .4s cubic-bezier(.19,1,.22,1);transform-origin:center;
 }
 .nav-burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
 .nav-burger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
 .nav-burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
-@media(min-width:900px){.nav-burger{display:none;}}
+@media(max-width:900px){.nav-burger{display:flex;}}
 
-/* MOBILE OVERLAY MENU */
+/* ═══ MOBILE OVERLAY MENU ═══ */
 .mob-menu{
   position:fixed;inset:0;z-index:8500;background:#150926;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.3rem;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;
   transform:translateY(-100%);transition:transform .5s cubic-bezier(.19,1,.22,1);
   padding:2rem;overflow-y:auto;
 }
 .mob-menu.open{transform:translateY(0);}
 .mob-menu a{
-  font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,8vw,3rem);font-weight:200;
-  color:rgba(255,255,255,.85);text-decoration:none;letter-spacing:.04em;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2rem,8vw,2.8rem);font-weight:200;
+  background:linear-gradient(90deg,#fff 0%,#ff85aa 20%,#fff 35%,#f0c866 50%,#fff 65%,#c084fc 80%,#ff3d7f 90%,#fff 100%);
+  background-size:300% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:logoshimmer 4s linear infinite;
+  text-decoration:none;letter-spacing:.04em;
   padding:.7rem 2rem;border-radius:8px;width:100%;text-align:center;
-  transition:color .25s,background .25s;
+  transition:opacity .25s;
 }
-.mob-menu a:hover{color:#ff85aa;background:rgba(255,61,127,.07);}
-.mob-menu-sep{width:60px;height:1px;background:rgba(255,61,127,.25);margin:1rem 0;}
-.mob-menu-wa{
-  display:inline-flex;align-items:center;gap:.6rem;
-  padding:.9rem 2.5rem;background:#25D366;color:#fff;border-radius:100px;
-  font-family:'Josefin Sans',sans-serif;font-size:.7rem;letter-spacing:.14em;
-  text-transform:uppercase;text-decoration:none;margin-top:.5rem;min-height:48px;
+.mob-menu a:hover{opacity:.75;}
+.mob-menu-sep{width:60px;height:1px;background:rgba(255,61,127,.3);margin:.8rem 0;}
+.mob-menu-devis{
+  display:inline-flex;align-items:center;justify-content:center;gap:.6rem;
+  padding:1rem 2.5rem;border-radius:100px;
+  background:linear-gradient(270deg,#ff85aa,#9b3868,#c4608e,#f0c866,#ff85aa);
+  background-size:300% 300%;animation:btn-shimmer 4s ease infinite;
+  color:#0a0015;font-family:'Josefin Sans',sans-serif;
+  font-size:.75rem;font-weight:300;letter-spacing:.18em;text-transform:uppercase;
+  text-decoration:none;margin-top:.5rem;min-height:48px;border:none;cursor:pointer;
+  box-shadow:0 8px 30px rgba(196,96,142,.35);
+  transition:transform .3s;
+}
+.mob-menu-devis:hover{transform:translateY(-2px);}
+
+/* ═══ HERO BUTTONS ═══ */
+.sqbtn{
+  position:relative;width:90px;height:90px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,61,127,.25);border-radius:16px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;
+  cursor:pointer;transition:all .4s cubic-bezier(0.19,1,0.22,1);
+  text-decoration:none;overflow:hidden;backdrop-filter:blur(8px);
+}
+.sqbtn::before{content:'';position:absolute;inset:0;border-radius:16px;background:linear-gradient(45deg,var(--gf),var(--gt));opacity:0;transition:opacity .4s;}
+.sqbtn:hover::before{opacity:1;}
+.sqbtn:hover{transform:translateY(-4px);border-color:transparent;box-shadow:0 12px 30px rgba(255,61,127,.2);}
+/* Shimmer effect on icons */
+.sqbtn-ic{
+  font-size:1.6rem;position:relative;z-index:1;transition:transform .3s;
+  filter:drop-shadow(0 0 6px rgba(255,61,127,.5));
+}
+.sqbtn:hover .sqbtn-ic{transform:scale(1.2) rotate(-5deg);filter:drop-shadow(0 0 14px rgba(255,133,170,.9));}
+.sqbtn-lb{
+  font-family:'Josefin Sans',sans-serif;font-size:.48rem;font-weight:200;letter-spacing:.16em;text-transform:uppercase;
+  background:linear-gradient(90deg,#ff85aa,#fff,#f0c866,#ff85aa);background-size:200% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:logoshimmer 3s linear infinite;
+  position:relative;z-index:1;text-align:center;
 }
 
-/* ════ MOBILE HERO ════ */
+/* ═══ HERO SUBTITLE ═══ */
+.hero-subtitle{
+  font-family:'Josefin Sans',sans-serif;
+  font-size:clamp(.75rem,2vw,.9rem);font-weight:200;
+  letter-spacing:.08em;line-height:1.9;
+  color:rgba(255,200,220,.72);
+  max-width:520px;
+  margin:.5rem 0 0;
+  opacity:0;transform:translateY(16px);
+}
+
+/* ═══ SERVICES — même style que about ═══ */
+.srv-title{
+  font-family:'Cormorant Garamond',serif!important;
+  font-size:clamp(2.2rem,5vw,4.5rem)!important;
+  font-weight:200!important;line-height:1.1!important;
+  letter-spacing:-.02em!important;text-align:left!important;
+  background:none!important;-webkit-text-fill-color:#fff!important;
+  color:#fff!important;animation:none!important;
+}
+.srv-sub{display:none!important;}
+.srv-header{text-align:left!important;margin-bottom:3rem!important;}
+.srv-header .section-label{justify-content:flex-start!important;}
+.srv-header .section-label::before{display:block!important;}
+
+/* Services list items — harmonisés */
+.srv-name-p{
+  font-family:'Cormorant Garamond',serif!important;
+  font-size:clamp(1.8rem,4vw,3rem)!important;
+  font-weight:200!important;line-height:1.1!important;
+  background:linear-gradient(90deg,#fdf8fb,#e8a0be,#e8d0a0,#e8a0be,#fdf8fb)!important;
+  background-size:300% auto!important;
+  -webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important;
+  background-clip:text!important;animation:shimmer-text 3s linear infinite!important;
+}
+.srv-cat-p{
+  font-size:.78rem!important;letter-spacing:.2em!important;
+  font-family:'Josefin Sans',sans-serif!important;font-weight:200!important;
+}
+.srv-np{font-size:3rem!important;}
+
+/* ═══ MOBILE GLOBAL ═══ */
 @media(max-width:900px){
   #hero{
-    grid-template-columns:1fr!important;
-    padding:6rem 1.5rem 3rem!important;
-    gap:2rem!important;
-    min-height:100svh;
-    display:flex!important;
-    flex-direction:column;
-    justify-content:center;
+    display:flex!important;flex-direction:column!important;
+    justify-content:center!important;
+    padding:5.5rem 1.5rem 3rem!important;
+    min-height:100svh;gap:1.5rem!important;
   }
   .hero-right{display:none!important;}
+  .htitle{font-size:clamp(2.6rem,10vw,4.5rem)!important;}
   .hero-btns{
-    justify-content:center!important;
-    gap:1rem!important;
+    justify-content:center!important;gap:1rem!important;
+    padding:1.5rem 0 .5rem!important;
   }
-  .sqbtn{width:80px!important;height:80px!important;}
-  /* ABOUT */
+  .sqbtn{width:82px!important;height:82px!important;}
   #about{padding:4rem 1.5rem!important;}
   .about-inner{grid-template-columns:1fr!important;gap:2rem!important;}
   .cstack-outer{display:none!important;}
-  .about-title{font-size:clamp(2.2rem,9vw,3.5rem)!important;transform:none!important;opacity:1!important;}
-  .about-text{transform:none!important;opacity:1!important;font-size:.9rem!important;}
+  .about-title{font-size:clamp(2rem,8vw,3rem)!important;transform:none!important;opacity:1!important;}
+  .about-text{transform:none!important;opacity:1!important;}
   .about-label-wrap{transform:none!important;opacity:1!important;}
-  /* SERVICES */
   #services{padding:4rem 1.5rem!important;}
-  .srv-title{font-size:clamp(2rem,8vw,3.5rem)!important;}
-  .srv-name-p{font-size:clamp(1.8rem,7vw,3rem)!important;}
-  .srv-item-p{grid-template-columns:50px 1fr!important;gap:1rem!important;padding:1.5rem 0!important;opacity:1!important;transform:none!important;}
-  /* TOPBAR */
-  #logo-wrap{padding:.7rem 1.5rem!important;}
-  #logo{font-size:1.1rem!important;letter-spacing:.22em!important;}
-  /* DIAG BANDS */
+  .srv-item-p{grid-template-columns:46px 1fr!important;gap:.8rem!important;padding:1.4rem 0!important;opacity:1!important;transform:none!important;}
+  .srv-np{font-size:2rem!important;}
+  .srv-name-p{font-size:clamp(1.5rem,6vw,2.2rem)!important;}
+  .srv-list-premium{max-width:100%!important;}
+  #logo-wrap{padding:.65rem 1rem!important;}
+  #logo{font-size:1rem!important;letter-spacing:.2em!important;}
   .diag-band{display:none!important;}
-  /* HERO TITLE */
-  .htitle{font-size:clamp(2.8rem,10vw,5rem)!important;}
+  .hero-subtitle{font-size:.78rem!important;}
 }
-
-/* ════ ENSURE NO HORIZONTAL OVERFLOW ════ */
 body{overflow-x:hidden;}
-.diag-band{overflow:hidden;}
-
-/* ════ BIGGER TOUCH TARGETS ════ */
-.sqbtn{min-height:44px!important;}
-#wa{width:54px!important;height:54px!important;}
 </style>
 </head>
 <body>
 
 
-<!-- MOBILE HAMBURGER -->
 <button class="nav-burger" id="nav-burger" aria-label="Menu">
   <span></span><span></span><span></span>
 </button>
-<!-- MOBILE MENU -->
 <div class="mob-menu" id="mob-menu">
-  <a href="#" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'});toggleMenu(false);">Qui Sommes-Nous</a>
-  <a href="#" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'});toggleMenu(false);">Nos Services</a>
-  <a href="boutique.html">Boutique & Offres</a>
-  <a href="https://www.skool.com/sakura-business-academy-9729" target="_blank">Skool Academy</a>
+  <a href="#" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'});toggleMenu(false);return false;">Qui Sommes-Nous</a>
+  <a href="#" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'});toggleMenu(false);return false;">Nos Services</a>
+  <a href="boutique.html" onclick="toggleMenu(false);">Boutique & Offres</a>
   <div class="mob-menu-sep"></div>
-  <a href="https://wa.me/33601747023" class="mob-menu-wa" target="_blank">
-    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-    WhatsApp
+  <a class="mob-menu-devis" href="https://wa.me/33601747023?text=Bonjour%20Sakura%20Group%2C%20je%20souhaite%20un%20devis%20pour%20mon%20projet." target="_blank">
+    Demande de devis →
   </a>
 </div>
 <div id="cr"></div>
@@ -415,6 +480,11 @@ body{overflow-x:hidden;}
     </div>
   </div>
 
+
+  <p class="hero-subtitle" id="heroSub">
+    Sites web, branding, Agents IA, RestoPremium — nous construisons votre présence digitale avec précision.<br>
+    Résultats concrets, livraison rapide, accompagnement humain. <strong style="color:rgba(255,133,170,.9);font-weight:300;">Rejoignez les entrepreneurs qui nous font confiance.</strong>
+  </p>
   <div class="hero-btns" id="hbtns">
     <button class="sqbtn" id="btnpacks" style="--gf:#ff3d7f;--gt:#ff85aa;">
       <span class="sqbtn-ic">🌸</span>
@@ -428,10 +498,7 @@ body{overflow-x:hidden;}
       <span class="sqbtn-ic">⚡</span>
       <span class="sqbtn-lb">Qui Sommes-Nous</span>
     </button>
-    <button class="sqbtn" style="--gf:#f0c866;--gt:#FF9966;">
-      <span class="sqbtn-ic">✉️</span>
-      <span class="sqbtn-lb">Contact</span>
-    </button>
+
   </div>
 </section>
 
@@ -467,15 +534,13 @@ body{overflow-x:hidden;}
 <section id="services">
   <div class="srv-header">
     <div class="section-label">Nos Services</div>
-    <h2 class="srv-title">Ce que nous créons<br><span class="agrad">pour vous</span></h2>
-    <p class="srv-sub">Chaque service pensé pour propulser votre business. Sans compromis.</p>
+    <h2 class="srv-title">Ce que nous créons<br><span class="agrad-text">pour vous</span></h2>
   </div>
   <div class="srv-list-premium">
-    <div class="srv-item-p"><div class="srv-np">01</div><div><div class="srv-name-p">Site Web Pro</div><div class="srv-cat-p">Vitrine · Landing Page · Portfolio</div></div></div>
-    <div class="srv-item-p"><div class="srv-np">02</div><div><div class="srv-name-p">Boutique Shopify</div><div class="srv-cat-p">E-commerce · Paiement · Formation</div></div></div>
-    <div class="srv-item-p"><div class="srv-np">03</div><div><div class="srv-name-p">Agents IA</div><div class="srv-cat-p">Chatbots · Automatisation · IA sur-mesure</div></div></div>
-    <div class="srv-item-p"><div class="srv-np">04</div><div><div class="srv-name-p">RestoRank</div><div class="srv-cat-p">Uber Eats · Deliveroo · Branding</div></div></div>
-    <div class="srv-item-p"><div class="srv-np">05</div><div><div class="srv-name-p">Branding Digital</div><div class="srv-cat-p">Logo · Identité Visuelle · Réseaux Sociaux</div></div></div>
+    <div class="srv-item-p"><div class="srv-np">01</div><div><div class="srv-name-p">Création Web & E-commerce</div><div class="srv-cat-p">Site Vitrine · Landing Page · Boutique Shopify · Portfolio</div></div></div>
+    <div class="srv-item-p"><div class="srv-np">02</div><div><div class="srv-name-p">Marketing & Branding</div><div class="srv-cat-p">Identité Visuelle · Logo · Réseaux Sociaux · Stratégie Digitale</div></div></div>
+    <div class="srv-item-p"><div class="srv-np">03</div><div><div class="srv-name-p">Intelligence Artificielle</div><div class="srv-cat-p">Chatbots · Agents IA · Automatisation · Sur-mesure</div></div></div>
+    <div class="srv-item-p"><div class="srv-np">04</div><div><div class="srv-name-p">RestoPremium</div><div class="srv-cat-p">Uber Eats · Deliveroo · Branding Resto · Référencement Plateforme</div></div></div>
   </div>
   <div class="srv-cta-wrap">
     <button class="srv-cta-btn" id="btnservices"><span>Voir toutes nos offres &amp; tarifs</span></button>
@@ -722,10 +787,19 @@ function toggleMenu(state) {
 }
 document.getElementById('nav-burger').addEventListener('click', () => toggleMenu());
 
-/* ── REDUCE PARTICLES ON MOBILE ── */
-const isMobile = window.innerWidth < 768;
-if (isMobile) {
-  // Remove excess petals after init - handled in bgLoop
+/* ── HERO SUBTITLE ANIM ── */
+const heroSub = document.getElementById('heroSub');
+if(heroSub){
+  setTimeout(()=>{
+    gsap.to(heroSub, {opacity:1, y:0, duration:1, ease:'expo.out', delay:.1});
+  }, 800);
+}
+
+/* ── MOBILE : fix about animations ── */
+if(window.innerWidth < 900){
+  document.querySelectorAll('.about-title,.about-text,.about-label-wrap').forEach(el=>{
+    el.style.transform='none'; el.style.opacity='1';
+  });
 }
 
 </script>
