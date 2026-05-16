@@ -92,8 +92,8 @@ body.hov #cr{width:48px;height:48px;}
 #marquee-bar::before{left:0;background:linear-gradient(90deg,rgba(10,0,21,1),transparent);}
 #marquee-bar::after{right:0;background:linear-gradient(-90deg,rgba(10,0,21,1),transparent);}
 .mq-track{display:inline-flex;animation:mqscroll 22s linear infinite;width:max-content;}
-.mq-item{font-family:'Josefin Sans',sans-serif;font-size:.5rem;font-weight:100;letter-spacing:.42em;text-transform:uppercase;color:rgba(255,133,170,.5);padding:0 1.6rem;flex-shrink:0;white-space:nowrap;}
-.mq-dot{color:rgba(255,61,127,.35);font-size:.42rem;flex-shrink:0;}
+.mq-item{font-family:'Josefin Sans',sans-serif;font-size:.7rem;font-weight:200;letter-spacing:.35em;text-transform:uppercase;color:rgba(255,180,210,.85);padding:0 1.6rem;flex-shrink:0;white-space:nowrap;}
+.mq-dot{color:rgba(255,133,170,.7);font-size:.55rem;flex-shrink:0;}
 @keyframes mqscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* SECTION LABEL */
@@ -199,7 +199,7 @@ body.hov #cr{width:48px;height:48px;}
 }
 .nav-burger span{
   display:block;height:1.5px;
-  background:linear-gradient(90deg,#ff85aa,#fff,#f0c866,#ff3d7f);
+  background:rgba(255,200,220,.45);
   border-radius:2px;transition:all .4s cubic-bezier(.19,1,.22,1);transform-origin:center;
 }
 .nav-burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
@@ -244,7 +244,7 @@ body.hov #cr{width:48px;height:48px;}
   font-family:'Josefin Sans',sans-serif;
   font-size:clamp(.78rem,2vw,.92rem);font-weight:200;
   letter-spacing:.06em;line-height:2;
-  color:rgba(255,210,228,.85);
+  color:rgba(255,255,255,.92);
   max-width:520px;margin:.8rem 0 0;
   opacity:0;transform:translateY(16px);
 }
@@ -464,7 +464,7 @@ body{overflow-x:hidden;}
   </div>
 
 
-  <p class="hero-subtitle" id="heroSub">Sites web, branding, Agents IA, RestoPremium — nous construisons votre présence digitale avec précision.<br>Résultats concrets, livraison rapide, accompagnement humain. <span class="shimmer-cta">Rejoignez les entrepreneurs qui nous font confiance.</span></p>
+  <p class="hero-subtitle" id="heroSub"><span style="color:rgba(255,255,255,.92);font-weight:200;">Sites web, branding, Agents IA, RestoPremium — nous construisons votre présence digitale avec précision. Résultats concrets, livraison rapide, accompagnement humain.</span> <span class="shimmer-cta">Rejoignez les entrepreneurs qui nous font confiance.</span></p>
   <div class="hero-btns" id="hbtns">
     <button class="sqbtn" id="btnpacks" style="--gf:#ff3d7f;--gt:#ff85aa;">
       <span class="sqbtn-ic">🌸</span>
