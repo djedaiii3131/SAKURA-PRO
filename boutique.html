@@ -53,8 +53,8 @@ body{font-family:'Jost',sans-serif;background:#150926;color:var(--white);overflo
 .agrad-normal{background:linear-gradient(270deg,#ff85aa,#fff,#f0c866,#ff3d7f,#c084fc,#fff,#ff85aa);background-size:400% 400%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gshift 5s ease infinite;}
 #nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 900;
-  height: 62px; display: flex; align-items: center; justify-content: space-between;
-  padding: 0 1.25rem;
+  height: 72px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 4rem;
   background: rgba(8,5,12,.88);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -332,89 +332,86 @@ footer {
 .f-copy { font-size: .58rem; letter-spacing: .1em; color: var(--white-30); }
 
 
-/* ════ HAMBURGER ════ */
+/* ═══ HAMBURGER ═══ */
 .nav-burger{
-  display:flex;flex-direction:column;justify-content:center;gap:5px;
+  display:none;flex-direction:column;justify-content:center;gap:5px;
   width:44px;height:44px;cursor:pointer;border:none;background:none;
   padding:10px;border-radius:8px;flex-shrink:0;
 }
 .nav-burger span{
-  display:block;height:1.5px;background:rgba(255,133,170,.85);border-radius:2px;
-  transition:all .4s cubic-bezier(.19,1,.22,1);transform-origin:center;
+  display:block;height:1.5px;
+  background:linear-gradient(90deg,#ff85aa,#fff,#f0c866,#ff3d7f);
+  border-radius:2px;transition:all .4s cubic-bezier(.19,1,.22,1);transform-origin:center;
 }
 .nav-burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
 .nav-burger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
 .nav-burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+@media(max-width:900px){.nav-burger{display:flex;}}
 
-/* MOBILE OVERLAY */
+/* ═══ MOBILE OVERLAY ═══ */
 .mob-menu{
   position:fixed;inset:0;z-index:8500;background:#150926;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.3rem;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;
   transform:translateY(-100%);transition:transform .5s cubic-bezier(.19,1,.22,1);
   padding:2rem;overflow-y:auto;
 }
 .mob-menu.open{transform:translateY(0);}
 .mob-menu a{
-  font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,7vw,2.8rem);font-weight:200;
-  color:rgba(255,255,255,.85);text-decoration:none;letter-spacing:.04em;
-  padding:.6rem 2rem;border-radius:8px;width:100%;text-align:center;
-  transition:color .25s,background .25s;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.8rem,7vw,2.6rem);font-weight:200;
+  background:linear-gradient(90deg,#fff 0%,#ff85aa 20%,#fff 35%,#f0c866 50%,#fff 65%,#c084fc 80%,#ff3d7f 90%,#fff 100%);
+  background-size:300% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;animation:logoshimmer 4s linear infinite;
+  text-decoration:none;letter-spacing:.04em;
+  padding:.6rem 2rem;border-radius:8px;width:100%;text-align:center;transition:opacity .25s;
 }
-.mob-menu a:hover{color:#ff85aa;background:rgba(255,61,127,.07);}
-.mob-menu-sep{width:60px;height:1px;background:rgba(255,61,127,.25);margin:.8rem 0;}
-.mob-menu-wa{
-  display:inline-flex!important;align-items:center;gap:.6rem;
-  padding:.9rem 2.5rem!important;background:#25D366!important;color:#fff!important;
-  border-radius:100px!important;font-family:'Josefin Sans',sans-serif;
-  font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;
-  text-decoration:none;min-height:48px;margin-top:.5rem;
+.mob-menu a:hover{opacity:.75;}
+.mob-menu-sep{width:60px;height:1px;background:rgba(255,61,127,.3);margin:.8rem 0;}
+.mob-menu-devis{
+  display:inline-flex!important;align-items:center;justify-content:center;gap:.6rem;
+  padding:1rem 2.5rem!important;border-radius:100px!important;
+  background:linear-gradient(270deg,#ff85aa,#9b3868,#c4608e,#f0c866,#ff85aa)!important;
+  background-size:300% 300%!important;animation:btn-shimmer 4s ease infinite!important;
+  color:#0a0015!important;font-family:'Josefin Sans',sans-serif;
+  font-size:.75rem;font-weight:300;letter-spacing:.18em;text-transform:uppercase;
+  text-decoration:none;min-height:48px;border:none;cursor:pointer;
+  box-shadow:0 8px 30px rgba(196,96,142,.35);margin-top:.5rem;
 }
 
-/* ════ NAV MOBILE ════ */
+/* ═══ BOUTON DEVIS ANIMÉ ═══ */
+@keyframes btn-shimmer{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.btn-devis{
+  display:inline-flex;align-items:center;justify-content:center;gap:.6rem;
+  padding:.9rem 2rem;border-radius:100px;width:100%;
+  background:linear-gradient(270deg,#ff85aa,#9b3868,#c4608e,#f0c866,#ff85aa);
+  background-size:300% 300%;animation:btn-shimmer 4s ease infinite;
+  color:#0a0015;font-family:'Josefin Sans',sans-serif;
+  font-size:.7rem;font-weight:300;letter-spacing:.18em;text-transform:uppercase;
+  text-decoration:none;border:none;cursor:pointer;
+  box-shadow:0 8px 30px rgba(196,96,142,.3);
+  transition:transform .3s,box-shadow .3s;margin-top:1.5rem;min-height:48px;
+}
+.btn-devis:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(196,96,142,.5);}
+
+/* ═══ SHOP CARDS MOBILE ═══ */
 @media(max-width:768px){
   #nav{padding:0 1rem!important;height:58px!important;}
-  .nav-logo{font-size:1rem!important;letter-spacing:.15em!important;}
-  .nav-back span{display:none;}
-  /* TOPBAR overlap fix */
+  .nav-logo{font-size:1rem!important;letter-spacing:.14em!important;}
   #topbar{display:none!important;}
-  /* DIAG BANDS mobile off */
   .diag-band{display:none!important;}
-  /* PAGE HEADER */
-  .page-header{padding:5.5rem 1.25rem 2.5rem!important;}
-  /* SECTIONS */
-  .section{padding:3rem 1.25rem!important;}
-  /* SHOP CARDS */
-  .shop-card{
-    grid-template-columns:1fr!important;
-    gap:.8rem!important;
-    padding:1.5rem!important;
-  }
+  .page-header{padding:5rem 1.25rem 2rem!important;}
+  .section{padding:2.5rem 1.25rem!important;}
+  .shop-card{grid-template-columns:1fr!important;gap:.8rem!important;padding:1.5rem!important;}
   .shop-left-col{display:none!important;}
-  .shop-foot{
-    flex-direction:row!important;align-items:center!important;
-    justify-content:space-between!important;
-    padding-top:.8rem;
-    border-top:1px solid rgba(232,160,190,.1);
-  }
-  .shop-btn{min-height:44px!important;}
-  /* PKG */
+  .shop-foot{border-top:1px solid rgba(232,160,190,.12);padding-top:1rem;margin-top:.5rem;}
+  .shop-btn{min-height:44px!important;width:100%!important;justify-content:center!important;}
   .pkg-card{padding:1.5rem!important;}
   .pkg-cta{width:100%!important;}
-  /* DIVIDER */
   .section-divider{padding:0 1.25rem!important;}
-  /* FOOTER */
   footer{padding:1.5rem 1.25rem!important;flex-direction:column!important;text-align:center!important;}
   .f-links{justify-content:center!important;}
-  /* INPUTS */
-  input,textarea,select{font-size:16px!important;}
 }
-
-/* ENSURE NO OVERFLOW */
 body{overflow-x:hidden;}
-.diag-band{overflow:hidden;}
-
-/* WA FLOAT bigger */
-#wa-float{width:54px!important;height:54px!important;}
 
 /* ANIMATIONS */
 @keyframes rise { to { transform: translateY(0); opacity: 1; } }
@@ -447,16 +444,13 @@ body{overflow-x:hidden;}
 <body>
 
 
-<!-- MOBILE MENU -->
 <div class="mob-menu" id="mob-menu">
   <a href="index.html">← Retour au site</a>
-  <a href="boutique.html#produits">Nos Produits</a>
-  <a href="boutique.html#packagings">Packagings</a>
-  <a href="https://www.skool.com/sakura-business-academy-9729" target="_blank">Skool Academy</a>
+  <a href="#produits" onclick="toggleMenu(false);">Nos Offres</a>
+  <a href="index.html#about" onclick="toggleMenu(false);">Qui Sommes-Nous</a>
   <div class="mob-menu-sep"></div>
-  <a href="https://wa.me/33601747023" class="mob-menu-wa" target="_blank">
-    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-    WhatsApp
+  <a class="mob-menu-devis" href="https://wa.me/33601747023?text=Bonjour%20Sakura%20Group%2C%20je%20souhaite%20un%20devis." target="_blank">
+    Demande de devis →
   </a>
 </div>
 <canvas id="bg-canvas"></canvas>
@@ -492,78 +486,50 @@ body{overflow-x:hidden;}
 
 <!-- ════════ PRODUITS ════════ -->
 <section class="section" id="produits">
-  <div class="sec-eyebrow"><span class="agrad-normal">Produits &amp; Services</span></div>
-  <h2 class="sec-title">Nos ressources <span class="agrad-text">digitales</span></h2>
+  <div class="sec-eyebrow"><span class="agrad-normal">Nos Offres</span></div>
+  <h2 class="sec-title" style="margin-bottom:2.5rem;">Choisissez votre <span class="agrad-text">formule</span></h2>
 
   <div class="shop-grid">
 
-    <!-- 01 Site Web -->
+    <!-- CARTE 1 : Création Web -->
     <div class="shop-card reveal">
-      <div class="top-line"></div><div class="shop-glow"></div>
+      <div class="top-line"></div>
+      <div class="shop-glow"></div>
       <div class="shop-badge">⭐ Offre phare</div>
       <div class="shop-left-col"><div class="shop-num">01</div></div>
       <div class="shop-body">
-        <div class="shop-type">Création de Site Web</div>
-        <div class="shop-title">Site Web Professionnel — Clé en mains</div>
-        <p class="shop-desc">Site vitrine, landing page ou portfolio livré clé en mains. Design premium sur-mesure, optimisé SEO, rapide et mobile-first. 3 mois de modifications offertes après livraison.</p>
+        <div class="shop-type">Création Web & E-commerce</div>
+        <div class="shop-title">Votre présence digitale, clé en mains</div>
+        <p class="shop-desc">Nous concevons votre site web sur-mesure, optimisé pour convertir. Design premium, mobile-first, livraison rapide.</p>
         <ul class="shop-list">
-          <li>Design premium sur-mesure & responsive</li>
-          <li>Optimisé SEO & performance</li>
-          <li>Formulaire de contact + hébergement inclus</li>
-          <li>3 mois de modifications gratuites incluses</li>
+          <li>Site vitrine & landing page</li>
+          <li>Boutique Shopify & e-commerce</li>
+          <li>Portfolio & page de vente</li>
+          <li>SEO, performance & responsive</li>
+          <li>Hébergement & domaine inclus</li>
         </ul>
-      </div>
-      <div class="shop-foot">
-        <div class="shop-price">À partir de 400€<small>Clé en mains</small></div>
-        <a href="https://wa.me/33601747023?text=Bonjour%2C+je+suis+int%C3%A9ress%C3%A9(e)+par+la+cr%C3%A9ation+d%27un+site+web.+Pouvez-vous+m%27en+dire+plus+%3F" target="_blank" class="shop-btn">Commander →</a>
+        <a href="https://wa.me/33601747023?text=Bonjour%20Sakura%20Group%2C%20je%20souhaite%20un%20devis%20pour%20un%20site%20web%20%2F%20e-commerce." target="_blank" class="btn-devis">Demande de devis →</a>
       </div>
     </div>
 
-    <!-- 02 Shopify -->
+    <!-- CARTE 2 : RestoPremium -->
     <div class="shop-card reveal">
-      <div class="top-line"></div><div class="shop-glow"></div>
-      <div class="shop-badge">Populaire</div>
+      <div class="top-line"></div>
+      <div class="shop-glow"></div>
+      <div class="shop-badge">🍽️ Exclusif Resto</div>
       <div class="shop-left-col"><div class="shop-num">02</div></div>
       <div class="shop-body">
-        <div class="shop-type">Création Shopify</div>
-        <div class="shop-title">Boutique Shopify Pro — Clé en mains</div>
-        <p class="shop-desc">On crée votre boutique Shopify complète : design premium, produits configurés, paiement activé et domaine connecté. Prête à vendre dès le premier jour.</p>
+        <div class="shop-type">RestoPremium</div>
+        <div class="shop-title">Dominez les plateformes de livraison</div>
+        <p class="shop-desc">On crée et optimise votre présence sur Uber Eats, Deliveroo et autres plateformes. Branding, référencement, gestion — tout inclus.</p>
         <ul class="shop-list">
-          <li>Design personnalisé & responsive</li>
-          <li>Produits + fiches configurés</li>
-          <li>Paiement, livraison & domaine inclus</li>
-          <li>Formation prise en main offerte</li>
+          <li>Branding & identité visuelle resto</li>
+          <li>Création & optimisation Uber Eats</li>
+          <li>Référencement Deliveroo & plateformes</li>
+          <li>Site web & boutique en ligne</li>
+          <li>Gestion mensuelle disponible</li>
         </ul>
-      </div>
-      <div class="shop-foot">
-        <div class="shop-price">50€<small>Livraison sous 5 jours</small></div>
-        <a href="https://wa.me/33601747023?text=Bonjour%2C+je+suis+int%C3%A9ress%C3%A9(e)+par+la+Boutique+Shopify+Pro.+Pouvez-vous+m%27en+dire+plus+%3F" target="_blank" class="shop-btn">Commander →</a>
-      </div>
-    </div>
-
-    <!-- 03 DropEat 3 offres -->
-    <div class="shop-card reveal">
-      <div class="top-line"></div><div class="shop-glow"></div>
-      <div class="shop-badge">Exclusif</div>
-      <div class="shop-left-col"><div class="shop-num">03</div></div>
-      <div class="shop-body">
-        <div class="shop-type">Restaurants & Livraison</div>
-        <div class="shop-title">RestoRank — Boostez votre Restaurant sur Uber Eats</div>
-        <p class="shop-desc">Nous créons et gérons votre présence sur les plateformes de livraison. 3 formules selon votre situation.</p>
-        <div class="dropeat-offers">
-          <div class="deo">
-            <div class="deo-header"><span class="deo-num">Offre 1</span><span class="deo-name">Refonte Identité Visuelle</span><span class="deo-price">Sur devis</span></div>
-            <p class="deo-desc">On recrée entièrement l'identité visuelle de votre boutique existante — nouveau logo, photos, cohérence avec votre restaurant physique.</p>
-          </div>
-          <div class="deo">
-            <div class="deo-header"><span class="deo-num">Offre 2</span><span class="deo-name">Création + Gestion Mensuelle</span><span class="deo-price">Sur devis</span></div>
-            <p class="deo-desc">On crée tout from scratch : nouveau logo, marque, menu optimisé, référencement Uber Eats. Gestion mensuelle incluse pour maximiser vos commandes.</p>
-          </div>
-          
-      </div>
-      <div class="shop-foot" style="align-self:flex-start;margin-top:1rem;">
-        <div class="shop-price">Sur devis<small>2 formules</small></div>
-        <a href="https://wa.me/33601747023?text=Bonjour%2C+je+suis+restaurateur+et+int%C3%A9ress%C3%A9+par+DropEat+Uber+Eats.+Contactez-moi+%3F" target="_blank" class="shop-btn">Nous contacter →</a>
+        <a href="https://wa.me/33601747023?text=Bonjour%20Sakura%20Group%2C%20je%20suis%20restaurateur%20et%20je%20souhaite%20un%20devis%20RestoPremium." target="_blank" class="btn-devis">Demande de devis →</a>
       </div>
     </div>
 
@@ -571,117 +537,7 @@ body{overflow-x:hidden;}
 </section>
 
 <!-- DIVIDER -->
-<div class="section-divider">
-  <span>✦ Packagings Complets ✦</span>
-</div>
 
-<!-- ════════ PACKAGINGS ════════ -->
-<section class="section section--alt" id="packagings">
-  <div class="sec-eyebrow"><span class="agrad-normal">Packagings</span></div>
-  <h2 class="sec-title">Votre présence digitale,<br><span class="agrad-text">tout-en-un</span></h2>
-
-  <div class="pkg-intro-text reveal">
-    <p>Page de vente, boutique Shopify, site web complet — réunis dans une offre pensée pour convertir et faire grandir votre business dès le premier jour.</p>
-  </div>
-
-  <div class="pkg-includes reveal">
-    <div class="pkg-includes-label">Inclus dans chaque packaging</div>
-    <div class="pkg-includes-grid">
-      <div class="pkg-inc-item"><div class="pkg-inc-dot"></div>Design sur-mesure</div>
-      <div class="pkg-inc-item"><div class="pkg-inc-dot"></div>Page de vente optimisée</div>
-      <div class="pkg-inc-item"><div class="pkg-inc-dot"></div>Bouton WhatsApp intégré</div>
-      <div class="pkg-inc-item"><div class="pkg-inc-dot"></div>Version mobile responsive</div>
-      <div class="pkg-inc-item"><div class="pkg-inc-dot"></div>Livraison rapide garantie</div>
-      <div class="pkg-inc-item"><div class="pkg-inc-dot"></div>Révisions incluses</div>
-    </div>
-  </div>
-
-  <div class="pkg-grid">
-
-    <!-- STARTER -->
-    <div class="pkg-card reveal">
-      <div class="top-line"></div>
-      <div class="pkg-glow"></div>
-      <div class="pkg-tier">Essentiel</div>
-      <div class="pkg-name">Pack <em>Starter</em></div>
-      <p class="pkg-desc">Le pack idéal pour lancer votre présence digitale. Un site web professionnel clé en mains avec tout le nécessaire pour convertir vos visiteurs en clients.</p>
-      <div class="pkg-price-row">
-        <span class="pkg-price-cur">€</span>
-        <span class="pkg-price-amount">550</span>
-      </div>
-      <ul class="pkg-list">
-        <li>Site web professionnel complet</li>
-        <li>Design premium sur-mesure & responsive</li>
-        <li>Optimisé SEO & performance</li>
-        <li>Intégration WhatsApp & formulaire contact</li>
-        <li>3 mois de révisions & maintenance offerts</li>
-        <li>Livraison sous 5 jours</li>
-      </ul>
-      <a class="pkg-cta pkg-cta-outline" href="https://wa.me/33601747023?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20le%20Pack%20Starter%20%C3%A0%20297%E2%82%AC%20%F0%9F%9A%80" target="_blank">
-        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Je veux cette offre
-      </a>
-    </div>
-
-    <!-- GROWTH -->
-    <div class="pkg-card pkg-featured reveal">
-      <div class="top-line"></div>
-      <div class="pkg-glow"></div>
-      <div class="pkg-popular">Le plus choisi</div>
-      <div class="pkg-tier">Complet</div>
-      <div class="pkg-name">Pack <em>Growth</em></div>
-      <p class="pkg-desc">Page de vente + site web vitrine professionnel. L'offre idéale pour asseoir votre crédibilité en ligne.</p>
-      <div class="pkg-price-row">
-        <span class="pkg-price-cur">€</span>
-        <span class="pkg-price-amount">750</span>
-      </div>
-      <ul class="pkg-list">
-        <li>Site web vitrine complet (3–5 pages)</li>
-        <li>Page de vente haute conversion</li>
-        <li>Intégration paiement en ligne (Stripe / PayPal)</li>
-        <li>Intégration WhatsApp + formulaire contact</li>
-        <li>SEO avancé & optimisation performance</li>
-        <li>1 an de révisions & maintenance inclus</li>
-        <li>Livraison sous 10 jours</li>
-      </ul>
-      <a class="pkg-cta pkg-cta-fill" href="https://wa.me/33601747023?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20le%20Pack%20Growth%20%C3%A0%20550%E2%82%AC%20%F0%9F%9A%80" target="_blank">
-        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Je veux cette offre
-      </a>
-    </div>
-
-    <!-- FULL STACK -->
-    <div class="pkg-card reveal">
-      <div class="top-line"></div>
-      <div class="pkg-glow"></div>
-      <div class="pkg-tier">Premium</div>
-      <div class="pkg-name">Pack <em>Full Stack</em></div>
-      <p class="pkg-desc">L'écosystème complet : page de vente, site web et boutique Shopify pour vendre partout, tout le temps.</p>
-      <div class="pkg-price-row">
-        <span class="pkg-price-cur">€</span>
-        <span class="pkg-price-amount">900</span>
-      </div>
-      <ul class="pkg-list">
-        <li>Tout le Pack Growth inclus</li>
-        <li>Boutique Shopify complète (jusqu'à 20 produits)</li>
-        <li>Paiement en ligne activé (Stripe / PayPal)</li>
-        <li>Intégration réseaux sociaux & pixel Meta</li>
-        <li>Révisions illimitées incluses</li>
-        <li>1 an de support & maintenance offert</li>
-        <li>Livraison sous 15 jours</li>
-      </ul>
-      <a class="pkg-cta pkg-cta-outline" href="https://wa.me/33601747023?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20le%20Pack%20Full%20Stack%20%C3%A0%20965%E2%82%AC%20%F0%9F%9A%80" target="_blank">
-        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Je veux cette offre
-      </a>
-    </div>
-
-  </div>
-
-
-</section>
-
-<!-- FOOTER -->
 <footer>
   <div class="f-logo">Sakura <em>Group</em>™</div>
   <div class="f-links">
@@ -806,6 +662,8 @@ function toggleMenu(state) {
   document.body.style.overflow = menuOpen ? 'hidden' : '';
 }
 document.getElementById('nav-burger').addEventListener('click', () => toggleMenu());
-document.querySelectorAll('#mob-menu a').forEach(a => a.addEventListener('click', () => toggleMenu(false)));
+document.querySelectorAll('#mob-menu a:not(.mob-menu-devis)').forEach(a => {
+  a.addEventListener('click', () => setTimeout(() => toggleMenu(false), 100));
+});
 
 </script>
