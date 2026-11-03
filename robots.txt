@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /_dev/
+Disallow: /_ancien/
 
-Sitemap: https://www.sakuragroup.fr/sitemap.xml
+Sitemap: https://sakuragroup.fr/sitemap.xml
