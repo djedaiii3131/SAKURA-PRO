@@ -376,3 +376,6 @@ em { font-style: italic; color: var(--pink); }
 .intro::before { content: ""; position: absolute; inset: -40px; background: url(../img/poster.jpg) center / cover; filter: blur(28px) saturate(1.2); opacity: .8; }
 .intro video { position: relative; }
 @media (max-aspect-ratio: 1/1) { .intro video { object-fit: contain; } }
+
+/* Curseur personnalisé retiré : on garde le curseur normal */
+.cursor { display: none !important; }
