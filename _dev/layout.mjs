@@ -46,11 +46,12 @@ export function page({ path, title, description, body, jsonld = [], image = '/as
 <meta property="og:url" content="${url}">
 <meta property="og:image" content="${SITE}${image}">
 <meta property="og:locale" content="fr_FR">
-<meta name="theme-color" content="#0a0015">
+<meta name="theme-color" content="#fbf4ef">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Josefin+Sans:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/site.css">
+<link rel="stylesheet" href="/assets/css/pages.css">
 ${ld}
 </head>
 <body class="subpage">
@@ -72,7 +73,7 @@ ${footer}
 
 export const pageHero = (kicker, titleHtml, lead, crumbs) => `
 <section class="page-hero">
-  <div class="page-hero-glow" aria-hidden="true"></div>
+  <div class="page-hero-glow" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
   <nav class="crumbs reveal-up" aria-label="Fil d'Ariane">${crumbs.map(([t, h]) => (h ? `<a href="${h}">${t}</a>` : `<span>${t}</span>`)).join('<i>/</i>')}</nav>
   <p class="kicker reveal-up">${kicker}</p>
   <h1 class="h2 page-title" data-split>${titleHtml}</h1>

@@ -1,0 +1,116 @@
+/* Sakura Group — pages intérieures : même esprit clair et coloré que l'accueil */
+.subpage {
+  --ivory: #fbf4ef;
+  --ink-dark: #170a22;
+  --rose: #d8256a;
+  --cyan: #5ef2ff;
+  --teal: #1aa6b8;
+  --violet2: #a06bff;
+  --mono: "JetBrains Mono", ui-monospace, monospace;
+  background: var(--ivory);
+}
+.subpage main {
+  --paper: var(--ink-dark);
+  --muted: rgba(23, 10, 34, .68);
+  --line: rgba(176, 52, 106, .18);
+  color: var(--ink-dark);
+  background: var(--ivory);
+}
+.subpage main em { color: var(--rose); }
+/* Le dégradé est posé sur chaque mot : les mots sont découpés pour l'animation d'apparition */
+.subpage .h2 em .wd > span, .subpage .h2 em:not(:has(.wd)) { background: linear-gradient(95deg, var(--rose), var(--violet2) 60%, var(--teal)); -webkit-background-clip: text; background-clip: text; color: transparent; padding-right: .06em; }
+.subpage .kicker { color: #b0346a; }
+
+/* La barre de navigation reste lisible sur fond clair */
+.subpage .nav { background: rgba(7, 0, 15, .82); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255, 133, 170, .18); }
+
+/* Haut de page lumineux, en dégradé animé */
+.subpage .page-hero { max-width: none; margin: 0; padding-left: max(var(--gut), calc((100vw - 1400px) / 2 + var(--gut))); padding-right: var(--gut); overflow: hidden; }
+.subpage .page-hero > *:not(.page-hero-glow) { position: relative; max-width: 1100px; }
+.subpage .page-hero-glow { inset: 0; width: auto; height: auto; max-width: none; max-height: none; background: none; filter: blur(60px); }
+.page-hero-glow i { position: absolute; border-radius: 50%; opacity: .55; animation: drift 14s ease-in-out infinite alternate; }
+.page-hero-glow i:nth-child(1) { width: 46vw; height: 46vw; right: -6vw; top: -18vw; background: #ff85aa; }
+.page-hero-glow i:nth-child(2) { width: 34vw; height: 34vw; right: 22vw; top: 4vw; background: #c9b4ff; animation-delay: -4s; }
+.page-hero-glow i:nth-child(3) { width: 30vw; height: 30vw; right: 2vw; bottom: -14vw; background: #9ff6ff; animation-delay: -8s; }
+.page-hero-glow i:nth-child(4) { width: 22vw; height: 22vw; right: 40vw; bottom: -10vw; background: #ffe0a3; animation-delay: -2s; }
+@keyframes drift { to { transform: translate(-6vw, 4vw) scale(1.15); } }
+.subpage .page-title { font: 600 clamp(44px, 7.4vw, 116px)/.98 var(--sans); letter-spacing: -.04em; }
+.subpage .page-title em { font-family: var(--serif); font-weight: 500; font-size: 1.06em; letter-spacing: -.01em; }
+.subpage .crumbs a, .subpage .crumbs { color: rgba(23, 10, 34, .55); font-family: var(--mono); font-size: 12px; letter-spacing: .04em; }
+.subpage .crumbs a:hover { color: var(--rose); }
+
+/* Offres */
+.subpage .offer { background: #fff; border-color: rgba(176, 52, 106, .14); box-shadow: 0 40px 90px -50px rgba(176, 52, 106, .55); border-radius: 30px; }
+.subpage .offer-feature { background: linear-gradient(160deg, #1b0a2c, #2d0f3f); border-color: rgba(240, 200, 102, .35); --paper: #fdf8fb; --muted: rgba(253, 248, 251, .72); color: #fdf8fb; }
+.subpage .offer-feature em { color: var(--pink); }
+.subpage .card-tag { font-family: var(--mono); letter-spacing: .14em; color: #b0346a; }
+.subpage .offer-feature .card-tag { color: var(--gold); }
+.subpage .offer-name { font: 600 clamp(30px, 3.2vw, 44px)/1.05 var(--sans); letter-spacing: -.03em; }
+.subpage .price { font: 600 clamp(54px, 5.6vw, 76px)/1 var(--sans); letter-spacing: -.04em; }
+.subpage .price small { color: var(--rose); }
+.subpage .offer-feature .price small { color: var(--gold); }
+.subpage .price .from { font-family: var(--mono); letter-spacing: .1em; }
+.subpage .offer-intro { font: 400 clamp(19px, 1.8vw, 23px)/1.45 var(--sans); }
+.subpage .offer-cols h3 { font-family: var(--mono); letter-spacing: .14em; color: #b0346a; }
+.subpage .offer-feature .offer-cols h3 { color: var(--gold); }
+.subpage .note a { color: var(--rose); }
+
+/* Étape par étape : numéros dans des pastilles, comme le chemin de l'accueil */
+.subpage .steps-list { border-color: var(--line); }
+.subpage .steps-list li { grid-template-columns: 76px 1fr; align-items: center; }
+.subpage .steps-list .step-n { width: 62px; height: 62px; display: grid; place-items: center; border-radius: 50%; font: 600 15px var(--mono); color: var(--rose); background: #fff; -webkit-background-clip: border-box; background-clip: border-box; border: 1px solid rgba(216, 37, 106, .3); box-shadow: 0 10px 30px -14px rgba(216, 37, 106, .6); }
+.subpage .steps-list h3 { font: 600 clamp(22px, 2.4vw, 30px)/1.15 var(--sans); letter-spacing: -.02em; }
+
+/* Questions */
+.subpage .faq summary { font: 600 clamp(19px, 2vw, 24px)/1.3 var(--sans); letter-spacing: -.01em; }
+.subpage .faq summary::after { color: var(--rose); }
+.subpage .faq a { color: var(--rose); }
+
+/* Bandeau d'appel : dégradé vif */
+.subpage .cta-band { border: 0; color: #fff; --paper: #fff; --muted: rgba(255, 255, 255, .88);
+  background: linear-gradient(120deg, #ff3d7f, #a06bff 55%, #1aa6b8); box-shadow: 0 40px 100px -40px rgba(160, 107, 255, .8); position: relative; overflow: hidden; }
+.subpage .cta-band::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 20% 0%, rgba(255, 255, 255, .35), transparent 50%); }
+.subpage .cta-band > * { position: relative; }
+.subpage .cta-band .h2 em, .subpage .cta-band .h2 em .wd > span { background: none; -webkit-background-clip: border-box; background-clip: border-box; color: #fff; text-shadow: 0 6px 30px rgba(23, 10, 34, .3); }
+.subpage .cta-band .btn { --bg: #170a22; background: #170a22; color: #fff; box-shadow: 0 16px 40px -12px rgba(23, 10, 34, .6); }
+
+/* Accompagnement */
+.subpage .switch { background: #fff; border-color: rgba(176, 52, 106, .2); }
+.subpage .switch button[aria-checked="true"] { color: var(--ink-dark); }
+.subpage .plan { background: #fff; border-color: rgba(176, 52, 106, .14); box-shadow: 0 30px 70px -40px rgba(176, 52, 106, .5); }
+.subpage .plan h3 { font: 600 34px/1 var(--sans); letter-spacing: -.03em; }
+.subpage .plan-price { font-family: var(--sans); font-weight: 600; letter-spacing: -.04em; }
+.subpage .plan-price small { color: var(--rose); }
+.subpage .plan-pro { background: linear-gradient(160deg, #1b0a2c, #2d0f3f); --paper: #fdf8fb; --muted: rgba(253, 248, 251, .72); color: #fdf8fb; }
+.subpage .plan-pro .plan-price small { color: var(--gold); }
+.subpage .why-item h3 { font: 600 24px/1.15 var(--sans); letter-spacing: -.02em; }
+.subpage .why-item span { color: var(--rose); }
+
+/* Blog : cartes blanches */
+.subpage .post-card { background: #fff; border-color: rgba(176, 52, 106, .14); box-shadow: 0 24px 60px -36px rgba(176, 52, 106, .5); }
+.subpage .post-card h2 { font: 600 24px/1.2 var(--sans); letter-spacing: -.02em; }
+.subpage .post-card .link-arrow { color: var(--rose); }
+
+/* Articles : un vrai confort de lecture */
+.subpage .prose { font-size: 19px; line-height: 1.8; font-weight: 400; color: #2a1a33; }
+.subpage .offer-body, .subpage .lead, .subpage .faq details p, .subpage .steps-list p { font-weight: 400; }
+.subpage .prose p, .subpage .prose ul, .subpage .prose ol, .subpage .prose table { color: #2a1a33; }
+.subpage .prose > p:first-of-type + p { font-size: 1.12em; }
+.subpage .prose h2 { font: 600 clamp(28px, 3vw, 38px)/1.15 var(--sans); letter-spacing: -.03em; color: var(--ink-dark); margin-top: 64px; }
+.subpage .prose h2::before { content: ""; display: block; width: 44px; height: 4px; border-radius: 4px; margin-bottom: 18px; background: linear-gradient(90deg, var(--rose), var(--violet2), var(--teal)); }
+.subpage .prose h3 { color: var(--rose); font-family: var(--sans); }
+.subpage .prose strong { color: var(--ink-dark); }
+.subpage .prose a { color: var(--rose); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.subpage .prose li::marker { color: var(--rose); }
+.subpage .prose table { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 50px -34px rgba(176, 52, 106, .5); }
+.subpage .prose th { color: #b0346a; font-family: var(--mono); font-size: 13px; letter-spacing: .06em; background: #fff0f4; }
+.subpage .prose .callout { background: linear-gradient(120deg, #fff0f4, #f1ecff); border-color: rgba(216, 37, 106, .25); }
+.subpage .post-meta { font-family: var(--mono); font-size: 13px; color: rgba(23, 10, 34, .55); }
+
+@media (max-width: 860px) {
+  .subpage .steps-list li { grid-template-columns: 56px 1fr; }
+  .subpage .steps-list .step-n { width: 48px; height: 48px; font-size: 13px; }
+  .subpage .prose { font-size: 17.5px; }
+  .page-hero-glow i:nth-child(1) { width: 80vw; height: 80vw; }
+}
+@media (prefers-reduced-motion: reduce) { .page-hero-glow i { animation: none; } }
