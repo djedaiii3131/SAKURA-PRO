@@ -361,3 +361,17 @@ em { font-style: italic; color: var(--pink); }
   .prose { font-size: 17px; }
 }
 .section .blog-grid { padding: 0; }
+
+/* Voile de transition entre les pages */
+.page-veil { position: fixed; inset: 0; z-index: 90; pointer-events: none; display: grid; grid-template-columns: repeat(3, 1fr); }
+.page-veil span { background: linear-gradient(180deg, #ff3d7f, #a06bff 60%, #0a0015); transform: scaleY(1); transform-origin: 50% 0; transition: transform .55s cubic-bezier(.7, 0, .2, 1); }
+.page-veil span:nth-child(2) { transition-delay: .06s; }
+.page-veil span:nth-child(3) { transition-delay: .12s; }
+.page-veil.out span { transform: scaleY(0); transform-origin: 50% 100%; }
+.page-veil.in span { transform: scaleY(1); transform-origin: 50% 0; }
+.page-veil.in { pointer-events: auto; }
+
+/* Intro : sur un écran en hauteur, la vidéo s'affiche en entier sur un fond flouté */
+.intro::before { content: ""; position: absolute; inset: -40px; background: url(../img/poster.jpg) center / cover; filter: blur(28px) saturate(1.2); opacity: .8; }
+.intro video { position: relative; }
+@media (max-aspect-ratio: 1/1) { .intro video { object-fit: contain; } }

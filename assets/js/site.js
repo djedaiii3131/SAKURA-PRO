@@ -61,6 +61,7 @@
   const introVideo = $('#intro-video');
   let introDone = false;
   const startPage = () => {
+    document.dispatchEvent(new Event('sakura:start')); // la page d'accueil V2 lance ses effets ici
     if (!hasGsap || reduce) { $$('.reveal-up').forEach((e) => { e.style.opacity = 1; e.style.transform = 'none'; }); return; }
     const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
     if ($('.hero-title .ch')) tl.from('.hero-title .ch', { yPercent: 115, rotate: 8, duration: 1.4, stagger: 0.028 });
@@ -97,6 +98,28 @@
       setTimeout(endIntro, 9000); // filet de sécurité
     }
   } else startPage();
+
+  /* ---------- Transition entre les pages (voile de pétales) ---------- */
+  if (!reduce) {
+    const veil = document.createElement('div');
+    veil.className = 'page-veil';
+    veil.innerHTML = '<span></span><span></span><span></span>';
+    document.body.appendChild(veil);
+    const lift = () => veil.classList.add('out');
+    requestAnimationFrame(lift); setTimeout(lift, 120);
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('a[href]');
+      if (!a || a.target || e.ctrlKey || e.metaKey || e.shiftKey) return;
+      const url = new URL(a.href, location.href);
+      if (url.origin !== location.origin || (url.pathname === location.pathname && url.hash)) return;
+      if (/.(pdf|mp4|jpg|png|webp)$/i.test(url.pathname)) return;
+      e.preventDefault();
+      veil.classList.remove('out');
+      veil.classList.add('in');
+      setTimeout(() => { location.href = a.href; }, 520);
+    });
+    addEventListener('pageshow', (e) => { if (e.persisted) { veil.classList.remove('in'); veil.classList.add('out'); } });
+  }
 
   /* ---------- Pétales de cerisier ---------- */
   const cv = $('#petals');

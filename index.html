@@ -8,17 +8,18 @@
 <meta property="og:title" content="Sakura Group — Agence digitale à Toulouse">
 <meta property="og:description" content="Sites web, motion design et vidéos IA. Prix affichés, paiement sécurisé, nom de domaine à votre nom.">
 <meta property="og:image" content="https://sakuragroup.fr/assets/img/poster.jpg">
-<meta name="theme-color" content="#0a0015">
+<meta name="theme-color" content="#07000f">
 <link rel="canonical" href="https://sakuragroup.fr/">
 <meta property="og:url" content="https://sakuragroup.fr/">
 <meta property="og:locale" content="fr_FR">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Sakura Group","url":"https://sakuragroup.fr/","email":"contact@sakuragroup.fr","description":"Agence digitale à Toulouse : création de sites web, motion design, vidéos IA, UGC IA, flyers animés et accompagnement.","address":{"@type":"PostalAddress","addressLocality":"Toulouse","addressCountry":"FR"},"areaServed":"FR","priceRange":"25 € – 699 €"}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Josefin+Sans:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/home.css">
 </head>
-<body>
+<body class="home">
 
 <!-- Intro : le dragon doré dans les cerisiers -->
 <div class="intro" id="intro" aria-hidden="true">
@@ -38,7 +39,7 @@
     <a href="/sites-web">Sites web</a>
     <a href="/videos">Vidéos</a>
     <a href="/accompagnement">Accompagnement</a>
-    <a href="#methode">Méthode</a>
+    <a href="#estimateur">Estimer mon projet</a>
     <a href="/blog/">Blog</a>
   </nav>
   <a class="btn btn-small magnet" href="#contact">Demander un devis</a>
@@ -47,210 +48,262 @@
 
 <main id="top">
 
-  <!-- HERO -->
-  <section class="hero" id="hero">
-    <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="assets/img/poster.jpg" aria-hidden="true">
-      <source src="assets/video/transition.mp4" type="video/mp4">
-    </video>
-    <div class="hero-shade"></div>
-    <canvas class="petals" id="petals" aria-hidden="true"></canvas>
-    <div class="hero-inner">
-      <p class="kicker reveal-up">Agence digitale · Toulouse · Entreprise immatriculée</p>
-      <h1 class="hero-title">
-        <span class="line" data-split>Votre site.</span>
-        <span class="line gold" data-split>Vos vidéos.</span>
-        <span class="line" data-split><em>Votre image.</em></span>
+  <!-- MONDE 1 · L'aurore : lumière vivante + pétales en 3D -->
+  <section class="w-aurora" id="aube">
+    <canvas class="aurora" id="aurora" aria-hidden="true"></canvas>
+    <canvas class="petals3d" id="petals3d" aria-hidden="true"></canvas>
+    <div class="aurora-grain" aria-hidden="true"></div>
+    <div class="aube-inner">
+      <p class="mono-tag reveal-up"><span class="dot"></span> Agence digitale · Toulouse · Entreprise immatriculée</p>
+      <h1 class="v2-title">
+        <span class="v2-line" data-scramble>Votre site.</span>
+        <span class="v2-line v2-grad" data-scramble>Vos vidéos.</span>
+        <span class="v2-line v2-serif" data-scramble>Votre image.</span>
       </h1>
-      <p class="hero-sub reveal-up">Sites web, motion design et vidéos IA pour entrepreneurs. Des prix affichés, un paiement sécurisé et un nom de domaine à votre nom.</p>
-      <div class="hero-cta reveal-up">
-        <a class="btn magnet" href="#contact">Parler de mon projet</a>
+      <p class="aube-sub reveal-up">Sites web, motion design et vidéos IA pour entrepreneurs. Des prix affichés, un paiement sécurisé et un nom de domaine à votre nom.</p>
+      <div class="aube-cta reveal-up">
+        <a class="btn magnet" href="#estimateur">Estimer mon projet</a>
         <a class="btn btn-ghost magnet" href="#sites">Voir les offres</a>
       </div>
     </div>
-    <a class="scroll-hint" href="#manifeste" aria-label="Descendre"><span></span></a>
+    <div class="chips" aria-hidden="true">
+      <span class="chip glass" data-depth="0.6"><i></i>Site vitrine dès 200 €</span>
+      <span class="chip glass" data-depth="1.1"><i class="c2"></i>Motion design</span>
+      <span class="chip glass" data-depth="0.8"><i class="c3"></i>Vidéo IA dès 25 €</span>
+      <span class="chip glass" data-depth="1.4"><i class="c4"></i>Paiement Stripe</span>
+    </div>
+    <a class="scroll-cue" href="#vol" aria-label="Descendre"><span>Défiler</span><i></i></a>
   </section>
 
-  <!-- BANDEAU -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee-track">
-      <span>Site vitrine</span><i>✿</i><span>Site motion design</span><i>✿</i><span>Site + boutique</span><i>✿</i><span>Vidéo IA</span><i>✿</i><span>UGC IA</span><i>✿</i><span>Flyer animé</span><i>✿</i><span>Accompagnement</span><i>✿</i>
-      <span>Site vitrine</span><i>✿</i><span>Site motion design</span><i>✿</i><span>Site + boutique</span><i>✿</i><span>Vidéo IA</span><i>✿</i><span>UGC IA</span><i>✿</i><span>Flyer animé</span><i>✿</i><span>Accompagnement</span><i>✿</i>
+  <!-- MONDE 2 · Le vol : la vidéo avance avec le défilement -->
+  <section class="w-vol" id="vol" aria-label="Notre façon de travailler">
+    <div class="vol-stage">
+      <video class="vol-video" id="scrub" muted playsinline preload="auto" aria-hidden="true" poster="assets/img/poster.jpg"
+        data-src="assets/video/dragon-scrub.mp4" data-src-mobile="assets/video/dragon-scrub-mobile.mp4"></video>
+      <div class="vol-shade"></div>
+      <div class="vol-words">
+        <p class="vol-word"><span>On imagine.</span></p>
+        <p class="vol-word"><span>On anime.</span></p>
+        <p class="vol-word"><span>On met en ligne.</span></p>
+      </div>
+      <div class="vol-meter" aria-hidden="true"><span class="mono" id="vol-count">000</span><i><b id="vol-bar"></b></i></div>
+    </div>
+  </section>
+
+  <!-- MONDE 3 · La lumière : manifeste sur fond clair -->
+  <section class="w-light manifest" id="manifeste">
+    <p class="mono-tag dark">[ 01 ] Notre promesse</p>
+    <p class="glow-text" id="glow-text">Pas de promesses en l'air. Un prix affiché, un devis clair, un site livré, et quelqu'un qui répond quand vous en avez besoin.</p>
+    <div class="widgets" aria-hidden="true">
+      <div class="widget glass-light" data-depth="1.2"><b>Prix affichés</b><span>Tous nos tarifs sont sur le site</span></div>
+      <div class="widget glass-light" data-depth="0.7"><b>Domaine à votre nom</b><span>Votre adresse vous appartient</span></div>
+      <div class="widget glass-light" data-depth="1.5"><b>Paiement Stripe</b><span>Sécurisé, facture envoyée</span></div>
+    </div>
+  </section>
+
+  <div class="ribbon" aria-hidden="true">
+    <div class="ribbon-track" id="ribbon">
+      <span>Site vitrine</span><i>✿</i><span>Motion design</span><i>✿</i><span>Boutique Stripe</span><i>✿</i><span>Vidéo IA</span><i>✿</i><span>UGC IA</span><i>✿</i><span>Flyer animé</span><i>✿</i>
+      <span>Site vitrine</span><i>✿</i><span>Motion design</span><i>✿</i><span>Boutique Stripe</span><i>✿</i><span>Vidéo IA</span><i>✿</i><span>UGC IA</span><i>✿</i><span>Flyer animé</span><i>✿</i>
     </div>
   </div>
 
-  <!-- MANIFESTE -->
-  <section class="manifeste" id="manifeste">
-    <p class="manifeste-text" id="manifeste-text">Pas de promesses en l'air. Un prix affiché, un devis clair, un site livré, et quelqu'un qui répond quand vous en avez besoin. Comme la fleur de cerisier&nbsp;: simple, soignée, et faite pour être vue.</p>
-  </section>
-
-  <!-- SITES WEB -->
-  <section class="section" id="sites">
+  <!-- MONDE 4 · L'atelier : les sites en cartes empilées -->
+  <section class="w-light atelier section-like" id="sites">
     <div class="section-head">
-      <p class="kicker">01 — Création de sites</p>
+      <p class="mono-tag dark">[ 02 ] Création de sites</p>
       <h2 class="h2" data-split>Un site à votre image,<br><em>payé une fois.</em></h2>
-      <p class="lead">Chaque site est créé sur mesure, adapté au mobile et mis en ligne par nos soins. Vous payez la création une seule fois.</p>
+      <p class="lead">Créé sur mesure, adapté au mobile, mis en ligne par nos soins. <a href="/sites-web">Tout le détail →</a></p>
     </div>
-    <div class="cards">
-      <article class="card tilt">
-        <div class="card-glow"></div>
-        <p class="card-tag">L'essentiel</p>
-        <h3>Site vitrine simple</h3>
-        <p class="price"><span class="from">Création</span> 200 <small>€</small></p>
-        <ul class="ticks">
-          <li>Jusqu'à 5 pages</li>
-          <li>Adapté au mobile</li>
-          <li>Formulaire de contact</li>
-          <li>Mise en ligne incluse</li>
-        </ul>
-        <a class="btn btn-card" href="#contact" data-prestation="Site vitrine simple (200 €)">Demander ce site</a>
+    <div class="stack">
+      <article class="stack-card holo">
+        <div class="sc-text">
+          <p class="mono-tag">01 · L'essentiel</p>
+          <h3>Site vitrine simple</h3>
+          <p class="sc-price">200 <small>€</small></p>
+          <ul class="ticks"><li>Jusqu'à 5 pages</li><li>Adapté au mobile</li><li>Formulaire de contact</li><li>Mise en ligne incluse</li></ul>
+          <a class="btn" href="#contact" data-prestation="Site vitrine simple (200 €)">Demander ce site</a>
+        </div>
+        <div class="sc-visual mock mock-vitrine" aria-hidden="true">
+          <div class="mock-bar"><i></i><i></i><i></i><span>votre-activite.fr</span></div>
+          <div class="mock-body"><b class="m-hero"></b><b class="m-line w70"></b><b class="m-line w50"></b><div class="m-row"><b></b><b></b><b></b></div><b class="m-btn"></b></div>
+        </div>
       </article>
-      <article class="card card-feature tilt">
-        <div class="card-glow"></div>
-        <p class="card-tag gold">Notre signature</p>
-        <h3>Site motion design</h3>
-        <p class="price"><span class="from">Création</span> 499 <small>€</small></p>
-        <ul class="ticks">
-          <li>Animations au défilement, intro, transitions</li>
-          <li>Design haut de gamme sur mesure</li>
-          <li>Adapté au mobile</li>
-          <li>Formulaire de contact et mise en ligne</li>
-        </ul>
-        <a class="btn btn-card" href="#contact" data-prestation="Site motion design (499 €)">Demander ce site</a>
+      <article class="stack-card holo sc-feature">
+        <div class="sc-text">
+          <p class="mono-tag">02 · Notre signature</p>
+          <h3>Site motion design</h3>
+          <p class="sc-price">499 <small>€</small></p>
+          <ul class="ticks"><li>Intro, transitions, effets au défilement</li><li>Design haut de gamme sur mesure</li><li>Adapté au mobile</li><li>Formulaire et mise en ligne</li></ul>
+          <a class="btn" href="#contact" data-prestation="Site motion design (499 €)">Demander ce site</a>
+        </div>
+        <div class="sc-visual mock mock-motion" aria-hidden="true">
+          <div class="mock-bar"><i></i><i></i><i></i><span>votre-marque.fr</span></div>
+          <div class="mock-body"><span class="mo-orb a"></span><span class="mo-orb b"></span><span class="mo-orb c"></span><b class="mo-title">MOTION</b><b class="m-line w50 light"></b></div>
+        </div>
       </article>
-      <article class="card tilt">
-        <div class="card-glow"></div>
-        <p class="card-tag">Pour vendre</p>
-        <h3>Site + boutique intégrée</h3>
-        <p class="price"><span class="from">Création</span> 699 <small>€</small></p>
-        <ul class="ticks">
-          <li>Boutique jusqu'à 20 produits (plus sur demande)</li>
-          <li>Paiement par Stripe : vous encaissez directement</li>
-          <li>Adapté au mobile</li>
-          <li>Formulaire de contact et mise en ligne</li>
-        </ul>
-        <a class="btn btn-card" href="#contact" data-prestation="Site + boutique intégrée (699 €)">Demander ce site</a>
+      <article class="stack-card holo">
+        <div class="sc-text">
+          <p class="mono-tag">03 · Pour vendre</p>
+          <h3>Site + boutique intégrée</h3>
+          <p class="sc-price">699 <small>€</small></p>
+          <ul class="ticks"><li>Jusqu'à 20 produits (plus sur demande)</li><li>Paiement Stripe sur votre compte</li><li>Adapté au mobile</li><li>Formulaire et mise en ligne</li></ul>
+          <a class="btn" href="#contact" data-prestation="Site + boutique intégrée (699 €)">Demander ce site</a>
+        </div>
+        <div class="sc-visual mock mock-shop" aria-hidden="true">
+          <div class="mock-bar"><i></i><i></i><i></i><span>votre-boutique.fr</span></div>
+          <div class="mock-body grid"><div class="p"><b></b><span>29 €</span></div><div class="p"><b></b><span>45 €</span></div><div class="p"><b></b><span>19 €</span></div><div class="p"><b></b><span>60 €</span></div><div class="cart">Panier · Payer</div></div>
+        </div>
       </article>
     </div>
-    <p class="note">Le site est livré avec ses fichiers. Vous préférez qu'on s'occupe de tout&nbsp;? Ajoutez l'hébergement et le nom de domaine pour 20&nbsp;€/an, ou prenez <a href="#accompagnement">l'accompagnement</a>. <a href="/sites-web">Tout le détail des sites →</a></p>
+    <p class="note">Le site est livré avec ses fichiers. Option hébergement + nom de domaine : 20&nbsp;€/an. Ou prenez <a href="#accompagnement">l'accompagnement</a>.</p>
   </section>
 
-  <!-- VIDÉOS -->
-  <section class="section section-videos" id="videos">
-    <div class="section-head">
-      <p class="kicker">02 — Vidéos &amp; visuels</p>
+  <!-- MONDE 5 · Le studio néon : les vidéos -->
+  <section class="w-neon" id="videos">
+    <div class="neon-head section-head">
+      <p class="mono-tag cyan">[ 03 ] Vidéos &amp; visuels</p>
       <h2 class="h2" data-split>Du contenu qui arrête<br><em>le pouce.</em></h2>
-      <p class="lead">Pour vos réseaux, vos pubs et votre site. Nous sommes une agence IA&nbsp;: nos vidéos IA et UGC IA sont réalisées avec l'intelligence artificielle, et nous le disons clairement.</p>
+      <p class="lead">Nous sommes une agence IA&nbsp;: nos vidéos IA et UGC IA sont créées avec l'intelligence artificielle, et on le dit clairement.</p>
     </div>
-    <div class="vgrid">
-      <article class="vcard tilt">
-        <div class="vcard-media"><span class="orb orb-pink"></span></div>
-        <h3>Vidéo IA à la demande</h3>
-        <p>Une vidéo IA d'une minute maximum, créée à partir de votre idée.</p>
-        <div class="vprice"><b>25 €</b><span>la vidéo</span></div>
-        <div class="vprice alt"><b>150 €</b><span>le pack de 10</span></div>
-        <a class="link-arrow" href="#contact" data-prestation="Vidéo IA à la demande">Commander →</a>
-      </article>
-      <article class="vcard tilt">
-        <div class="vcard-media"><span class="orb orb-gold"></span></div>
-        <h3>Vidéo UGC IA</h3>
-        <p>Une vidéo façon « avis client » ou présentation produit, jouée par un avatar IA. Idéale pour les pubs et les réseaux.</p>
-        <div class="vprice"><b>dès 70 €</b><span>sur devis</span></div>
-        <div class="vprice alt"><b>140 €</b><span>le pack de 3</span></div>
-        <a class="link-arrow" href="#contact" data-prestation="Vidéo UGC IA">Demander un devis →</a>
-      </article>
-      <article class="vcard tilt">
-        <div class="vcard-media"><span class="orb orb-violet"></span></div>
-        <h3>Flyer animé</h3>
-        <p>Votre offre, votre événement ou votre promo en visuel animé, prêt à publier.</p>
-        <div class="vprice"><b>dès 49 €</b><span>sur devis</span></div>
-        <div class="vprice alt"><b>129 €</b><span>le pack de 3</span></div>
-        <a class="link-arrow" href="#contact" data-prestation="Flyer animé">Demander un devis →</a>
-      </article>
+    <div class="reel" id="reel">
+      <div class="reel-track" id="reel-track">
+        <article class="screen-card">
+          <div class="phone" aria-hidden="true"><div class="ph-screen s-ia"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span><p class="cap"><b>Votre idée</b> devient une vidéo</p><div class="ph-ui"><i></i><i></i><i></i></div></div></div>
+          <div class="screen-info">
+            <h3>Vidéo IA à la demande</h3>
+            <p>Une vidéo d'une minute maximum, créée à partir de votre idée, prête pour TikTok, Reels et Shorts.</p>
+            <p class="tag-price"><b>25 €</b> la vidéo · <b>150 €</b> le pack de 10</p>
+            <a class="link-arrow" href="#contact" data-prestation="Vidéo IA à la demande">Commander →</a>
+          </div>
+        </article>
+        <article class="screen-card">
+          <div class="phone" aria-hidden="true"><div class="ph-screen s-ugc"><span class="avatar"><i></i></span><span class="ai-badge">Avatar IA</span><p class="karaoke"><span>Je</span> <span>vous</span> <span>présente</span> <span>ce</span> <span>produit</span></p></div></div>
+          <div class="screen-info">
+            <h3>Vidéo UGC IA</h3>
+            <p>Une présentation produit façon réseaux sociaux, jouée par un avatar IA. Annoncée comme contenu IA, en toute transparence.</p>
+            <p class="tag-price">Dès <b>70 €</b> sur devis · <b>140 €</b> le pack de 3</p>
+            <a class="link-arrow" href="#contact" data-prestation="Vidéo UGC IA">Demander un devis →</a>
+          </div>
+        </article>
+        <article class="screen-card">
+          <div class="phone" aria-hidden="true"><div class="ph-screen s-flyer"><b class="fl-big">-20%</b><b class="fl-sub">ce week-end</b><span class="fl-ring"></span><span class="fl-ring r2"></span></div></div>
+          <div class="screen-info">
+            <h3>Flyer animé</h3>
+            <p>Votre promo, votre événement ou votre nouvelle offre en visuel animé, prêt à publier.</p>
+            <p class="tag-price">Dès <b>49 €</b> sur devis · <b>129 €</b> le pack de 3</p>
+            <a class="link-arrow" href="#contact" data-prestation="Flyer animé">Demander un devis →</a>
+          </div>
+        </article>
+      </div>
     </div>
   </section>
 
-  <!-- ACCOMPAGNEMENT -->
-  <section class="section" id="accompagnement">
+  <!-- MONDE 6 · Le laboratoire : estimateur de prix -->
+  <section class="w-lab" id="estimateur">
+    <div class="lab-bg" aria-hidden="true"></div>
+    <div class="lab-inner">
+      <div class="section-head">
+        <p class="mono-tag">[ 04 ] Estimer mon projet</p>
+        <h2 class="h2" data-split>Composez votre offre,<br><em>voyez le prix.</em></h2>
+        <p class="lead">Nos vrais tarifs, en direct. Pour le sur-mesure, vous recevez un devis avant tout paiement.</p>
+      </div>
+      <div class="lab-grid">
+        <form class="lab-form glass" id="lab" onsubmit="return false">
+          <fieldset>
+            <legend>Votre site</legend>
+            <label class="opt"><input type="radio" name="site" value="0" data-label="Pas de site" checked><span>Pas de site<small>—</small></span></label>
+            <label class="opt"><input type="radio" name="site" value="200" data-label="Site vitrine simple"><span>Vitrine<small>200 €</small></span></label>
+            <label class="opt"><input type="radio" name="site" value="499" data-label="Site motion design"><span>Motion design<small>499 €</small></span></label>
+            <label class="opt"><input type="radio" name="site" value="699" data-label="Site + boutique intégrée"><span>Site + boutique<small>699 €</small></span></label>
+          </fieldset>
+          <fieldset>
+            <legend>Hébergement et suivi</legend>
+            <label class="opt"><input type="radio" name="acc" value="none" checked><span>Je gère moi-même<small>—</small></span></label>
+            <label class="opt"><input type="radio" name="acc" value="host"><span>Hébergement seul<small>20 €/an</small></span></label>
+            <label class="opt"><input type="radio" name="acc" value="ess"><span>Essentiel<small>39 €/mois</small></span></label>
+            <label class="opt"><input type="radio" name="acc" value="pro"><span>Pro<small>59 €/mois</small></span></label>
+            <label class="toggle" id="lab-year-wrap"><input type="checkbox" id="lab-year"><i></i>Payer à l'année (2 mois offerts)</label>
+          </fieldset>
+          <fieldset>
+            <legend>Vidéos &amp; visuels</legend>
+            <label class="opt"><input type="radio" name="vid" value="0" data-label="" checked><span>Aucune<small>—</small></span></label>
+            <label class="opt"><input type="radio" name="vid" value="25" data-label="1 vidéo IA"><span>1 vidéo IA<small>25 €</small></span></label>
+            <label class="opt"><input type="radio" name="vid" value="150" data-label="Pack 10 vidéos IA"><span>10 vidéos IA<small>150 €</small></span></label>
+            <label class="opt"><input type="radio" name="vid" value="129" data-label="Pack 3 flyers animés" data-devis="1"><span>3 flyers animés<small>129 €</small></span></label>
+          </fieldset>
+        </form>
+        <aside class="lab-result glass" aria-live="polite">
+          <p class="mono-tag">Votre estimation</p>
+          <div class="res-line"><span>À payer une fois</span><b><i id="r-once">0</i> €</b></div>
+          <div class="res-line"><span id="r-rec-label">Ensuite</span><b><i id="r-rec">0</i> €<small id="r-rec-per"></small></b></div>
+          <ul class="res-list" id="r-list"><li>Choisissez vos options à gauche.</li></ul>
+          <p class="res-note">Estimation selon nos tarifs affichés. Le prix définitif figure dans le devis, accepté avant tout paiement.</p>
+          <a class="btn btn-card" href="#contact" id="lab-send">Envoyer cette estimation</a>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- MONDE 7 · Le jardin : accompagnement -->
+  <section class="w-garden section-like" id="accompagnement">
     <div class="section-head">
-      <p class="kicker">03 — Accompagnement</p>
+      <p class="mono-tag dark">[ 05 ] Accompagnement</p>
       <h2 class="h2" data-split>On s'occupe de votre site,<br><em>vous de votre activité.</em></h2>
       <p class="lead">Hébergement, maintenance, sauvegardes et modifications illimitées. Au mois sans engagement, ou à l'année avec 2 mois offerts.</p>
     </div>
-
     <div class="switch" role="radiogroup" aria-label="Période de paiement">
       <button type="button" role="radio" aria-checked="true" data-period="mois">Au mois</button>
       <button type="button" role="radio" aria-checked="false" data-period="an">À l'année <span class="pill">2 mois offerts</span></button>
       <span class="switch-thumb" aria-hidden="true"></span>
     </div>
-
     <div class="plans">
-      <article class="plan tilt">
+      <article class="plan holo tilt">
         <h3>Essentiel</h3>
         <p class="plan-price"><b class="amount" data-mois="39" data-an="390">39</b> <small>€ / <span class="per">mois</span></small></p>
         <p class="plan-eq" data-mois="Sans engagement, arrêt à tout moment" data-an="Soit 12 mois pour le prix de 10">Sans engagement, arrêt à tout moment</p>
-        <ul class="ticks">
-          <li>Hébergement + nom de domaine</li>
-          <li>Maintenance et sauvegardes</li>
-          <li>Modifications du site illimitées</li>
-          <li>Réponse sous 72 h</li>
-        </ul>
+        <ul class="ticks"><li>Hébergement + nom de domaine</li><li>Maintenance et sauvegardes</li><li>Modifications du site illimitées</li><li>Réponse sous 72 h</li></ul>
         <a class="btn btn-card" data-plan="essentiel" href="#contact" data-prestation="Accompagnement Essentiel">Choisir Essentiel</a>
       </article>
-      <article class="plan plan-pro tilt">
+      <article class="plan plan-pro holo tilt">
         <p class="plan-badge">Le plus complet</p>
         <h3>Pro</h3>
         <p class="plan-price"><b class="amount" data-mois="59" data-an="590">59</b> <small>€ / <span class="per">mois</span></small></p>
         <p class="plan-eq" data-mois="Sans engagement, arrêt à tout moment" data-an="Soit 12 mois pour le prix de 10">Sans engagement, arrêt à tout moment</p>
-        <ul class="ticks">
-          <li>Tout l'Essentiel</li>
-          <li><b>Réponse sous 24 h</b></li>
-          <li><b>1 flyer animé offert par mois</b></li>
-          <li><b>Petit bilan des visites du site chaque mois</b></li>
-        </ul>
+        <ul class="ticks"><li>Tout l'Essentiel</li><li><b>Réponse sous 24 h</b></li><li><b>1 flyer animé offert par mois</b></li><li><b>Petit bilan des visites chaque mois</b></li></ul>
         <a class="btn btn-card" data-plan="pro" href="#contact" data-prestation="Accompagnement Pro">Choisir Pro</a>
       </article>
     </div>
     <div class="promises">
       <div><b>Votre domaine vous appartient.</b> Il est enregistré à votre nom.</div>
-      <div><b>Vous partez quand vous voulez.</b> On vous transfère le domaine et les fichiers du site.</div>
+      <div><b>Vous partez quand vous voulez.</b> On vous transfère le domaine et les fichiers.</div>
       <div><b>Déjà un site&nbsp;?</b> L'accompagnement se prend aussi seul.</div>
     </div>
   </section>
 
-  <!-- MÉTHODE -->
-  <section class="method" id="methode">
-    <div class="method-head">
-      <p class="kicker">04 — Notre méthode</p>
+  <!-- MONDE 8 · Le chemin : la méthode, tracée au défilement -->
+  <section class="w-path" id="methode">
+    <div class="section-head path-head">
+      <p class="mono-tag">[ 06 ] Notre méthode</p>
       <h2 class="h2" data-split>De votre message<br><em>à la mise en ligne.</em></h2>
     </div>
-    <div class="method-track" id="method-track">
-      <article class="step"><span class="step-n">01</span><h3>Votre demande</h3><p>Vous remplissez le formulaire&nbsp;: votre activité, votre objectif, vos exemples préférés.</p></article>
-      <article class="step"><span class="step-n">02</span><h3>Échange et devis</h3><p>On vous répond, on précise ensemble ce qu'il faut, et vous recevez un devis clair avec le prix et le délai.</p></article>
-      <article class="step"><span class="step-n">03</span><h3>Paiement sécurisé</h3><p>Vous validez et payez par lien Stripe sécurisé. La facture vous est envoyée.</p></article>
-      <article class="step"><span class="step-n">04</span><h3>Création</h3><p>On conçoit votre site ou votre vidéo et on vous montre une première version.</p></article>
-      <article class="step"><span class="step-n">05</span><h3>Vos retours</h3><p>Vous dites ce que vous voulez changer, on ajuste jusqu'à ce que ça vous ressemble.</p></article>
-      <article class="step"><span class="step-n">06</span><h3>Livraison</h3><p>Mise en ligne, fichiers remis, et si vous le souhaitez, l'accompagnement prend le relais.</p></article>
+    <div class="path" id="path">
+      <svg class="path-line" viewBox="0 0 4 1000" preserveAspectRatio="none" aria-hidden="true"><line x1="2" y1="0" x2="2" y2="1000" class="pl-bg"/><line x1="2" y1="0" x2="2" y2="1000" class="pl-fg" id="path-fg"/></svg>
+      <ol class="path-steps">
+        <li><span class="ps-n">01</span><div><h3>Votre demande</h3><p>Le formulaire&nbsp;: votre activité, votre objectif, vos exemples préférés.</p></div></li>
+        <li><span class="ps-n">02</span><div><h3>Échange et devis</h3><p>On précise ensemble votre besoin. Vous recevez un devis clair&nbsp;: prix et délai.</p></div></li>
+        <li><span class="ps-n">03</span><div><h3>Paiement sécurisé</h3><p>Par lien Stripe. Votre facture vous est envoyée.</p></div></li>
+        <li><span class="ps-n">04</span><div><h3>Création</h3><p>En général 3 jours ouvrés maximum une fois vos contenus reçus. Vous voyez une première version.</p></div></li>
+        <li><span class="ps-n">05</span><div><h3>Vos retours</h3><p>Vous dites ce que vous voulez changer, on ajuste.</p></div></li>
+        <li><span class="ps-n">06</span><div><h3>Livraison</h3><p>Mise en ligne, fichiers remis, et l'accompagnement si vous le souhaitez.</p></div></li>
+      </ol>
     </div>
   </section>
 
-  <!-- POURQUOI -->
-  <section class="section why">
+  <!-- MONDE 9 · Le papier : blog et questions -->
+  <section class="w-paper section-like" id="blog">
     <div class="section-head">
-      <p class="kicker">05 — Pourquoi Sakura</p>
-      <h2 class="h2" data-split>Une vraie agence,<br><em>des engagements simples.</em></h2>
-    </div>
-    <div class="why-grid">
-      <div class="why-item reveal-up"><span>✿</span><h3>Entreprise immatriculée</h3><p>Une agence déclarée, basée à Toulouse, qui facture chaque prestation.</p></div>
-      <div class="why-item reveal-up"><span>✿</span><h3>Prix affichés</h3><p>Les tarifs sont sur cette page. Pour le sur-mesure, un devis avant tout paiement.</p></div>
-      <div class="why-item reveal-up"><span>✿</span><h3>Paiement sécurisé</h3><p>Tous les paiements passent par Stripe. Nous ne voyons jamais vos coordonnées bancaires.</p></div>
-      <div class="why-item reveal-up"><span>✿</span><h3>Vous restez propriétaire</h3><p>Nom de domaine à votre nom, fichiers remis à la livraison.</p></div>
-    </div>
-  </section>
-
-  <!-- BLOG -->
-  <section class="section" id="blog">
-    <div class="section-head">
-      <p class="kicker">Le blog</p>
+      <p class="mono-tag dark">[ 07 ] Le blog</p>
       <h2 class="h2" data-split>Des conseils clairs,<br><em>sans jargon.</em></h2>
     </div>
     <div class="blog-grid">
@@ -259,12 +312,9 @@
       <a class="post-card reveal-up" href="/blog/nom-de-domaine-a-votre-nom"><p class="card-tag">Conseils · 4 min</p><h2>Nom de domaine&nbsp;: pourquoi il doit toujours être à votre nom</h2><span class="link-arrow">Lire l'article →</span></a>
     </div>
     <p class="note"><a href="/blog/">Tous les articles →</a></p>
-  </section>
 
-  <!-- FAQ -->
-  <section class="section" id="faq">
-    <div class="section-head">
-      <p class="kicker">06 — Questions fréquentes</p>
+    <div class="section-head faq-head" id="faq">
+      <p class="mono-tag dark">[ 08 ] Questions fréquentes</p>
       <h2 class="h2" data-split>Tout ce qu'on<br><em>nous demande.</em></h2>
     </div>
     <div class="faq">
@@ -273,20 +323,21 @@
       <details><summary>Comment j'arrête l'accompagnement&nbsp;?</summary><p>Au mois, vous arrêtez quand vous voulez, depuis <a href="https://billing.stripe.com/p/login/14AeVdaV6cybfre0WbefC00" rel="noopener">votre espace abonné</a>&nbsp;: l'arrêt prend effet à la fin du mois payé. À l'année, les 12 mois sont payés d'avance. Dans tous les cas, on vous transfère votre nom de domaine et les fichiers de votre site.</p></details>
       <details><summary>Comment se passe le paiement&nbsp;?</summary><p>Par lien de paiement Stripe sécurisé, après validation du devis. Une facture vous est envoyée.</p></details>
       <details><summary>Les vidéos UGC sont-elles faites avec de vraies personnes&nbsp;?</summary><p>Non. Nos vidéos UGC sont réalisées avec des avatars IA, et nous l'annonçons clairement. C'est à vous de le signaler aussi quand vous les publiez, comme le demandent les réseaux sociaux.</p></details>
-      <details><summary>Je ne sais pas quelle offre choisir.</summary><p>Décrivez votre projet dans le formulaire, même en quelques mots. On vous répond avec la formule adaptée à votre besoin.</p></details>
+      <details><summary>Je ne sais pas quelle offre choisir.</summary><p>Utilisez <a href="#estimateur">l'estimateur</a> ou décrivez votre projet dans le formulaire, même en quelques mots. On vous répond avec la formule adaptée.</p></details>
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <section class="section contact" id="contact">
-    <div class="contact-grid">
+  <!-- MONDE 10 · L'aube : contact -->
+  <section class="w-dawn" id="contact">
+    <div class="dawn-sun" aria-hidden="true"></div>
+    <div class="contact-grid section-like">
       <div class="section-head">
-        <p class="kicker">07 — Contact</p>
+        <p class="mono-tag">[ 09 ] Contact</p>
         <h2 class="h2" data-split>Parlons de<br><em>votre projet.</em></h2>
         <p class="lead">Décrivez votre activité et ce que vous voulez. Votre demande arrive directement dans notre boîte mail et on vous répond rapidement.</p>
         <p class="contact-mail">Ou écrivez-nous&nbsp;: <a href="mailto:contact@sakuragroup.fr">contact@sakuragroup.fr</a></p>
       </div>
-      <form class="form" id="form" novalidate>
+      <form class="form glass" id="form" novalidate>
         <label>Votre nom<input name="nom" required autocomplete="name"></label>
         <label>E-mail ou téléphone<input name="contact" required autocomplete="email"></label>
         <label>Prestation
@@ -302,7 +353,7 @@
             <option>Flyer animé</option>
           </select>
         </label>
-        <label>Votre projet<textarea name="message" rows="5" required placeholder="Votre activité, votre objectif, vos exemples préférés…"></textarea></label>
+        <label>Votre projet<textarea name="message" id="message" rows="5" required placeholder="Votre activité, votre objectif, vos exemples préférés…"></textarea></label>
         <input class="hp" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
         <button class="btn magnet" type="submit" id="form-btn">Envoyer ma demande</button>
         <p class="form-status" id="form-status" role="status"></p>
@@ -311,7 +362,8 @@
   </section>
 </main>
 
-<footer class="footer">
+<footer class="footer footer-v2">
+  <p class="giant" aria-hidden="true">SAKURA</p>
   <p class="logo">SAKURA <span>GROUP</span><sup>™</sup></p>
   <p>Agence digitale à Toulouse · Entreprise immatriculée</p>
   <nav class="footer-links" aria-label="Pages du site">
@@ -324,7 +376,9 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
 <script src="assets/js/config.js"></script>
 <script src="assets/js/site.js"></script>
+<script src="assets/js/home.js"></script>
 </body>
 </html>
