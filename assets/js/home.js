@@ -192,7 +192,8 @@
 
   /* ---------- Monde 2 : le dragon avance avec le défilement ---------- */
   const vid = $('#scrub');
-  if (vid) {
+  // sur smartphone la section est masquée : on ne charge pas la vidéo
+  if (vid && !matchMedia('(max-width: 640px)').matches) {
     vid.src = small ? vid.dataset.srcMobile : vid.dataset.src;
     vid.load();
     let target = 0, cur = 0;

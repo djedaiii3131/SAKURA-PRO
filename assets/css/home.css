@@ -296,7 +296,8 @@ html.lenis, html.lenis body { height: auto; }
 @media (max-width: 640px) {
   .v2-title { font-size: clamp(44px, 13.5vw, 72px); }
   .v2-line { white-space: normal; }
-  .w-vol { height: 260vh; }
+  .w-vol, .scroll-cue { display: none; } /* pas de vidéo au défilement sur smartphone */
+  .w-aurora::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 90px; z-index: 2; pointer-events: none; background: linear-gradient(180deg, transparent, var(--ivory)); }
   .vol-word { font-size: clamp(36px, 11vw, 60px); white-space: normal; text-align: center; }
   .screen-card { grid-template-columns: 1fr; padding: 22px; }
   .phone { max-width: 230px; margin: 0 auto; }

@@ -23,6 +23,16 @@
 
 /* La barre de navigation reste lisible sur fond clair */
 .subpage .nav { background: rgba(7, 0, 15, .82); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255, 133, 170, .18); }
+/* Menu ouvert : le flou de la barre enfermait le menu dans la barre ; on le retire pour que le fond couvre tout l'écran */
+.subpage .nav.menu-open { backdrop-filter: none; -webkit-backdrop-filter: none; background: transparent; border-color: transparent; }
+
+/* Pied de page lisible sur fond clair */
+.subpage .footer { color: rgba(23, 10, 34, .62); border-top-color: rgba(176, 52, 106, .18); }
+.subpage .footer .logo { color: var(--ink-dark); }
+.subpage .footer .logo span { color: var(--rose); }
+.subpage .footer .logo sup { color: #b0346a; }
+.subpage .footer a, .subpage .footer-links a:hover { color: var(--rose); }
+.subpage .footer-links a { color: rgba(23, 10, 34, .62); }
 
 /* Haut de page lumineux, en dégradé animé */
 .subpage .page-hero { max-width: none; margin: 0; padding-left: max(var(--gut), calc((100vw - 1400px) / 2 + var(--gut))); padding-right: var(--gut); overflow: hidden; }
