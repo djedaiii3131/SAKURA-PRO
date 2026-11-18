@@ -298,7 +298,7 @@
       const url = s[a.dataset.plan + (period === 'mois' ? 'Mois' : 'An')];
       if (url) { a.href = url; a.target = '_blank'; a.rel = 'noopener'; a.removeAttribute('data-prestation'); }
       else {
-        const name = 'Accompagnement ' + (a.dataset.plan === 'pro' ? 'Pro' : 'Essentiel');
+        const name = 'Entretien de site';
         a.href = ($('#contact') ? '' : '/?offre=' + encodeURIComponent(name)) + '#contact';
         a.removeAttribute('target');
         a.dataset.prestation = name;
