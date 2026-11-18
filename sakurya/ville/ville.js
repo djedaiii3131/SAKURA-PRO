@@ -135,10 +135,9 @@
     },
     /* ton bâtiment : ton bureau (toi seul le vois) */
     'moi': {
-      title: 'Ton bureau', where: 'Ton entreprise · Ton bureau', own: true,
-      noImg: 'L\'image de ton bureau arrive bientôt.',
+      title: 'Ton bureau', where: 'Ton entreprise · Ton bureau', own: true, img: '../img/bureau',
       items: [
-        { id: 'fiche', icon: '📇', label: 'Ma fiche pro', sub: 'Ce que les autres voient de toi',
+        { id: 'fiche', icon: '📇', label: 'Ma fiche pro', sub: 'Ce que les autres voient de toi', hot: [1.5, 44, 12.5, 51],
           html: `<p class="w-lead">C'est ta fiche dans l'annuaire « Les membres ». Les autres membres et les clients qui cherchent un pro la voient là-bas, avec un bouton pour te contacter.</p>
             <div class="fiche example"><span class="tag-ex">Aperçu</span>
               <div class="fiche-top"><span class="avatar" aria-hidden="true">TP</span><span><b>Ton entreprise</b><small>Ton prénom · Ton métier · Ta ville</small></span></div>
@@ -150,12 +149,12 @@
             <h4>À remplir</h4>
             <ol class="steps"><li>Le nom de ton enseigne (il s'affiche aussi sur ton bâtiment)</li><li>Ton métier et ta zone</li><li>Tes services et tes prix</li><li>Tes photos</li><li>Tes avis clients</li></ol>
             <button class="btn" data-soon>Modifier ma fiche</button>` },
-        { id: 'secretaire', icon: '☎️', label: 'Ma secrétaire IA', sub: 'Offre Pro · elle répond pour toi',
+        { id: 'secretaire', icon: '☎️', label: 'Ma secrétaire IA', sub: 'Offre Pro · elle répond pour toi', hot: [35, 50, 18.5, 34],
           html: `<p class="w-lead">Tu es sur un chantier et ton téléphone sonne ? Elle répond à ta place, au nom de ton entreprise.</p>
             <div class="box"><b>Ce qu'elle fait</b><ul><li>Elle décroche quand tu ne peux pas</li><li>Elle note le nom, le numéro et le besoin du client</li><li>Elle t'envoie un résumé de l'appel</li></ul></div>
             <div class="box"><b>Pour qui</b><p>Incluse dans l'offre Pro.</p></div>
             <button class="btn" data-soon>L'activer</button>` },
-        { id: 'mois', icon: '📊', label: 'Mon mois', sub: 'Chiffre, devis, factures',
+        { id: 'mois', icon: '📊', label: 'Mon mois', sub: 'Chiffre, devis, factures', hot: [56, 22, 21, 31.5],
           html: `<p class="w-lead">Ton mois en un coup d'œil, calculé à partir de tes devis et de tes factures Sakurya.</p>
             <div class="stats-grid">
               <div class="stat"><small>Chiffre du mois</small><b>—</b></div>
@@ -165,7 +164,7 @@
             </div>
             <div class="empty"><b>Rien pour l'instant</b><p>Tes chiffres s'affichent ici dès ton premier devis ou ta première facture.</p></div>
             <p class="note">Tes factures seront au format de la facturation électronique.</p>` },
-        { id: 'badges', icon: '🏆', label: 'Mes badges', sub: 'Gagnés à l\'École et au Guichet',
+        { id: 'badges', icon: '🏆', label: 'Mes badges', sub: 'Gagnés à l\'École et au Guichet', hot: [82.5, 27, 17, 25],
           html: `<p class="w-lead">Tes badges s'affichent sur ta fiche dans l'annuaire. Et ton bâtiment s'embellit à chaque parcours terminé.</p>
             <div class="cards">
               <div class="c"><b>✔ Pro vérifié</b><span class="soon">À gagner</span></div>
@@ -327,7 +326,7 @@
   function open(id) {
     const b = B.find((x) => x.id === id); if (!b) return;
     if (focused && focused.id !== id) leave();
-    closeWin(); current = 'RDC'; hots.innerHTML = ''; inside.classList.remove('placeholder');
+    closeWin(); current = 'RDC'; hots.innerHTML = ''; inside.classList.remove('placeholder', 'narrow');
     focused = b; focus(b);
     const p = PANELS[id]();
     $('#pKicker').textContent = p.kicker; $('#pTitle').textContent = p.title; $('#pLead').textContent = p.lead;
@@ -340,7 +339,7 @@
   function closePanel() {
     if (!focused) return;
     const b = focused; focused = null;
-    closeWin(); current = 'RDC'; hots.innerHTML = ''; inside.classList.remove('placeholder');
+    closeWin(); current = 'RDC'; hots.innerHTML = ''; inside.classList.remove('placeholder', 'narrow');
     panel.classList.remove('open'); panel.setAttribute('aria-hidden', 'true');
     const wasInside = leave();
     setTimeout(() => travel(() => { base = Math.max(innerWidth / W, innerHeight / H); cam.s = base; cam.x = innerWidth / 2 - (b.x + b.w / 2) * base; cam.y = innerHeight / 2 - (b.y + b.h / 2) * base; clamp(); }), wasInside && !reduce ? 500 : 0);
@@ -374,6 +373,8 @@
     const img = r && r.img ? r.img : r && r.own ? (NIGHT > .5 ? '../img/ville-nuit' : '../img/ville-jour') : '../img/hall';
     insideImg.src = img + (innerWidth > 1700 ? '.webp' : '-1600.webp');
     inside.classList.toggle('placeholder', !!(r && floor !== 'RDC' && !r.img));
+    inside.classList.toggle('narrow', !!(r && r.own && r.img));
+    inside.style.setProperty('--bg', `url(${insideImg.src})`);
     $('#insideWhere').textContent = r && r.where ? r.where : floor === 'RDC' ? 'Tour Sakura Group · Rez-de-chaussée, l\'Accueil' : `Tour Sakura Group · Étage ${floor}, ${r.title}`;
     hots.innerHTML = '';
     if (r && r.img) r.items.forEach((it) => {
@@ -388,7 +389,10 @@
   // place les objets cliquables sur l'image (qui remplit l'écran en « cover »)
   function placeHots() {
     const iw = insideImg.naturalWidth || 16, ih = insideImg.naturalHeight || 9;
-    const s = Math.max(innerWidth / iw, innerHeight / ih), ox = (innerWidth - iw * s) / 2, oy = (innerHeight - ih * s) / 2;
+    // « narrow » (ton bureau sur ordinateur) : l'image est entière à gauche du panneau, sinon elle remplit l'écran
+    const narrow = inside.classList.contains('narrow') && innerWidth > 760;
+    const cw = narrow ? insideImg.clientWidth : innerWidth, ch = innerHeight;
+    const s = (narrow ? Math.min : Math.max)(cw / iw, ch / ih), ox = (cw - iw * s) / 2, oy = (ch - ih * s) / 2;
     $$('.hot', hots).forEach((h) => {
       const [x, y, w, hh] = h.dataset.pos.split(',').map(Number);
       Object.assign(h.style, { left: ox + iw * s * x / 100 + 'px', top: oy + ih * s * y / 100 + 'px', width: iw * s * w / 100 + 'px', height: ih * s * hh / 100 + 'px' });

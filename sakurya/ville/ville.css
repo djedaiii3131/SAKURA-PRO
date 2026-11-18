@@ -78,6 +78,12 @@ a { color: inherit; }
 @media (max-width: 760px) { .inside-where { display: none; } }
 
 /* étage sans image encore : le hall flouté */
+/* ton bureau : sur ordinateur, toute la pièce tient à gauche du panneau (fond flouté autour) */
+@media (min-width: 761px) {
+  .inside.narrow { overflow: hidden; }
+  .inside.narrow::before { content: ''; position: absolute; inset: -40px; background: var(--bg) center / cover; filter: blur(28px) brightness(.5); }
+  .inside.narrow img { position: relative; width: calc(100% - min(420px, 100%)); object-fit: contain; }
+}
 .inside.placeholder img { filter: blur(14px) brightness(.6) saturate(1.1); }
 
 /* objets cliquables dans la pièce */
