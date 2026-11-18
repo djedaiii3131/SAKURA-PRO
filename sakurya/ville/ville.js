@@ -75,7 +75,7 @@
               <div class="c"><b>🧾 Attestation CESU</b>${soon}</div>
               <div class="c"><b>💬 Scripts d'appel et de SMS clients</b>${soon}</div>
             </div>
-            <p class="note">Contrat de prestation : ménage régulier, conciergerie ou chantier. Avant l'ouverture, les modèles seront relus par un avocat. Ce sont des modèles à remplir toi-même, pas un conseil juridique personnalisé : pour un cas particulier, demande à un avocat.</p>` },
+            <p class="note">Le contrat de prestation s'adapte à tous les métiers : ménage, conciergerie, chantier, livraison, jardinage, coiffure… Avant l'ouverture, les modèles seront relus par un avocat. Ce sont des modèles à remplir toi-même, pas un conseil juridique personnalisé : pour un cas particulier, demande à un avocat.</p>` },
         { id: 'live', icon: '🎙️', label: 'Questions en direct', sub: 'Une séance par mois', hot: [4, 51, 28, 37],
           html: `<p class="w-lead">Une fois par mois, Sakura Group répond en direct aux questions des membres.</p>
             <div class="box"><b>Prochaine séance</b><p>La date sera annoncée à l'ouverture de Sakurya.</p></div>
