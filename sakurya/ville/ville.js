@@ -56,17 +56,26 @@
             <h4>Par métier</h4>
             <div class="chips">${['Ménage', 'Conciergerie Airbnb', 'Peinture', 'Plomberie', 'Électricité', 'Livraison'].map((m) => `<span class="chip">${m}</span>`).join('')}</div>
             <p class="note">Parcours de base inclus dans l'abonnement. Formations avancées à la carte, dès 5 €.</p>` },
-        { id: 'modeles', icon: '📚', label: 'La boîte à outils', sub: 'Modèles prêts à télécharger', hot: [43, 21, 13.5, 36],
-          html: `<p class="w-lead">Des modèles prêts à l'emploi, à télécharger et à remplir.</p>
+        { id: 'modeles', icon: '📚', label: 'La boîte à outils', sub: 'Tes contrats, à remplir toi-même', hot: [43, 21, 13.5, 36],
+          html: `<p class="w-lead">Des modèles que tu remplis toi-même, question par question, puis que tu télécharges. Tous inclus dans ton abonnement, sans limite.</p>
+            <h4>Tes contrats</h4>
             <div class="cards">
-              <div class="c"><b>📄 Modèle de devis</b>${soon}</div>
               <div class="c"><b>📑 Conditions générales de vente</b>${soon}</div>
-              <div class="c"><b>🧹 Contrat de ménage</b>${soon}</div>
+              <div class="c"><b>🤝 Contrat de prestation</b>${soon}</div>
+              <div class="c"><b>👷 Contrat de sous-traitance entre membres</b>${soon}</div>
+              <div class="c"><b>✅ PV de réception de travaux</b>${soon}</div>
+            </div>
+            <h4>Si un client ne paie pas</h4>
+            <div class="cards">
+              <div class="c"><b>📨 Lettre de relance</b>${soon}</div>
+              <div class="c"><b>⚠️ Mise en demeure</b>${soon}</div>
+            </div>
+            <h4>Au quotidien</h4>
+            <div class="cards">
               <div class="c"><b>🧾 Attestation CESU</b>${soon}</div>
               <div class="c"><b>💬 Scripts d'appel et de SMS clients</b>${soon}</div>
-              <div class="c"><b>✅ Checklists de chantier</b>${soon}</div>
             </div>
-            <p class="note">Ce sont des modèles, pas un conseil juridique.</p>` },
+            <p class="note">Contrat de prestation : ménage régulier, conciergerie ou chantier. Avant l'ouverture, les modèles seront relus par un avocat. Ce sont des modèles à remplir toi-même, pas un conseil juridique personnalisé : pour un cas particulier, demande à un avocat.</p>` },
         { id: 'live', icon: '🎙️', label: 'Questions en direct', sub: 'Une séance par mois', hot: [4, 51, 28, 37],
           html: `<p class="w-lead">Une fois par mois, Sakura Group répond en direct aux questions des membres.</p>
             <div class="box"><b>Prochaine séance</b><p>La date sera annoncée à l'ouverture de Sakurya.</p></div>
