@@ -379,3 +379,14 @@ em { font-style: italic; color: var(--pink); }
 
 /* Curseur personnalisé retiré : on garde le curseur normal */
 .cursor { display: none !important; }
+
+/* Pack Commerçant : paiement direct Stripe */
+.pack-pay { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; width: 100%; }
+.pack-pay a { display: block; text-align: center; padding: 10px 12px; border-radius: 999px; font: 700 13.5px/1.2 var(--sans); text-decoration: none; color: #fff; background: rgba(255, 255, 255, .14); border: 1.5px solid rgba(255, 255, 255, .55); transition: background .25s, color .25s, transform .25s; }
+.pack-pay a:hover { background: #fff; color: #b0346a; transform: translateY(-2px); }
+.pack-pay small { grid-column: 1 / -1; font-size: 12.5px; opacity: .8; text-align: center; }
+.pack-pay.light a { color: #b0346a; background: #fff; border-color: rgba(176, 52, 106, .45); }
+.pack-pay.light a:hover { background: #b0346a; color: #fff; }
+.pack-pay.light small { color: #6b4a63; }
+.pack-pay.light { grid-template-columns: 1fr; max-width: 260px; }
+@media (max-width: 420px) { .pack-pay { grid-template-columns: 1fr; } }

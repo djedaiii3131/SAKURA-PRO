@@ -7,6 +7,8 @@ window.SAKURA = {
   stripe: {
     essentielMois: "https://buy.stripe.com/14AeVdaV6cybfre0WbefC00",
     essentielAn: "https://buy.stripe.com/aFaaEX5AM8hV0wk8oDefC01"
+    // Pack Commerçant connecté (créés le 18/11/2026, redirection vers /merci?offre=Pack)
+    // packMois: "https://buy.stripe.com/bJe3cve7i0Ptena48nefC04", packAn: "https://buy.stripe.com/6oUeVd3sEfKngvi48nefC05" (liens écrits directement dans les pages)
     // Liens « Pro » désactivés dans Stripe le 18/11/2026 (offre retirée)
   },
   // Portail client Stripe : le client y gère ou arrête son abonnement
