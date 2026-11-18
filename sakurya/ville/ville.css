@@ -126,6 +126,18 @@ a { color: inherit; }
 .tag-ex { position: absolute; top: 12px; right: 12px; background: rgba(255, 255, 255, .12); }
 .tag-urg { background: var(--gold); color: #2a1a05; }
 .btn-sm { height: 40px; font-size: 14px; }
+.room-actions .btn:only-child { grid-column: 1 / -1; }
+/* ton bureau : aperçu de la fiche et chiffres du mois */
+.fiche { position: relative; display: grid; gap: 8px; padding: 16px; border-radius: 16px; margin-bottom: 4px; background: linear-gradient(135deg, rgba(244, 163, 192, .14), rgba(255, 255, 255, .04)); border: 1px solid rgba(244, 163, 192, .35); }
+.fiche-top { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+.fiche-top b { display: block; font: 800 17px "Plus Jakarta Sans", sans-serif; }
+.fiche-top small { color: var(--ink-dim); font-size: 13px; }
+.fiche-line { padding: 9px 12px; border-radius: 10px; font-size: 13.5px; color: var(--ink-dim); background: rgba(255, 255, 255, .04); border: 1px dashed rgba(255, 255, 255, .16); }
+.fiche-contact { justify-self: start; width: auto; margin: 4px 0 0; padding: 0 22px; pointer-events: none; }
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+.stat { padding: 14px; border-radius: 14px; background: rgba(255, 255, 255, .05); border: 1px solid var(--line); }
+.stat small { display: block; color: var(--ink-dim); font-size: 12.5px; }
+.stat b { font: 800 22px "Plus Jakarta Sans", sans-serif; }
 
 /* portes d'ascenseur */
 .doors { position: fixed; inset: 0; z-index: 12; pointer-events: none; display: grid; place-items: center; }

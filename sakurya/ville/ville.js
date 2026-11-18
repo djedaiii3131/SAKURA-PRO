@@ -132,6 +132,49 @@
     },
     'RDC': {
       title: 'L\'Accueil', lead: 'Bienvenue. L\'ascenseur t\'emmène à chaque service.', items: []
+    },
+    /* ton bâtiment : ton bureau (toi seul le vois) */
+    'moi': {
+      title: 'Ton bureau', where: 'Ton entreprise · Ton bureau', own: true,
+      noImg: 'L\'image de ton bureau arrive bientôt.',
+      items: [
+        { id: 'fiche', icon: '📇', label: 'Ma fiche pro', sub: 'Ce que les autres voient de toi',
+          html: `<p class="w-lead">C'est ta fiche dans l'annuaire « Les membres ». Les autres membres et les clients qui cherchent un pro la voient là-bas, avec un bouton pour te contacter.</p>
+            <div class="fiche example"><span class="tag-ex">Aperçu</span>
+              <div class="fiche-top"><span class="avatar" aria-hidden="true">TP</span><span><b>Ton entreprise</b><small>Ton prénom · Ton métier · Ta ville</small></span></div>
+              <p class="fiche-line">Tes services et tes prix</p>
+              <p class="fiche-line">Tes photos de chantier</p>
+              <p class="fiche-line">Les avis de tes clients</p>
+              <span class="btn btn-sm fiche-contact" aria-hidden="true">Contacter</span>
+            </div>
+            <h4>À remplir</h4>
+            <ol class="steps"><li>Le nom de ton enseigne (il s'affiche aussi sur ton bâtiment)</li><li>Ton métier et ta zone</li><li>Tes services et tes prix</li><li>Tes photos</li><li>Tes avis clients</li></ol>
+            <button class="btn" data-soon>Modifier ma fiche</button>` },
+        { id: 'secretaire', icon: '☎️', label: 'Ma secrétaire IA', sub: 'Offre Pro · elle répond pour toi',
+          html: `<p class="w-lead">Tu es sur un chantier et ton téléphone sonne ? Elle répond à ta place, au nom de ton entreprise.</p>
+            <div class="box"><b>Ce qu'elle fait</b><ul><li>Elle décroche quand tu ne peux pas</li><li>Elle note le nom, le numéro et le besoin du client</li><li>Elle t'envoie un résumé de l'appel</li></ul></div>
+            <div class="box"><b>Pour qui</b><p>Incluse dans l'offre Pro.</p></div>
+            <button class="btn" data-soon>L'activer</button>` },
+        { id: 'mois', icon: '📊', label: 'Mon mois', sub: 'Chiffre, devis, factures',
+          html: `<p class="w-lead">Ton mois en un coup d'œil, calculé à partir de tes devis et de tes factures Sakurya.</p>
+            <div class="stats-grid">
+              <div class="stat"><small>Chiffre du mois</small><b>—</b></div>
+              <div class="stat"><small>Devis envoyés</small><b>—</b></div>
+              <div class="stat"><small>Factures payées</small><b>—</b></div>
+              <div class="stat"><small>En attente</small><b>—</b></div>
+            </div>
+            <div class="empty"><b>Rien pour l'instant</b><p>Tes chiffres s'affichent ici dès ton premier devis ou ta première facture.</p></div>
+            <p class="note">Tes factures seront au format de la facturation électronique.</p>` },
+        { id: 'badges', icon: '🏆', label: 'Mes badges', sub: 'Gagnés à l\'École et au Guichet',
+          html: `<p class="w-lead">Tes badges s'affichent sur ta fiche dans l'annuaire. Et ton bâtiment s'embellit à chaque parcours terminé.</p>
+            <div class="cards">
+              <div class="c"><b>✔ Pro vérifié</b><span class="soon">À gagner</span></div>
+              <div class="c"><b>🎓 Premier parcours</b><span class="soon">À gagner</span></div>
+              <div class="c"><b>⭐ Premiers avis</b><span class="soon">À gagner</span></div>
+              <div class="c"><b>📇 Fiche complète</b><span class="soon">À gagner</span></div>
+            </div>
+            <p class="note">« Pro vérifié » : SIRET vérifié et assurance à jour, au Guichet (étage 2 de la tour).</p>` }
+      ]
     }
   };
   const PANELS = {
@@ -162,12 +205,9 @@
         <p class="note">Présentation complète bientôt, en cours de validation avec Allô La Flem.</p>`
     }),
     moi: () => ({
-      kicker: 'Ton bâtiment', title: 'Ton entreprise',
-      lead: 'Ta vitrine dans la ville : tes services, tes avis et ton bouton contact. Les membres et les clients te trouvent ici.',
-      body: `
-        <div class="box"><b>Sur ton enseigne</b><p>Ton nom et le nom de ton entreprise, mis automatiquement à ton inscription.</p></div>
-        <div class="box"><b>À l'intérieur</b><ul><li>Tes services et tes prix</li><li>Tes photos et tes avis</li><li>Un bouton pour te contacter</li></ul></div>
-        <button class="btn" data-soon>Personnaliser mon bâtiment</button>`
+      kicker: 'Ton entreprise', title: 'Ton bureau',
+      lead: 'Ici, c\'est chez toi : toi seul vois ce bâtiment. Les autres te trouvent dans « Les membres ».',
+      body: roomBody('moi')
     }),
     membres: () => ({
       kicker: 'L\'annuaire', title: 'Les membres de Sakurya',
@@ -264,13 +304,16 @@
     animate ? travel(go) : (go(), apply());
   }
   /* intérieurs déjà prêts (les autres arrivent) */
-  const INSIDE = { tour: { img: '../img/hall', where: 'Tour Sakura Group · Rez-de-chaussée, l\'Accueil' } };
+  const INSIDE = { tour: { img: '../img/hall', where: 'Tour Sakura Group · Rez-de-chaussée, l\'Accueil' }, moi: { room: 'moi' } };
   const inside = $('#inside'), insideImg = $('#insideImg');
   let insideTimer;
   function enter(id) {
     const it = INSIDE[id]; if (!it) return false;
-    insideImg.src = it.img + (innerWidth > 1700 ? '.webp' : '-1600.webp');
-    $('#insideWhere').textContent = it.where;
+    if (it.room) { current = it.room; setRoomImage(it.room); }
+    else {
+      insideImg.src = it.img + (innerWidth > 1700 ? '.webp' : '-1600.webp');
+      $('#insideWhere').textContent = it.where;
+    }
     clearTimeout(insideTimer);
     insideTimer = setTimeout(() => { inside.classList.add('on'); inside.setAttribute('aria-hidden', 'false'); }, reduce ? 0 : 750);
     return true;
@@ -284,6 +327,7 @@
   function open(id) {
     const b = B.find((x) => x.id === id); if (!b) return;
     if (focused && focused.id !== id) leave();
+    closeWin(); current = 'RDC'; hots.innerHTML = ''; inside.classList.remove('placeholder');
     focused = b; focus(b);
     const p = PANELS[id]();
     $('#pKicker').textContent = p.kicker; $('#pTitle').textContent = p.title; $('#pLead').textContent = p.lead;
@@ -326,10 +370,11 @@
   const hots = $('#hots'), win = $('#win');
   function setRoomImage(floor) {
     const r = ROOMS[floor];
-    const img = r && r.img ? r.img : '../img/hall';
+    // sans image : le hall pour la tour, la ville floutée pour ton bureau
+    const img = r && r.img ? r.img : r && r.own ? (NIGHT > .5 ? '../img/ville-nuit' : '../img/ville-jour') : '../img/hall';
     insideImg.src = img + (innerWidth > 1700 ? '.webp' : '-1600.webp');
     inside.classList.toggle('placeholder', !!(r && floor !== 'RDC' && !r.img));
-    $('#insideWhere').textContent = floor === 'RDC' ? 'Tour Sakura Group · Rez-de-chaussée, l\'Accueil' : `Tour Sakura Group · Étage ${floor}, ${r.title}`;
+    $('#insideWhere').textContent = r && r.where ? r.where : floor === 'RDC' ? 'Tour Sakura Group · Rez-de-chaussée, l\'Accueil' : `Tour Sakura Group · Étage ${floor}, ${r.title}`;
     hots.innerHTML = '';
     if (r && r.img) r.items.forEach((it) => {
       if (!it.hot) return;
@@ -365,12 +410,17 @@
     $('#pKicker').textContent = `Tour Sakura Group · Étage ${floor}`;
     $('#pTitle').textContent = r.title;
     $('#pLead').textContent = r.lead;
-    $('#pBody').innerHTML = `<div class="rooms">${r.items.map((it, i) => `
+    $('#pBody').innerHTML = roomBody(floor);
+  }
+  // menu des rubriques d'une pièce (étage de la tour ou ton bureau)
+  function roomBody(key) {
+    const r = ROOMS[key];
+    return `<div class="rooms">${r.items.map((it, i) => `
       <button class="room-item" data-item="${it.id}" style="animation-delay:${80 + i * 60}ms">
         <span class="ri-ico" aria-hidden="true">${it.icon}</span><span><b>${it.label}</b><small>${it.sub}</small></span><span class="go" aria-hidden="true">→</span>
       </button>`).join('')}</div>
-      <div class="room-actions"><button class="btn btn-ghost" data-lift>🛗 Ascenseur</button><button class="btn btn-ghost" data-exit>Sortir de la tour</button></div>
-      ${r.img ? '' : '<p class="note">Image de cet étage à venir : pour l\'instant, le fond est celui du hall.</p>'}`;
+      <div class="room-actions">${r.own ? '' : '<button class="btn btn-ghost" data-lift>🛗 Ascenseur</button>'}<button class="btn btn-ghost" data-exit>${r.own ? 'Retour à la ville' : 'Sortir de la tour'}</button></div>
+      ${r.img ? '' : `<p class="note">${r.noImg || 'Image de cet étage à venir : pour l\'instant, le fond est celui du hall.'}</p>`}`;
   }
   function openWin(id) {
     const r = ROOMS[current]; const it = r && r.items.find((x) => x.id === id); if (!it) return;
