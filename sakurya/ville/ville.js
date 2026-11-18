@@ -82,7 +82,7 @@
             <p class="note">Pour un particulier : le passage du CESU au SIRET.</p><button class="btn" data-soon>Commencer</button>` },
         { id: 'calendrier', icon: '📅', label: 'Mes obligations', sub: 'Déclarations et rappels', hot: [37, 23, 24, 27],
           html: `<p class="w-lead">Tes déclarations URSSAF, ta CFE… avec un rappel avant chaque date.</p>
-            <div class="box"><b>Ton chiffre du mois, déjà calculé</b><p>Il est calculé à partir de tes factures Sakurya : tu n'as plus qu'à le recopier sur le site de l'URSSAF.</p></div>
+            <div class="box"><b>Ta déclaration URSSAF</b><p>Un rappel avant chaque date, avec le lien direct vers le site de l'URSSAF.</p></div>
             <div class="box"><b>⚠️ Alertes de plafond</b><p>Tu es prévenu quand tu approches du plafond de la micro-entreprise ou de la fin de la franchise de TVA.</p></div>` },
         { id: 'coffre', icon: '🗂️', label: 'Mon coffre-fort', sub: 'Tous mes documents pros', hot: [1, 18, 20, 70],
           html: `<p class="w-lead">Avis SIRET, attestation URSSAF, assurance, diplômes : tout est rangé, avec un rappel avant expiration.</p>
@@ -90,6 +90,11 @@
             <div class="box"><b>✔ Badge « Pro vérifié »</b><p>SIRET vérifié et assurance à jour : un badge s'affiche dans l'annuaire.</p></div>` },
         { id: 'aides', icon: '💰', label: 'Mes aides', sub: 'ACRE, aides de la région', hot: [56, 54, 10, 21],
           html: `<p class="w-lead">Réponds à 3 questions et vois les aides auxquelles tu as droit (ACRE, aides de la région Occitanie…).</p><button class="btn" data-soon>Faire le test</button>` },
+        { id: 'factures', icon: '🧾', label: 'Mes factures', sub: 'Une solution gratuite et agréée',
+          html: `<p class="w-lead">Sakurya ne fait pas tes factures, et c'est voulu : il existe des solutions gratuites agréées par l'État pour la facture électronique.</p>
+            <div class="box"><b>Notre conseil : Tiime</b><p>Gratuit et agréé par l'État : tu reçois et tu envoies tes factures électroniques, et tu fais tes devis et factures sans limite. Sakura Group l'utilise aussi. Ce n'est pas un partenariat : on te le conseille parce que c'est gratuit et simple.</p></div>
+            <div class="box"><b>Les dates à retenir</b><p>Recevoir des factures électroniques : obligatoire depuis le 1er septembre 2026. Envoyer tes factures à tes clients pros : à partir du 1er septembre 2027 pour les micro-entreprises.</p></div>
+            <a class="btn" href="https://www.tiime.fr/" target="_blank" rel="noopener">Découvrir Tiime ↗</a>` },
         { id: 'partenaires', icon: '🏦', label: 'Banque et assurance', sub: 'Offres partenaires', hot: [68, 51, 6, 25],
           html: `<p class="w-lead">Des offres négociées pour les membres : compte pro, RC Pro, décennale.</p>
             <div class="box"><b>Partenaires</b><p>Les partenaires seront annoncés à l'ouverture.</p></div>` }
@@ -119,13 +124,13 @@
       items: [
         { id: 'demandes', icon: '📍', label: 'Le tableau des demandes', sub: 'Filtré par métier et zone', hot: [8.5, 10, 39.5, 47],
           html: `<p class="w-lead">Les demandes publiées par les clients, filtrées selon ton métier et ta zone. Les urgentes en tête.</p>
-            <div class="mission example"><span class="tag-ex">Exemple</span><span class="tag-urg">Urgent</span><b>Peintre pour 2 chambres</b><small>Colomiers · cette semaine</small><button class="btn btn-sm" data-soon>Répondre avec un devis</button></div>
+            <div class="mission example"><span class="tag-ex">Exemple</span><span class="tag-urg">Urgent</span><b>Peintre pour 2 chambres</b><small>Colomiers · cette semaine</small><button class="btn btn-sm" data-soon>Répondre</button></div>
             <div class="empty"><b>Les premières demandes arrivent</b><p>Dès l'ouverture, les vraies demandes des clients s'affichent ici.</p></div>` },
-        { id: 'repondre', icon: '⚡', label: 'Répondre en 1 clic', sub: 'Devis pré-rempli par l\'IA', hot: [1, 58, 35, 30],
-          html: `<p class="w-lead">Tu cliques sur « Répondre » : l'IA prépare un devis à partir de la demande. Tu ajustes le prix et tu envoies.</p><div class="box"><b>Pourquoi c'est important</b><p>Le premier qui répond bien gagne souvent le chantier.</p></div>` },
+        { id: 'repondre', icon: '⚡', label: 'Répondre en 1 clic', sub: 'Un message prêt pour le client', hot: [1, 58, 35, 30],
+          html: `<p class="w-lead">Tu cliques sur « Répondre » : un message est préparé à partir de la demande, avec tes disponibilités et ta zone. Tu ajustes et tu envoies.</p><div class="box"><b>Pourquoi c'est important</b><p>Le premier qui répond bien gagne souvent le chantier.</p></div>` },
         { id: 'sous', icon: '🤝', label: 'Sous-traitance', sub: 'Se passer du travail entre pros', hot: [49, 55, 32, 32],
           html: `<p class="w-lead">« Trop de travail, qui prend ce chantier ? » ou « Il me faut un électricien pour finir. » Les membres se passent du travail.</p>
-            <div class="box"><b>👷 Équipes d'un jour</b><p>Pour un gros chantier, plusieurs métiers répondent ensemble avec un seul devis groupé.</p></div>` },
+            <div class="box"><b>👷 Équipes d'un jour</b><p>Pour un gros chantier, plusieurs métiers répondent ensemble au même client.</p></div>` },
         { id: 'alertes', icon: '🔔', label: 'Mes alertes', sub: 'Notification ou SMS', hot: [50, 25, 10, 20],
           html: `<p class="w-lead">Reçois une alerte dès qu'une mission tombe dans ton métier et ta zone.</p><button class="btn" data-soon>Régler mes alertes</button>` }
       ]
@@ -154,16 +159,15 @@
             <div class="box"><b>Ce qu'elle fait</b><ul><li>Elle décroche quand tu ne peux pas</li><li>Elle note le nom, le numéro et le besoin du client</li><li>Elle t'envoie un résumé de l'appel</li></ul></div>
             <div class="box"><b>Pour qui</b><p>Incluse dans l'offre Pro.</p></div>
             <button class="btn" data-soon>L'activer</button>` },
-        { id: 'mois', icon: '📊', label: 'Mon mois', sub: 'Chiffre, devis, factures', hot: [56, 22, 21, 31.5],
-          html: `<p class="w-lead">Ton mois en un coup d'œil, calculé à partir de tes devis et de tes factures Sakurya.</p>
+        { id: 'demandes', icon: '📬', label: 'Mes demandes', sub: 'Appels, clients, vues de ta fiche', hot: [56, 22, 21, 31.5],
+          html: `<p class="w-lead">Ton mois en un coup d'œil : tout ce qui t'amène des clients.</p>
             <div class="stats-grid">
-              <div class="stat"><small>Chiffre du mois</small><b>—</b></div>
-              <div class="stat"><small>Devis envoyés</small><b>—</b></div>
-              <div class="stat"><small>Factures payées</small><b>—</b></div>
-              <div class="stat"><small>En attente</small><b>—</b></div>
+              <div class="stat"><small>Appels reçus</small><b>—</b></div>
+              <div class="stat"><small>Demandes de clients</small><b>—</b></div>
+              <div class="stat"><small>Vues de ta fiche</small><b>—</b></div>
+              <div class="stat"><small>Réponses envoyées</small><b>—</b></div>
             </div>
-            <div class="empty"><b>Rien pour l'instant</b><p>Tes chiffres s'affichent ici dès ton premier devis ou ta première facture.</p></div>
-            <p class="note">Tes factures seront au format de la facturation électronique.</p>` },
+            <div class="empty"><b>Rien pour l'instant</b><p>Tes chiffres s'affichent ici dès ton premier appel ou ta première demande.</p></div>` },
         { id: 'badges', icon: '🏆', label: 'Mes badges', sub: 'Gagnés à l\'École et au Guichet', hot: [82.5, 27, 17, 25],
           html: `<p class="w-lead">Tes badges s'affichent sur ta fiche dans l'annuaire. Et ton bâtiment s'embellit à chaque parcours terminé.</p>
             <div class="cards">
@@ -473,11 +477,14 @@
   const toastEl = $('#toast'); let tt;
   function toast(msg) { toastEl.textContent = msg; toastEl.classList.add('show'); clearTimeout(tt); tt = setTimeout(() => toastEl.classList.remove('show'), 2800); }
   const toolToBuilding = { messages: 'cafe', membres: 'membres' };
+  // appels : ton bureau, rubrique secrétaire ; missions : la tour, étage 4
+  const toolToRoom = { appels: ['moi', () => openWin('secretaire')], missions: ['tour', () => ride('4')] };
   $$('.side-btn').forEach((btn) => btn.addEventListener('click', () => {
     $$('.side-btn').forEach((x) => x.classList.toggle('active', x === btn));
     const t = btn.dataset.tool;
     if (t === 'ville') { closePanel(); return; }
     if (toolToBuilding[t]) { open(toolToBuilding[t]); return; }
+    if (toolToRoom[t]) { const [id, then] = toolToRoom[t]; open(id); setTimeout(then, reduce ? 50 : 1300); return; }
     toast('Bientôt disponible.');
   }));
   const ob = $('#onlineBtn'), op = $('#onlinePanel');
