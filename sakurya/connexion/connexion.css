@@ -1,0 +1,87 @@
+:root {
+  --night: #0b1226;
+  --ink: #f5f1ea;
+  --ink-dim: rgba(245, 241, 234, .72);
+  --pink: #f4a3c0;
+  --pink-deep: #e2669a;
+  --gold: #f6c453;
+  --line: rgba(255, 255, 255, .16);
+  --ease: cubic-bezier(.22, .8, .2, 1);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body { background: var(--night); color: var(--ink); font: 15px/1.55 Inter, system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+/* fond : le hall de la tour */
+.bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; }
+.bg img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; transform: scale(1.08); animation: drift 40s ease-in-out infinite alternate; }
+@keyframes drift { to { transform: scale(1.14) translate(-1%, -1%); } }
+.bg canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.shade { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 70% at 50% 50%, rgba(11, 18, 38, .35), rgba(11, 18, 38, .1) 70%), linear-gradient(180deg, rgba(11, 18, 38, .45), transparent 25%, transparent 70%, rgba(11, 18, 38, .6)); }
+
+.logo { position: fixed; top: max(18px, env(safe-area-inset-top)); left: clamp(16px, 4vw, 40px); display: flex; align-items: center; gap: 10px; text-decoration: none; z-index: 2; }
+.logo-mark { width: 34px; height: 34px; color: var(--pink); filter: drop-shadow(0 0 10px rgba(244, 163, 192, .6)); }
+.logo-mark svg { width: 100%; height: 100%; }
+.logo-text { font: 800 21px "Plus Jakarta Sans", sans-serif; }
+
+.stage { min-height: 100svh; display: grid; place-content: center; justify-items: center; gap: 16px; padding: 90px 16px 32px; }
+
+/* carte en verre */
+.card {
+  width: min(420px, 100%); padding: 34px 30px 26px; border-radius: 28px;
+  background: linear-gradient(160deg, rgba(255, 255, 255, .16), rgba(255, 255, 255, .06));
+  border: 1px solid rgba(255, 255, 255, .22);
+  backdrop-filter: blur(22px) saturate(1.3); -webkit-backdrop-filter: blur(22px) saturate(1.3);
+  box-shadow: 0 30px 90px rgba(5, 8, 20, .5), inset 0 1px 0 rgba(255, 255, 255, .25);
+  display: grid; gap: 14px;
+  opacity: 0; transform: translateY(24px) scale(.98); animation: rise 1s var(--ease) .15s forwards;
+}
+@keyframes rise { to { opacity: 1; transform: none; } }
+.hello { font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); }
+.card h1 { font: 800 clamp(26px, 4vw, 32px)/1.15 "Plus Jakarta Sans", sans-serif; letter-spacing: -.01em; }
+.sub { color: var(--ink-dim); font-size: 14.5px; margin-bottom: 6px; }
+
+.field { position: relative; display: flex; align-items: center; }
+.field .ico { position: absolute; left: 14px; width: 18px; height: 18px; color: rgba(245, 241, 234, .6); }
+.field .ico svg, .eye svg { width: 100%; height: 100%; }
+.field input {
+  width: 100%; height: 50px; padding: 0 46px 0 44px; border-radius: 14px;
+  background: rgba(11, 18, 38, .38); border: 1px solid var(--line); color: var(--ink); font: inherit; font-size: 15px;
+  transition: border-color .2s, box-shadow .2s, background .2s;
+}
+.field input::placeholder { color: rgba(245, 241, 234, .55); }
+.field input:focus { outline: none; border-color: var(--pink); box-shadow: 0 0 0 4px rgba(244, 163, 192, .2); background: rgba(11, 18, 38, .5); }
+.eye { position: absolute; right: 12px; width: 26px; height: 26px; padding: 3px; color: rgba(245, 241, 234, .6); border-radius: 8px; }
+.eye:hover, .eye[aria-pressed="true"] { color: var(--pink); }
+
+.row { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 13.5px; flex-wrap: wrap; }
+.row a { color: var(--pink); text-decoration: none; font-weight: 600; }
+.row a:hover { text-decoration: underline; }
+.check { display: flex; align-items: center; gap: 8px; cursor: pointer; color: var(--ink-dim); }
+.check input { width: 16px; height: 16px; accent-color: var(--pink-deep); }
+
+.btn {
+  height: 52px; margin-top: 4px; border-radius: 14px; font: 700 15.5px "Plus Jakarta Sans", sans-serif;
+  background: linear-gradient(135deg, var(--pink), var(--pink-deep)); color: #2a0d1a;
+  box-shadow: 0 12px 32px rgba(226, 102, 154, .4); transition: transform .2s var(--ease), box-shadow .2s;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(226, 102, 154, .55); }
+.btn span { display: inline-block; transition: transform .2s; }
+.btn:hover span { transform: translateX(4px); }
+.msg { min-height: 1.3em; font-size: 13.5px; text-align: center; color: var(--gold); }
+
+.join, .legal { opacity: 0; animation: rise .9s var(--ease) .45s forwards; }
+.join { padding: 12px 20px; border-radius: 16px; font-size: 14px; background: rgba(11, 18, 38, .45); border: 1px solid var(--line); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+.join a { color: var(--pink); font-weight: 700; text-decoration: none; }
+.join a:hover { text-decoration: underline; }
+.legal { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+.legal a { font-size: 12px; text-decoration: none; padding: 5px 10px; border-radius: 999px; background: rgba(11, 18, 38, .4); color: var(--ink-dim); }
+.legal a:hover { color: var(--ink); }
+
+@media (prefers-reduced-motion: reduce) {
+  .bg img { animation: none; }
+  .card, .join, .legal { animation: none; opacity: 1; transform: none; }
+}

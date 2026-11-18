@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Merci pour votre paiement | Sakura Group</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0a0015">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Josefin+Sans:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/site.css">
+<link rel="stylesheet" href="/assets/css/pages.css">
+<style>
+  .merci { max-width: 760px; margin: 0 auto; padding: 0 var(--gut) clamp(80px, 10vw, 130px); }
+  .merci-steps { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 0 0 34px; }
+  .merci-steps li { padding: 16px 18px; border-radius: 16px; border: 1px solid var(--line); background: rgba(255, 255, 255, .04); font-size: 15px; color: var(--muted); }
+  .merci-steps b { display: block; color: var(--paper); margin-bottom: 4px; }
+  .merci .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .merci .hint { font: 400 13px/1.5 var(--sans); letter-spacing: 0; text-transform: none; color: var(--muted); }
+  .merci .safe { margin-top: -4px; font-size: 14px; color: var(--muted); }
+  .merci .done { padding: 26px; border-radius: var(--r); border: 1px solid rgba(240, 200, 102, .5); background: rgba(240, 200, 102, .08); }
+  .merci .done h2 { font: 600 26px/1.2 var(--sans); margin-bottom: 8px; }
+  @media (max-width: 680px) { .merci-steps, .merci .row2 { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body class="subpage">
+<div class="progress" id="progress"></div>
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <a class="logo" href="/" aria-label="Sakura Group, accueil">SAKURA <span>GROUP</span><sup>™</sup></a>
+  <nav class="nav-links" id="nav-links" aria-label="Navigation principale">
+    <a href="/#allo-la-flem">Allô La Flem</a>
+    <a href="/#agence">L'agence</a>
+    <a href="/sakurya/">Sakurya</a>
+    <a href="/blog/">Blog</a>
+  </nav>
+  <a class="btn btn-small magnet" href="/#contact">Nous écrire</a>
+  <button class="burger" id="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-links"><span></span><span></span></button>
+</header>
+<main>
+
+<section class="page-hero">
+  <div class="page-hero-glow" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <p class="kicker reveal-up">Paiement reçu</p>
+  <h1 class="h2 page-title" data-split>Merci, c'est validé.<br><em>Parlons de votre site.</em></h1>
+  <p class="lead reveal-up">Votre paiement est bien reçu, vous recevez aussi un e-mail de confirmation de Stripe. Il nous reste à savoir de quel site il s'agit : deux minutes, et on s'en occupe.</p>
+</section>
+
+<section class="merci">
+  <ol class="merci-steps reveal-up">
+    <li><b>1 · Vous remplissez</b>Les infos de votre site, ci-dessous.</li>
+    <li><b>2 · On vous appelle</b>Pour faire le point et organiser la suite.</li>
+    <li><b>3 · On s'en occupe</b>Mise en ligne, modifications, suivi.</li>
+  </ol>
+
+  <form class="form" id="merci-form" novalidate>
+    <label>Ce que vous avez choisi
+      <select name="offre" id="merci-offre">
+        <option>Entretien de site (39 €/mois)</option>
+        <option>Entretien de site (390 €/an)</option>
+        <option>Pack Commerçant connecté (Allô La Flem)</option>
+        <option>Site professionnel</option>
+        <option>Site boutique</option>
+        <option>Autre</option>
+      </select>
+    </label>
+    <div class="row2">
+      <label>Votre nom<input name="nom" required autocomplete="name"></label>
+      <label>Votre commerce ou entreprise<input name="entreprise" autocomplete="organization"></label>
+    </div>
+    <div class="row2">
+      <label>E-mail utilisé pour le paiement<input name="email" type="email" required autocomplete="email"></label>
+      <label>Téléphone<input name="tel" type="tel" required autocomplete="tel"></label>
+    </div>
+    <label>Adresse de votre site <span class="hint">(si vous en avez déjà un, sinon laissez vide)</span><input name="site" placeholder="www.votre-commerce.fr" autocomplete="url"></label>
+    <label>Ce que vous voulez <span class="hint">(modifications, produits à ajouter, idées…)</span><textarea name="message" rows="5" placeholder="Par exemple : changer mes horaires, ajouter ma nouvelle carte, mettre des photos…"></textarea></label>
+    <p class="safe">🔒 Ne mettez jamais de mot de passe ici. Si on a besoin d'un accès, on vous appelle.</p>
+    <input class="hp" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <button class="btn magnet" type="submit" id="merci-btn">Envoyer</button>
+    <p class="form-status" id="merci-status" role="status"></p>
+  </form>
+</section>
+
+</main>
+
+<footer class="footer">
+  <p class="logo">SAKURA <span>GROUP</span><sup>™</sup></p>
+  <p>Groupe digital à Toulouse · Entreprise immatriculée</p>
+  <p><a href="mailto:contact@sakuragroup.fr">contact@sakuragroup.fr</a></p>
+  <p class="small"><a href="/mentions-legales">Mentions légales</a> · <a href="/cgv">CGV</a></p>
+  <p class="small">© 2026 Sakura Group</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="/assets/js/config.js"></script>
+<script src="/assets/js/site.js"></script>
+<script>
+/* Page Merci : les infos du site arrivent par e-mail (Web3Forms → contact@sakuragroup.fr) */
+(() => {
+  'use strict';
+  const CFG = window.SAKURA || {};
+  const form = document.getElementById('merci-form');
+  const status = document.getElementById('merci-status');
+  const btn = document.getElementById('merci-btn');
+  const sel = document.getElementById('merci-offre');
+  // ?offre=… dans l'adresse de retour Stripe présélectionne l'offre
+  const pre = new URLSearchParams(location.search).get('offre');
+  if (pre) { const o = [...sel.options].find((x) => x.text.toLowerCase().startsWith(pre.toLowerCase())); if (o) sel.value = o.value; }
+  const say = (m, ok) => { status.textContent = m; status.className = 'form-status ' + (ok ? 'ok' : 'err'); };
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (form.dataset.sent) return;
+    let bad = false;
+    form.querySelectorAll('[required]').forEach((f) => { const empty = !f.value.trim(); f.setAttribute('aria-invalid', String(empty)); if (empty) bad = true; });
+    if (bad) { say('Merci de remplir votre nom, votre e-mail et votre téléphone.', false); return; }
+    if (form.botcheck.checked) return;
+    const d = Object.fromEntries(new FormData(form));
+    const payload = {
+      access_key: CFG.formKey,
+      subject: `Nouveau client payé — ${d.offre} — ${d.entreprise || d.nom}`,
+      from_name: 'Site Sakura Group · page Merci',
+      Offre: d.offre, Nom: d.nom, Entreprise: d.entreprise, Email: d.email, Telephone: d.tel,
+      Site: d.site, Demande: d.message, replyto: d.email
+    };
+    btn.disabled = true; say('Envoi en cours…', true);
+    try {
+      const r = await fetch('https://api.web3forms.com/submit', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(payload) });
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok || !data.success) throw new Error();
+      form.dataset.sent = '1';
+      form.outerHTML = '<div class="done"><h2>C\'est parfait, merci !</h2><p>On a bien reçu les infos de votre site. On vous appelle très vite pour la suite.</p></div>';
+    } catch {
+      say(`L'envoi n'a pas fonctionné : réessayez, ou écrivez-nous à ${CFG.email || 'contact@sakuragroup.fr'}.`, false);
+      btn.disabled = false;
+    }
+  });
+})();
+</script>
+</body>
+</html>

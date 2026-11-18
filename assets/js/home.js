@@ -336,7 +336,14 @@
   };
   let summary = '';
   const update = () => {
-    const site = val('site'), acc = val('acc').value, vid = val('vid');
+    const site = val('site'), acc = val('acc').value, vid = val('vid') || { value: 0, dataset: {} };
+    const DESC = {
+      none: 'Vous recevez les fichiers de votre site et vous le gérez vous-même.',
+      host: 'On met votre site en ligne et on garde votre nom de domaine actif. Sans modifications.',
+      ess: 'On héberge votre site, nom de domaine compris. Sauvegardes, maintenance et modifications illimitées (textes, photos, prix, horaires). Réponse sous 72 h.',
+      pro: "Tout l'Essentiel, et : réponse sous 24 h, et un petit bilan de vos visites chaque mois."
+    };
+    const desc = document.getElementById('acc-desc'); if (desc) desc.textContent = DESC[acc] || '';
     const year = yearBox.checked;
     const lines = [];
     let once = +site.value + +vid.value, rec = 0, per = '';

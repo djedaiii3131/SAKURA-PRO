@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>La ville · Sakurya</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0b1226">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="../img/ville-nuit-1600.webp">
+<link rel="stylesheet" href="ville.css">
+</head>
+<body>
+
+<!-- ===== la ville ===== -->
+<div class="viewport" id="viewport">
+  <div class="world" id="world">
+    <img class="layer" id="day" src="../img/ville-jour-1600.webp" srcset="../img/ville-jour-1600.webp 1600w, ../img/ville-jour.webp 2752w" sizes="160vw" alt="La ville Sakurya de jour" draggable="false">
+    <img class="layer" id="night" src="../img/ville-nuit-1600.webp" srcset="../img/ville-nuit-1600.webp 1600w, ../img/ville-nuit.webp 2752w" sizes="160vw" alt="" draggable="false">
+    <div class="glows" id="glows" aria-hidden="true"></div>
+    <canvas class="life" id="life" aria-hidden="true"></canvas>
+    <div class="spots" id="spots"></div>
+  </div>
+  <canvas id="fx" aria-hidden="true"></canvas>
+</div>
+
+<!-- ===== intérieur d'un bâtiment ===== -->
+<div class="inside" id="inside" aria-hidden="true">
+  <img id="insideImg" alt="">
+  <div class="inside-shade"></div>
+  <div class="hots" id="hots"></div>
+  <p class="inside-where" id="insideWhere"></p>
+</div>
+<section class="win" id="win" aria-hidden="true" aria-labelledby="winTitle">
+  <header class="win-head"><span class="win-ico" id="winIcon" aria-hidden="true"></span><h3 id="winTitle"></h3><button class="close" id="winClose" aria-label="Fermer">×</button></header>
+  <div class="win-body" id="winBody"></div>
+</section>
+<div class="doors" id="doors" aria-hidden="true">
+  <i class="door door-l"></i><i class="door door-r"></i>
+  <div class="door-floor"><small>Étage</small><b id="doorFloor">RDC</b></div>
+</div>
+
+<!-- ===== barre du haut ===== -->
+<header class="top">
+  <div class="me">
+    <span class="avatar" aria-hidden="true">TP</span>
+    <span class="me-text">
+      <b>Ton prénom</b>
+      <small>Ton entreprise</small>
+    </span>
+    <span class="demo" title="Aperçu : les comptes membres ne sont pas encore ouverts">Démo</span>
+  </div>
+  <div class="clock" aria-live="off">
+    <b id="time">--:--</b>
+    <small id="date"></small>
+  </div>
+  <button class="online" id="onlineBtn" aria-expanded="false" aria-controls="onlinePanel">
+    <i aria-hidden="true"></i> <span id="onlineCount">1</span> en ligne
+  </button>
+</header>
+
+<div class="online-panel" id="onlinePanel" hidden>
+  <p class="op-title">Membres en ligne</p>
+  <div class="op-row"><span class="avatar sm" aria-hidden="true">TP</span> Toi <em>maintenant</em></div>
+  <p class="op-note">Les autres membres apparaîtront ici dès l'ouverture.</p>
+</div>
+
+<!-- ===== menu de gauche ===== -->
+<nav class="side" aria-label="Ton espace">
+  <a class="logo" href="../" aria-label="Sakurya, retour au site">
+    <svg viewBox="0 0 40 40" aria-hidden="true"><g fill="currentColor"><path d="M20 4c3 4 3 9 0 13-3-4-3-9 0-13z"/><path d="M35.2 15.1c-1.5 4.8-5.6 7.7-10.4 7.4 1.5-4.7 5.6-7.6 10.4-7.4z"/><path d="M29.4 33c-4.9.2-8.9-2.8-10.3-7.5 4.9-.2 8.9 2.8 10.3 7.5z"/><path d="M10.6 33c1.4-4.7 5.4-7.7 10.3-7.5-1.4 4.7-5.4 7.7-10.3 7.5z"/><path d="M4.8 15.1c4.8-.2 8.9 2.7 10.4 7.4-4.8.3-8.9-2.6-10.4-7.4z"/></g><circle cx="20" cy="20" r="3" fill="#f6c453"/></svg>
+  </a>
+  <button class="side-btn active" data-tool="ville" aria-label="La ville"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V10l4-3v14M9 21V4h7v17M16 21v-8h3v8"/></svg><span>Ville</span></button>
+  <button class="side-btn" data-tool="stats" aria-label="Statistiques"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span>Stats</span></button>
+  <button class="side-btn" data-tool="devis" aria-label="Devis"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h5"/></svg><span>Devis</span></button>
+  <button class="side-btn" data-tool="factures" aria-label="Factures"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2zM9 8h6M9 12h6M9 16h3"/></svg><span>Factures</span></button>
+  <button class="side-btn" data-tool="messages" aria-label="Messages"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg><span>Messages</span></button>
+  <button class="side-btn" data-tool="membres" aria-label="Les membres"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.3-5.5 6.5-5.5s5.7 1.9 6.5 5.5M16 4.8a3.5 3.5 0 0 1 0 6.4M18 14.8c1.8.7 3 2.4 3.5 5.2"/></svg><span>Membres</span></button>
+  <span class="side-sep"></span>
+  <button class="side-btn" data-tool="reglages" aria-label="Réglages"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></svg><span>Réglages</span></button>
+</nav>
+
+<!-- ===== aide ===== -->
+<p class="hint" id="hint">Clique sur un bâtiment pour entrer. <span class="hint-mobile">Glisse pour te déplacer.</span></p>
+
+<!-- ===== panneau d'un bâtiment ===== -->
+<aside class="panel" id="panel" aria-hidden="true" aria-labelledby="pTitle">
+  <button class="close" id="close" aria-label="Sortir du bâtiment">×</button>
+  <p class="p-kicker" id="pKicker"></p>
+  <h2 id="pTitle"></h2>
+  <p class="p-lead" id="pLead"></p>
+  <div id="pBody"></div>
+</aside>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="ville.js"></script>
+</body>
+</html>

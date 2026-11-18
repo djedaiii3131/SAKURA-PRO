@@ -1,0 +1,122 @@
+/* =====================================================================
+   Sakura Group : un seul fil de couleurs, du héros jusqu'au blog
+   nuit (héros) → crépuscule violet (univers) → magenta (Allô La Flem)
+   → lever du soleil (l'agence) → aube claire (promesse, sites, guide)
+   → nuit néon violette (vidéos, méthode) → rose (Sakurya) → aube (blog, contact)
+   ===================================================================== */
+:root {
+  --c-night: #07000f;
+  --c-plum: #2a0a45;
+  --c-violet: #4a1268;
+  --c-orchid: #7a1c6e;
+  --c-magenta: #b02a72;
+  --c-rose: #e0507a;
+  --c-coral: #ff8a8a;
+  --c-peach: #ffc9b8;
+  --c-ivory: #fbf4ef;
+  --c-lilac: #f3e6ff;
+  --c-blush: #ffe3ef;
+}
+
+/* ---------- aurores animées réutilisables ---------- */
+.w-univers, .w-flem, .w-agence, .w-sakurya { position: relative; overflow: hidden; isolation: isolate; }
+.w-univers::before, .w-flem::before, .w-sakurya::before, .w-agence::before {
+  content: ""; position: absolute; inset: -20%; z-index: -1; pointer-events: none; filter: blur(70px);
+  animation: auroraDrift 18s ease-in-out infinite alternate;
+}
+@keyframes auroraDrift { 0% { transform: translate3d(-4%, -2%, 0) scale(1); } 100% { transform: translate3d(4%, 3%, 0) scale(1.08); } }
+
+/* ---------- 1 · Nos univers : crépuscule violet ---------- */
+.w-univers { background: linear-gradient(180deg, var(--c-night) 0%, var(--c-plum) 22%, var(--c-violet) 60%, var(--c-orchid) 100%); }
+.w-univers::before { background: radial-gradient(circle at 18% 30%, rgba(160, 107, 255, .55), transparent 40%), radial-gradient(circle at 82% 70%, rgba(255, 61, 127, .45), transparent 42%), radial-gradient(circle at 60% 10%, rgba(94, 242, 255, .22), transparent 35%); }
+.w-univers .lead { font-size: clamp(18px, 1.8vw, 22px); color: rgba(255, 255, 255, .92); max-width: 720px; }
+.w-univers .mono-tag { color: var(--gold); }
+.uni-card { background: linear-gradient(165deg, rgba(255, 255, 255, .16), rgba(255, 255, 255, .05)); border-color: rgba(255, 255, 255, .25); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 30px 80px -40px rgba(7, 0, 15, .8); }
+.uni-card:hover { box-shadow: 0 30px 90px -30px rgba(255, 61, 127, .6); }
+.uni-card p:not(.uni-kicker) { color: rgba(255, 255, 255, .82); }
+.uni-card.uni-flem { background: linear-gradient(165deg, rgba(240, 200, 102, .3), rgba(255, 255, 255, .06) 70%); }
+.uni-card.uni-sakurya { background: linear-gradient(180deg, rgba(42, 10, 69, .15), rgba(42, 10, 69, .85) 62%), url("/sakurya/img/ville-nuit-1600.webp") center 30% / cover; }
+
+/* ---------- 2 · Allô La Flem : magenta ---------- */
+.w-flem { background: linear-gradient(180deg, var(--c-orchid) 0%, var(--c-magenta) 50%, var(--c-rose) 100%); }
+.w-flem::before { background: radial-gradient(circle at 85% 20%, rgba(240, 200, 102, .5), transparent 40%), radial-gradient(circle at 10% 80%, rgba(160, 107, 255, .4), transparent 42%); }
+.w-flem .lead { color: rgba(255, 255, 255, .92); font-size: clamp(17px, 1.6vw, 20px); }
+.w-flem .mono-tag { color: #ffe08a; }
+.flem-door, .offer { background: rgba(255, 255, 255, .12); border-color: rgba(255, 255, 255, .28); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.flem-door span:not(.fd-ico), .offer-list li { color: rgba(255, 255, 255, .9); }
+.flem-door em, .offer-alt b { color: #ffe08a; }
+.offer-star { background: linear-gradient(165deg, rgba(255, 255, 255, .28), rgba(255, 255, 255, .1)); border-color: rgba(255, 255, 255, .55); }
+.offer-for { color: #ffe08a; }
+.offer-more { background: rgba(42, 10, 69, .35); }
+.w-flem .note, .w-flem .note a { color: rgba(255, 255, 255, .85); }
+
+/* ---------- 3 · L'agence : lever du soleil, qui fond dans l'aube claire ---------- */
+.w-agence { background: linear-gradient(180deg, var(--c-rose) 0%, var(--c-coral) 28%, var(--c-peach) 62%, var(--c-ivory) 100%); padding-bottom: clamp(90px, 11vw, 140px); }
+.w-agence::before { background: radial-gradient(circle at 50% 35%, rgba(255, 255, 255, .55), transparent 38%), radial-gradient(circle at 15% 70%, rgba(255, 61, 127, .25), transparent 40%); }
+.w-agence .mono-tag { color: #7a1446; }
+.w-agence .h2 { color: #1c0526; }
+.w-agence .lead { color: #4a1c3a; font-size: clamp(17px, 1.6vw, 20px); }
+.w-agence .btn-ghost { color: #4a1c3a; border-color: rgba(74, 28, 58, .45); }
+.w-agence .btn-ghost:hover { color: #b0346a; border-color: #b0346a; }
+.agence-in { position: relative; }
+.agence-in .h2::after { content: ""; display: block; height: 3px; width: 0; margin: 22px auto 0; border-radius: 3px; background: linear-gradient(90deg, transparent, #ff3d7f, #a06bff, #f0c866, transparent); transition: width 1.4s cubic-bezier(.2, .8, .2, 1) .3s; }
+.agence-in.fx-in .h2::after { width: min(420px, 70%); }
+
+/* titres : la partie en italique scintille (même dégradé que le héros) */
+#univers .h2 em .wd > span, #allo-la-flem .h2 em .wd > span, #agence .h2 em .wd > span, #estimateur .h2 em .wd > span, #sakurya .h2 em .wd > span, #methode .h2 em .wd > span {
+  background: linear-gradient(95deg, #ff85aa, #c7b6ff 35%, #f0c866 65%, #ff85aa); background-size: 300% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent; animation: emShine 6s linear infinite;
+}
+#agence .h2 em .wd > span, #estimateur .h2 em .wd > span { background-image: linear-gradient(95deg, #d8256a, #8b3fd9 35%, #e0912a 65%, #d8256a); }
+@keyframes emShine { to { background-position: 300% 0; } }
+
+/* phrases d'intro : les mots apparaissent un à un, en sortant du flou */
+.fx-words .fw { display: inline-block; opacity: 0; filter: blur(8px); transform: translateY(10px); transition: opacity .6s, filter .6s, transform .6s cubic-bezier(.2, .8, .2, 1); transition-delay: calc(var(--i) * 28ms); }
+.fx-words.fx-in .fw { opacity: 1; filter: blur(0); transform: none; }
+
+/* ---------- guide « Quelle offre » : aube lilas, lumineux ---------- */
+.w-lab { background: linear-gradient(180deg, var(--c-ivory) 0%, var(--c-lilac) 45%, var(--c-blush) 100%); color: #1c0526; --paper: #1c0526; --muted: rgba(28, 5, 38, .66); }
+.w-lab::after { display: none; }
+.lab-bg { opacity: .28; filter: blur(90px) saturate(1.1); }
+.w-lab .mono-tag { color: #b0346a; }
+.w-lab .h2 { color: #1c0526; }
+.w-lab .lead { color: #4a1c3a; }
+.w-lab .glass { background: rgba(255, 255, 255, .62); border-color: rgba(176, 52, 106, .18); box-shadow: 0 30px 80px -40px rgba(176, 52, 106, .45); }
+.w-lab .lab-form legend { color: #b0346a; }
+.w-lab .opt span { border-color: rgba(176, 52, 106, .2); background: rgba(255, 255, 255, .7); color: #2a0d1a; }
+.w-lab .opt small { color: #7a4a66; }
+.w-lab .opt:hover span { border-color: rgba(176, 52, 106, .5); }
+.w-lab .opt input:checked + span { background: linear-gradient(140deg, #ff3d7f, #a06bff); color: #fff; border-color: transparent; }
+.w-lab .opt input:checked + span small { color: rgba(255, 255, 255, .9); }
+.w-lab .lab-hint, .w-lab .res-note, .w-lab .res-list { color: #6b3a57; }
+.w-lab .lab-hint a { color: #b0346a; }
+.w-lab .g-for { color: #d8256a; }
+.w-lab .g-name, .w-lab .g-why { color: #1c0526; }
+.w-lab .g-price small { color: #7a4a66; }
+.w-lab .g-price b { background: linear-gradient(90deg, #d8256a, #8b3fd9); -webkit-background-clip: text; background-clip: text; }
+
+/* ---------- vidéos : nuit néon violette (plus de bleu nuit) ---------- */
+.w-neon { background: linear-gradient(180deg, var(--c-blush) 0, #b0468f 150px, #5b1a8a 38%, #2a0a52 75%, #1c0738 100%); }
+.w-neon::before { opacity: .25; }
+.screen-card { background: rgba(28, 7, 56, .55); border-color: rgba(255, 133, 170, .28); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.w-neon .lead { color: rgba(255, 255, 255, .88); }
+.vr-list li { background: rgba(255, 255, 255, .08); border-color: rgba(255, 133, 170, .3); }
+.vr-list b { color: #ffb3cf; }
+
+/* ---------- méthode : la nuit violette continue ---------- */
+.w-path { background: linear-gradient(180deg, #1c0738 0%, #3a0f5c 45%, var(--c-violet) 100%) !important; }
+.ps-n { background: #24093f; }
+
+/* ---------- Sakurya : du violet au rose, puis l'aube du blog ---------- */
+.w-sakurya { background: linear-gradient(180deg, var(--c-violet) 0%, var(--c-orchid) 35%, var(--c-magenta) 70%, var(--c-rose) 100%); }
+.w-sakurya::before { background: radial-gradient(circle at 80% 30%, rgba(255, 133, 170, .5), transparent 40%), radial-gradient(circle at 10% 70%, rgba(160, 107, 255, .45), transparent 42%); }
+.w-sakurya .lead { color: rgba(255, 255, 255, .92); }
+.sk-steps li { background: rgba(255, 255, 255, .12); border-color: rgba(255, 255, 255, .26); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.sk-steps span { color: rgba(255, 255, 255, .85); }
+.w-paper { background: linear-gradient(180deg, #fde4ec 0%, var(--c-ivory) 260px) !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .w-univers::before, .w-flem::before, .w-sakurya::before, .w-agence::before { animation: none; }
+  .fx-words .fw { opacity: 1; filter: none; transform: none; transition: none; }
+  #univers .h2 em .wd > span, #allo-la-flem .h2 em .wd > span, #agence .h2 em .wd > span, #estimateur .h2 em .wd > span, #sakurya .h2 em .wd > span, #methode .h2 em .wd > span { animation: none; }
+}

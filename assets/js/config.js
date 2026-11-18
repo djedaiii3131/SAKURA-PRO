@@ -6,9 +6,8 @@ window.SAKURA = {
   // Liens de paiement Stripe : colle chaque lien quand il est créé. Vide = le bouton ouvre le formulaire.
   stripe: {
     essentielMois: "https://buy.stripe.com/14AeVdaV6cybfre0WbefC00",
-    essentielAn: "https://buy.stripe.com/aFaaEX5AM8hV0wk8oDefC01",
-    proMois: "https://buy.stripe.com/6oU6oHaV6dCf6UI5crefC02",
-    proAn: "https://buy.stripe.com/7sYcN52oAgOrcf2eN1efC03"
+    essentielAn: "https://buy.stripe.com/aFaaEX5AM8hV0wk8oDefC01"
+    // Liens « Pro » désactivés dans Stripe le 18/11/2026 (offre retirée)
   },
   // Portail client Stripe : le client y gère ou arrête son abonnement
   portail: "https://billing.stripe.com/p/login/14AeVdaV6cybfre0WbefC00"

@@ -1,0 +1,169 @@
+/* Sakura Group : les univers du groupe (Nos univers, l'agence, Sakurya, Allô La Flem) */
+
+/* --- Nos univers --- */
+.w-univers { max-width: none; background: radial-gradient(ellipse at 15% 0%, rgba(192, 132, 252, .18), transparent 50%), radial-gradient(ellipse at 90% 100%, rgba(255, 61, 127, .16), transparent 55%), var(--ink); }
+.w-univers > * { max-width: 1400px; margin-left: auto; margin-right: auto; }
+.uni-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 56px; }
+.uni-card {
+  position: relative; display: flex; flex-direction: column; gap: 10px; min-height: 360px; padding: 30px 26px; border-radius: var(--r); text-decoration: none; overflow: hidden;
+  background: linear-gradient(165deg, rgba(255, 255, 255, .09), rgba(255, 255, 255, .02)); border: 1px solid rgba(255, 255, 255, .14);
+  transition: border-color .4s, transform .4s;
+}
+.uni-card:hover { border-color: rgba(240, 200, 102, .55); }
+.uni-card::before { content: ""; position: absolute; inset: auto -30% -40% auto; width: 260px; height: 260px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 133, 170, .28), transparent 65%); pointer-events: none; transition: transform .6s; }
+.uni-card:hover::before { transform: scale(1.25); }
+.uni-ico { width: 56px; height: 56px; display: grid; place-items: center; border-radius: 16px; font-size: 26px; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .14); }
+.uni-kicker { margin-top: 14px; font-family: var(--mono, monospace); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); }
+.uni-card h3 { font: 600 clamp(24px, 2.2vw, 30px)/1.1 var(--sans); letter-spacing: -.02em; }
+.uni-card p:not(.uni-kicker) { color: var(--muted); font-size: 15.5px; }
+.uni-go { margin-top: auto; padding-top: 14px; font-weight: 600; color: var(--pink); }
+.uni-sakurya { background: linear-gradient(180deg, rgba(10, 0, 21, .25), rgba(10, 0, 21, .92) 62%), url("/sakurya/img/ville-nuit-1600.webp") center 30% / cover; }
+.uni-flem { background: linear-gradient(165deg, rgba(240, 200, 102, .16), rgba(255, 255, 255, .02) 60%); border-color: rgba(240, 200, 102, .3); }
+
+/* --- L'agence : en-tête --- */
+.w-agence { position: relative; padding: clamp(90px, 12vw, 150px) var(--gut) clamp(70px, 9vw, 110px); text-align: center; overflow: hidden;
+  background: radial-gradient(ellipse at 50% 120%, rgba(255, 133, 170, .35), transparent 55%), linear-gradient(180deg, var(--ink), var(--ink-2)); }
+.agence-in { max-width: 900px; margin: 0 auto; }
+.agence-in .lead { margin-left: auto; margin-right: auto; }
+.agence-links { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 34px; }
+.agence-in .agence-links { justify-content: center; }
+
+/* --- Sakurya --- */
+.w-sakurya { position: relative; overflow: hidden; background: radial-gradient(ellipse at 85% 30%, rgba(255, 133, 170, .2), transparent 50%), linear-gradient(180deg, var(--ink-2), var(--ink)); }
+.sk-in { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(32px, 5vw, 80px); align-items: center; }
+.sk-steps { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 30px; }
+.sk-steps li { display: grid; gap: 4px; padding: 16px 18px; border-radius: 16px; background: rgba(255, 255, 255, .05); border: 1px solid rgba(255, 255, 255, .12); }
+.sk-steps b { font-weight: 600; }
+.sk-steps span { color: var(--muted); font-size: 14.5px; }
+.sk-visual { position: relative; display: block; border-radius: 28px; overflow: hidden; border: 1px solid rgba(255, 255, 255, .16); box-shadow: 0 40px 120px -30px rgba(255, 61, 127, .45); aspect-ratio: 16 / 10; }
+.sk-visual img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(.2, .8, .2, 1); }
+.sk-visual:hover img { transform: scale(1.06); }
+.sk-badge { position: absolute; left: 18px; bottom: 18px; padding: 8px 14px; border-radius: 999px; font-size: 13px; font-weight: 600; background: rgba(10, 0, 21, .7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, .18); }
+
+/* --- Allô La Flem --- */
+.w-flem { position: relative; background: radial-gradient(ellipse at 10% 10%, rgba(240, 200, 102, .16), transparent 50%), radial-gradient(ellipse at 100% 90%, rgba(255, 61, 127, .14), transparent 50%), var(--ink); }
+.flem-doors { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 50px; }
+.flem-door { display: flex; flex-direction: column; gap: 8px; padding: 26px 22px; border-radius: var(--r); text-decoration: none; background: rgba(255, 255, 255, .05); border: 1px solid rgba(255, 255, 255, .13); transition: border-color .3s, transform .3s; }
+.flem-door:hover { border-color: rgba(240, 200, 102, .6); transform: translateY(-4px); }
+.fd-ico { font-size: 30px; }
+.flem-door b { font-size: 21px; font-weight: 600; margin-top: 6px; }
+.flem-door span:not(.fd-ico) { color: var(--muted); font-size: 15px; }
+.flem-door em { margin-top: auto; padding-top: 12px; font-style: normal; font-weight: 600; color: var(--gold); }
+.flem-order { background: linear-gradient(165deg, rgba(240, 200, 102, .18), rgba(255, 255, 255, .03)); border-color: rgba(240, 200, 102, .35); }
+.flem-ladder { margin-top: 70px; }
+.ladder { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: end; }
+.step-card { position: relative; display: grid; gap: 8px; padding: 26px 22px 22px; border-radius: var(--r); background: rgba(255, 255, 255, .05); border: 1px solid rgba(255, 255, 255, .12); }
+.ladder .step-card:nth-child(1) { min-height: 210px; }
+.ladder .step-card:nth-child(2) { min-height: 245px; }
+.ladder .step-card:nth-child(3) { min-height: 280px; }
+.step-top { background: linear-gradient(165deg, rgba(255, 133, 170, .2), rgba(255, 255, 255, .03)); border-color: rgba(255, 133, 170, .45); }
+.lad-n { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 12px; font-weight: 700; background: rgba(240, 200, 102, .18); color: var(--gold); }
+.step-card b { font-size: 19px; font-weight: 600; }
+.step-card span:not(.lad-n) { color: var(--muted); font-size: 15px; }
+.step-card small { margin-top: auto; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--pink); }
+
+@media (max-width: 1100px) {
+  .uni-grid, .flem-doors { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 860px) {
+  .sk-in { grid-template-columns: 1fr; }
+  .ladder { grid-template-columns: 1fr; }
+  .ladder .step-card { min-height: 0 !important; }
+}
+@media (max-width: 560px) {
+  .uni-grid, .flem-doors, .sk-steps { grid-template-columns: 1fr; }
+  .uni-card { min-height: 0; }
+}
+
+/* --- offre commerçant mise en valeur --- */
+.lad-badge { position: absolute; top: -12px; right: 18px; padding: 5px 12px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; background: linear-gradient(90deg, var(--gold), var(--pink)); color: #2a0d1a; box-shadow: 0 8px 24px rgba(255, 61, 127, .35); }
+.flem-ladder .note a { color: var(--gold); }
+.sc-price.sc-devis { font-size: clamp(30px, 3vw, 42px); }
+.lab-flem { border-color: rgba(240, 200, 102, .35) !important; }
+.lab-flem legend { color: var(--gold); }
+.opt-star span { box-shadow: inset 0 0 0 1px rgba(240, 200, 102, .55); }
+
+/* --- offres commerçants Allô La Flem --- */
+.flem-offers { margin-top: 70px; }
+.offer-grid { display: grid; grid-template-columns: 1fr 1.25fr; gap: 18px; align-items: stretch; max-width: 1000px; }
+.offer { position: relative; display: flex; flex-direction: column; gap: 10px; padding: 30px 28px; border-radius: var(--r); background: rgba(255, 255, 255, .05); border: 1px solid rgba(255, 255, 255, .13); }
+.offer-star { background: linear-gradient(165deg, rgba(255, 133, 170, .2), rgba(240, 200, 102, .06) 60%, rgba(255, 255, 255, .02)); border-color: rgba(255, 133, 170, .5); box-shadow: 0 30px 90px -30px rgba(255, 61, 127, .45); }
+.offer-for { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--pink); font-weight: 600; }
+.offer h3 { font: 600 clamp(24px, 2.4vw, 32px)/1.1 var(--sans); letter-spacing: -.02em; }
+.offer-price { font: 600 clamp(34px, 3.4vw, 46px)/1 var(--sans); margin-top: 6px; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.offer-price small { font-size: 15px; font-weight: 400; color: var(--muted); }
+.offer-alt { color: var(--muted); margin-top: -2px; }
+.offer-alt b { color: var(--gold); font-weight: 600; }
+.offer-list { list-style: none; display: grid; gap: 9px; margin: 10px 0 6px; }
+.offer-list li { position: relative; padding-left: 26px; color: var(--paper); font-size: 15.5px; }
+.offer-list li::before { content: "✓"; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
+.offer-more { margin: 4px 0 10px; border-radius: 14px; background: rgba(10, 0, 21, .35); border: 1px solid rgba(255, 255, 255, .1); }
+.offer-more summary { cursor: pointer; padding: 12px 16px; font-weight: 600; color: var(--gold); list-style: none; }
+.offer-more summary::-webkit-details-marker { display: none; }
+.offer-more summary::after { content: " ▾"; }
+.offer-more[open] summary::after { content: " ▴"; }
+.offer-more ul { list-style: none; display: grid; gap: 10px; padding: 0 16px 16px; }
+.offer-more li { color: var(--muted); font-size: 14.5px; }
+.offer-more li b { color: var(--paper); font-weight: 600; }
+.offer .btn { margin-top: auto; justify-content: center; }
+.flem-offers .note { text-align: left; }
+.acc-desc { grid-column: 1 / -1; margin: 4px 0 2px; padding: 12px 14px; border-radius: 12px; font-size: 14px; line-height: 1.5; color: var(--paper); background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .12); }
+.lab-hint { margin-top: 14px; font-size: 14px; color: var(--muted); }
+.lab-hint a { color: var(--gold); }
+@media (max-width: 860px) { .offer-grid { grid-template-columns: 1fr; } }
+
+/* --- bouton « en une fois / au mois » (offres de sites) --- */
+.pay-switch { display: inline-flex; gap: 4px; padding: 5px; margin: 34px 0 6px; border-radius: 999px; background: rgba(23, 10, 34, .06); border: 1px solid rgba(176, 52, 106, .25); }
+.pay-switch button { padding: 11px 20px; border-radius: 999px; font: 600 14px var(--sans); color: #6b3a57; background: transparent; border: 0; cursor: pointer; transition: background .3s, color .3s, box-shadow .3s; }
+.pay-switch button[aria-checked="true"] { background: linear-gradient(90deg, var(--pink-hot), var(--pink)); color: #fff; box-shadow: 0 10px 26px -8px rgba(255, 61, 127, .6); }
+.sc-pay { margin: -6px 0 16px; font-size: 14px; color: #7a4a66; }
+.sc-feature .sc-pay { color: rgba(253, 248, 251, .75); }
+
+/* --- guide « Quelle offre est faite pour vous ? » --- */
+.guide-form fieldset { grid-template-columns: 1fr 1fr !important; }
+.guide-result { display: flex; flex-direction: column; gap: 8px; }
+.g-for { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--pink); font-weight: 600; }
+.g-name { font: 600 clamp(26px, 2.6vw, 36px)/1.1 var(--sans); letter-spacing: -.02em; }
+.g-price { display: flex; align-items: baseline; gap: 8px; margin: 4px 0 2px; }
+.g-price b { font: 600 clamp(40px, 4vw, 58px)/1 var(--sans); background: linear-gradient(90deg, var(--gold), var(--pink)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.g-price small { color: var(--muted); font-size: 16px; }
+.g-why { color: var(--paper); font-size: 15.5px; }
+.guide-result .btn { margin-top: auto; }
+
+/* --- vidéos : packs à prix fixe --- */
+.packs { display: grid; grid-template-columns: 1fr 1.2fr; gap: 10px; margin-top: 18px; }
+.pack { position: relative; display: grid; gap: 2px; padding: 14px 16px; border-radius: 16px; text-decoration: none; background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .16); transition: transform .25s, border-color .25s, background .25s; }
+.pack:hover { transform: translateY(-3px); border-color: rgba(103, 232, 249, .6); background: rgba(103, 232, 249, .08); }
+.pack b { font-size: 14px; font-weight: 600; }
+.pack span { font: 600 26px/1.1 var(--sans); }
+.pack small { font-size: 12px; color: var(--muted); }
+.pack em { font-style: normal; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: #67e8f9; font-weight: 700; }
+.pack-best { background: linear-gradient(150deg, rgba(103, 232, 249, .14), rgba(255, 61, 127, .12)); border-color: rgba(103, 232, 249, .45); }
+.pack::after { content: "Commander →"; margin-top: 6px; font-size: 12.5px; font-weight: 600; color: var(--gold); }
+@media (max-width: 420px) { .packs { grid-template-columns: 1fr; } }
+
+/* --- vidéos : les règles --- */
+.vid-rules { padding-top: 10px !important; padding-bottom: 0 !important; }
+.vr-list { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.vr-list li { display: grid; gap: 6px; padding: 20px 22px; border-radius: 18px; background: rgba(255, 255, 255, .05); border: 1px solid rgba(103, 232, 249, .22); }
+.vr-list b { font-weight: 600; color: #67e8f9; }
+.vr-list span { color: var(--muted); font-size: 15px; }
+@media (max-width: 860px) { .vr-list { grid-template-columns: 1fr; } }
+
+/* --- entretien de site (remplace la section accompagnement) --- */
+.entretien { display: grid; grid-template-columns: 1fr auto; gap: 24px 40px; align-items: center; margin-top: 46px; padding: 28px 32px; border-radius: var(--r);
+  background: linear-gradient(120deg, rgba(255, 255, 255, .78), rgba(255, 228, 238, .7)); border: 1px solid rgba(176, 52, 106, .22); box-shadow: 0 24px 60px -28px rgba(176, 52, 106, .45); color: #2a0d1a; }
+.ent-kicker { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: #b0346a; }
+.ent-main { margin-top: 8px; font-size: clamp(17px, 1.6vw, 20px); line-height: 1.5; }
+.ent-main b { font-weight: 700; color: #d8256a; }
+.ent-small { margin-top: 8px; font-size: 14px; color: #6b3a57; }
+.ent-cta { display: grid; gap: 10px; justify-items: center; }
+.ent-pay { font-size: 13.5px; font-weight: 600; color: #b0346a; }
+/* la méthode suit maintenant une section sombre */
+.w-path { background: var(--ink) !important; }
+@media (max-width: 760px) { .entretien { grid-template-columns: 1fr; padding: 24px 20px; } .ent-cta { justify-items: start; } }
+/* liens de paiement de l'entretien : en vrais petits boutons */
+.ent-cta { min-width: 230px; }
+.ent-pay { display: block; width: 100%; text-align: center; padding: 11px 16px; border-radius: 999px; font-size: 14px; font-weight: 700; text-decoration: none; color: #b0346a; background: #fff; border: 1.5px solid rgba(176, 52, 106, .45); transition: background .25s, color .25s, transform .25s; }
+.ent-pay:hover { background: #b0346a; color: #fff; transform: translateY(-2px); }
+.ent-cta .btn { width: 100%; justify-content: center; }

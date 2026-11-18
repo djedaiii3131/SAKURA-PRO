@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sakurya · Bosse sur ton métier, Sakurya s'occupe du reste</title>
+<meta name="description" content="Sakurya, par Sakura Group : ton site, tes devis et factures faits par l'IA, une secrétaire IA qui répond pour toi, des leçons et une communauté d'artisans et d'indépendants. Dès 39 € par mois, sans engagement.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/ville-nuit-1600.webp">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="motion.css">
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <a class="logo" href="#top" aria-label="Sakurya, accueil">
+    <span class="logo-mark" aria-hidden="true">
+      <svg viewBox="0 0 40 40"><g fill="currentColor"><path d="M20 4c3 4 3 9 0 13-3-4-3-9 0-13z"/><path d="M35.2 15.1c-1.5 4.8-5.6 7.7-10.4 7.4 1.5-4.7 5.6-7.6 10.4-7.4z"/><path d="M29.4 33c-4.9.2-8.9-2.8-10.3-7.5 4.9-.2 8.9 2.8 10.3 7.5z"/><path d="M10.6 33c1.4-4.7 5.4-7.7 10.3-7.5-1.4 4.7-5.4 7.7-10.3 7.5z"/><path d="M4.8 15.1c4.8-.2 8.9 2.7 10.4 7.4-4.8.3-8.9-2.6-10.4-7.4z"/></g><circle cx="20" cy="20" r="3" fill="#f6c453"/></svg>
+    </span>
+    <span class="logo-text">Sakurya</span>
+  </a>
+  <nav class="nav-links" aria-label="Navigation principale">
+    <a href="#pour-qui">Pour qui</a>
+    <a href="#poles">Les pôles</a>
+    <a href="#annonces">Annonces</a>
+    <a href="#tarifs">Tarifs</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+  <div class="nav-cta">
+    <a class="link-login" href="connexion/">Se connecter</a>
+    <a class="btn btn-ghost" href="#liste">Rejoindre</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ===== EN-TÊTE ===== -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-bg" aria-hidden="true">
+      <img id="hero-day" src="img/ville-jour-1600.webp" srcset="img/ville-jour-1600.webp 1600w, img/ville-jour.webp 2752w" sizes="100vw" alt="">
+      <img id="hero-night" src="img/ville-nuit-1600.webp" srcset="img/ville-nuit-1600.webp 1600w, img/ville-nuit.webp 2752w" sizes="100vw" alt="">
+      <div class="hero-shade"></div>
+    </div>
+    <canvas id="petals" aria-hidden="true"></canvas>
+
+    <div class="hero-content">
+      <p class="eyebrow"><span class="dot"></span><span id="hero-time">Ta ville s'allume</span></p>
+      <h1 id="hero-title"><span class="line"><span>Bosse sur ton métier.</span></span><span class="line"><span class="grad">Sakurya s'occupe</span></span><span class="line"><span class="grad">du reste.</span></span></h1>
+      <p class="lead">Tu débutes ? On t'apprend le métier et on t'aide à créer ton statut. Tu es déjà pro ? Ta secrétaire IA répond au téléphone pendant tes chantiers, et tes factures sont prêtes pour la facture électronique obligatoire.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary magnetic" href="#liste">Rejoindre les premiers membres <span aria-hidden="true">→</span></a>
+        <a class="btn-text" href="#parcours">Voir le parcours <span aria-hidden="true">↓</span></a>
+      </div>
+      <ul class="hero-facts">
+        <li>Particuliers : <strong>gratuit</strong>, leçons dès 5 €</li>
+        <li>Pros : <strong>dès 39 €</strong> par mois, sans engagement</li>
+        <li>On commence par <strong>Toulouse et ses environs</strong></li>
+      </ul>
+    </div>
+    <a class="scroll-hint" href="#pour-qui" aria-label="Descendre"><span></span></a>
+  </section>
+
+  <!-- ===== BANDEAU MÉTIERS ===== -->
+  <div class="marquee" aria-label="Quelques métiers présents sur Sakurya">
+    <div class="marquee-track">
+      <span>Ménage</span><span>Conciergerie Airbnb</span><span>Plomberie</span><span>Peinture</span><span>Électricité</span><span>Livraison</span><span>Jardinage</span><span>Coiffure</span><span>Carrelage</span><span>Menuiserie</span><span>Photographie</span><span>Déménagement</span>
+      <span aria-hidden="true">Ménage</span><span aria-hidden="true">Conciergerie Airbnb</span><span aria-hidden="true">Plomberie</span><span aria-hidden="true">Peinture</span><span aria-hidden="true">Électricité</span><span aria-hidden="true">Livraison</span><span aria-hidden="true">Jardinage</span><span aria-hidden="true">Coiffure</span><span aria-hidden="true">Carrelage</span><span aria-hidden="true">Menuiserie</span><span aria-hidden="true">Photographie</span><span aria-hidden="true">Déménagement</span>
+    </div>
+  </div>
+
+  <!-- ===== LE CHEMIN ===== -->
+  <section class="journey" aria-labelledby="journey-title">
+    <div class="wrap">
+      <h2 id="journey-title" class="journey-title">Un seul chemin, <span class="grad">du premier pas au quotidien du pro.</span></h2>
+      <ol class="journey-steps">
+        <li><span class="j-ico" aria-hidden="true">🌱</span><b>Particulier</b><small>Tu as un savoir-faire, pas encore de statut.</small></li>
+        <li><span class="j-ico" aria-hidden="true">📚</span><b>Tu apprends</b><small>Leçons courtes : prix, clients, devis, IA.</small></li>
+        <li><span class="j-ico" aria-hidden="true">🚀</span><b>Tu deviens pro</b><small>On t'aide à créer ton statut, pas à pas.</small></li>
+        <li><span class="j-ico" aria-hidden="true">🛠️</span><b>Tu es équipé</b><small>Secrétaire IA, devis, factures, clients.</small></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== POUR QUI ===== -->
+  <section class="section" id="pour-qui" aria-labelledby="pourqui-title">
+    <div class="wrap">
+      <p class="kicker center">Pour qui ?</p>
+      <h2 id="pourqui-title" class="center">Une ville, trois façons d'y entrer.</h2>
+      <p class="sub center">Que tu débutes, que tu sois déjà pro ou que tu cherches un pro, ta place est ici.</p>
+
+      <div class="who-grid">
+        <article class="door glow-card">
+          <span class="door-ico" aria-hidden="true">🌱</span>
+          <p class="door-who">Tu débutes</p>
+          <h3>Ménage, petits travaux, livraison… sans statut pour l'instant</h3>
+          <p>Des leçons courtes pour apprendre à fixer tes prix et trouver tes clients. Et le Guichet t'aide à devenir micro-entrepreneur, ou à travailler avec le CESU.</p>
+          <p class="door-price"><strong>Inscription gratuite</strong> · leçons dès 5 €</p>
+          <a class="btn btn-ghost-dark" href="#liste">Je veux me lancer</a>
+        </article>
+        <article class="door door-pro glow-card">
+          <span class="door-ico" aria-hidden="true">⚒</span>
+          <p class="door-who">Tu es pro</p>
+          <h3>Artisan, auto-entrepreneur, petite entreprise</h3>
+          <p><strong>Ne rate plus un appel</strong> : ta secrétaire IA répond pendant tes chantiers. <strong>Tes factures aux normes</strong> de la facture électronique. Et tous tes outils au même endroit.</p>
+          <p class="door-price">Abonnement dès <strong>39 €/mois</strong> · SIRET vérifié</p>
+          <a class="btn btn-primary" href="#tarifs">Voir les formules</a>
+        </article>
+        <article class="door glow-card">
+          <span class="door-ico" aria-hidden="true">⌕</span>
+          <p class="door-who">Tu cherches un pro</p>
+          <h3>Un plombier, une femme de ménage, un peintre…</h3>
+          <p>Publie ton besoin, les pros de ta zone te répondent. Pressé ? Mets ta demande en avant pour <strong>5 € le mois</strong>.</p>
+          <p class="door-price"><strong>Inscription gratuite</strong></p>
+          <a class="btn btn-ghost-dark" href="#" data-soon>Publier un besoin</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PARCOURS ===== -->
+  <section class="section" id="parcours" aria-labelledby="parcours-title">
+    <div class="wrap">
+      <p class="kicker">Comment ça marche</p>
+      <h2 id="parcours-title">De ton premier pas à ton activité qui tourne.</h2>
+      <p class="sub">Tu t'inscris, tu entres dans la ville, et Sakurya avance avec toi, étape par étape.</p>
+
+      <ol class="timeline">
+        <li class="step">
+          <div class="step-text">
+            <span class="step-when">Tu débutes</span>
+            <h3>Tu apprends, puis tu deviens pro.</h3>
+            <p>À l'École, des leçons courtes : chaque leçon se termine par une action concrète. Au Guichet, on t'aide à créer ton statut pas à pas, avec les bons liens officiels.</p>
+          </div>
+          <div class="mock mock-site" aria-hidden="true">
+            <div class="mock-bar"><i></i><i></i><i></i><span>Parcours « Passer pro »</span></div>
+            <div class="mock-body">
+              <div class="m-check done">Fixer mes prix</div>
+              <div class="m-check done">Trouver mes premiers clients</div>
+              <div class="m-check">Créer ma micro-entreprise</div>
+              <div class="m-check">Ma première facture</div>
+            </div>
+            <span class="mock-tag">Exemple</span>
+          </div>
+        </li>
+
+        <li class="step">
+          <div class="step-text">
+            <span class="step-when">Tu es pro</span>
+            <h3>Tes devis en une phrase, tes factures aux normes.</h3>
+            <p>Tu écris « pose de carrelage 20 m², 2 jours ». L'IA prépare le devis avec les bonnes mentions. Tu relis, tu envoies, ton client signe en ligne. La facture suit en un clic, au format de la facture électronique obligatoire.</p>
+          </div>
+          <div class="mock mock-quote" aria-hidden="true">
+            <div class="q-head"><b>Devis n° 001</b><span>Mme Martin</span></div>
+            <div class="q-row"><span>Pose carrelage 20 m²</span><b>900 €</b></div>
+            <div class="q-row"><span>Fourniture colle et joints</span><b>140 €</b></div>
+            <div class="q-row q-total"><span>Total</span><b>1 040 €</b></div>
+            <p class="q-note">TVA non applicable, art. 293 B du CGI</p>
+            <div class="q-actions"><span class="chip">Relance auto</span><span class="chip chip-pink">Envoyer</span></div>
+            <span class="mock-tag">Exemple</span>
+          </div>
+        </li>
+
+        <li class="step">
+          <div class="step-text">
+            <span class="step-when">Pendant tes chantiers</span>
+            <h3>Tu ne rates plus un appel.</h3>
+            <p>Tu es sur le chantier ? Ta secrétaire IA décroche, répond aux questions simples, prend le message et t'envoie un résumé par SMS.</p>
+          </div>
+          <div class="mock mock-call" aria-hidden="true">
+            <div class="c-head"><span class="c-ico">☎</span><b>Appel pris pour toi</b><small>il y a 4 min</small></div>
+            <p class="c-msg">« Mme Dupont, fuite sous l'évier à Colomiers. Disponible demain matin. Rappeler avant 18 h. »</p>
+            <div class="q-actions"><span class="chip">Rappeler</span><span class="chip chip-pink">Ajouter au planning</span></div>
+            <span class="mock-tag">Exemple</span>
+          </div>
+        </li>
+
+        <li class="step">
+          <div class="step-text">
+            <span class="step-when">Quand tu ne peux plus tout faire seul</span>
+            <h3>Tu t'entoures.</h3>
+            <p>Au Café, les membres s'entraident, partagent des chantiers et des bons plans. Un besoin d'électricien près de chez toi ? Quelqu'un répond.</p>
+          </div>
+          <div class="mock mock-chat" aria-hidden="true">
+            <div class="ch-msg"><span class="av">K</span><p><b>Karim · électricien</b>Je cherche un plaquiste pour un chantier à Colomiers la semaine pro.</p></div>
+            <div class="ch-msg me"><p>Dispo jeudi et vendredi, je t'envoie mon devis 👍</p></div>
+            <span class="mock-tag">Exemple</span>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== LES PÔLES ===== -->
+  <section class="section section-alt" id="poles" aria-labelledby="poles-title">
+    <div class="wrap">
+      <p class="kicker">Les pôles de la ville</p>
+      <h2 id="poles-title">Tout ce qu'il te faut, dans un seul quartier.</h2>
+      <p class="sub">Dans ta barre d'outils : tout ce que tu utilises chaque jour. Au centre de la ville, la tour Sakura Group : un étage, un service.</p>
+
+      <div class="bento">
+        <article class="card card-big card-school">
+          <span class="floor">Tes outils · Le cœur</span>
+          <h3>Ta secrétaire IA</h3>
+          <p>Tu es sur un chantier, les mains prises ? Elle décroche, répond aux questions simples, prend le message et t'envoie un résumé par SMS. Chaque appel décroché, c'est un client qui n'appelle pas le suivant.</p>
+        </article>
+        <article class="card">
+          <span class="floor">Tes outils</span>
+          <h3>Devis et factures électroniques</h3>
+          <p>Une phrase suffit. Mentions obligatoires, relances des impayés, signature en ligne, format de la facture électronique.</p>
+        </article>
+        <article class="card">
+          <span class="floor">Étage 1 · L'École</span>
+          <h3>Les leçons</h3>
+          <p>Parcours courts par objectif et par métier. 1 leçon = 1 résultat concret.</p>
+        </article>
+        <article class="card">
+          <span class="floor">Étage 2 · Le Guichet</span>
+          <h3>L'administratif avec toi</h3>
+          <p>Créer ton statut, tes déclarations rappelées, tes documents rangés, tes aides.</p>
+        </article>
+        <article class="card">
+          <span class="floor">Étage 4 · Les Missions</span>
+          <h3>Des chantiers près de toi</h3>
+          <p>Les demandes de clients de ta zone et la sous-traitance entre pros. 0 % de commission.</p>
+        </article>
+        <article class="card card-wide card-studio">
+          <span class="floor">Étage 3 · Le Studio</span>
+          <h3>On te rend visible</h3>
+          <p>Ton site web, ta fiche Google, ton logo et tes visuels, faits par Sakura Group au tarif membre.</p>
+          <a class="btn-text" href="/">Découvrir l'agence Sakura Group →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LE CAFÉ DES ANNONCES ===== -->
+  <section class="section" id="annonces" aria-labelledby="annonces-title">
+    <div class="wrap split">
+      <div>
+        <p class="kicker">Le Café des annonces</p>
+        <h2 id="annonces-title">Tu as besoin de quelqu'un ? Dis-le à la ville.</h2>
+        <p class="sub">Les particuliers publient leurs besoins, les pros de la zone répondent. Les pros s'entraident, partagent des chantiers et recrutent. Seuls les pros avec un SIRET vérifié peuvent proposer un service payant.</p>
+        <ul class="ticks">
+          <li>Gratuit pour publier une demande</li>
+          <li>Les pros de ta zone sont prévenus</li>
+          <li>« Demande urgente » en tête de liste pendant un mois : 5 €</li>
+        </ul>
+      </div>
+      <div class="feed" aria-hidden="true">
+        <div class="feed-head"><span>Toulouse et environs</span><span class="chip">Tous les métiers ▾</span></div>
+        <div class="post post-urgent"><span class="tag tag-urgent">Urgent</span><b>Fuite sous l'évier</b><small>Particulier · Colomiers · il y a 12 min</small><span class="post-replies">3 pros ont répondu</span></div>
+        <div class="post"><span class="tag">Ménage</span><b>Ménage entre deux locations Airbnb</b><small>Particulier · Toulouse centre · il y a 1 h</small></div>
+        <div class="post"><span class="tag tag-pro">Pro</span><b>Cherche un plaquiste pour un chantier</b><small>Électricien · Blagnac · il y a 3 h</small></div>
+        <div class="post"><span class="tag">Emploi</span><b>Je cherche à apprendre la peinture en bâtiment</b><small>Particulier · Plaisance-du-Touch · hier</small></div>
+        <span class="mock-tag">Exemple</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PARTENAIRE ALLÔ LA FLEM ===== -->
+  <section class="section partner" id="allo-la-flem" aria-labelledby="partner-title">
+    <div class="wrap">
+      <div class="partner-card glow-card">
+        <div>
+          <p class="kicker">Partenaire · Livraison et services de proximité</p>
+          <h2 id="partner-title">Allô La Flem arrive dans le Sud avec Sakurya.</h2>
+          <p class="sub">Allô La Flem est une conciergerie de proximité : elle relie habitants, commerçants et livreurs pour les courses, les livraisons et les services du quotidien. Sakurya est son partenaire pour Toulouse et tout le Sud.</p>
+          <div class="partner-roles">
+            <div><b>Commerçant</b><span>Rejoins la plateforme et livre tes clients.</span></div>
+            <div><b>Livreur indépendant</b><span>Avec ton SIRET, ajoute des courses à ton activité.</span></div>
+            <div><b>Habitant</b><span>Fais-toi livrer par les commerces près de chez toi.</span></div>
+          </div>
+          <a class="btn btn-primary" href="https://allo-laflemme.fr/" target="_blank" rel="noopener">Découvrir Allô La Flem ↗</a>
+        </div>
+        <div class="partner-visual" aria-hidden="true"><span class="pin p1"></span><span class="pin p2"></span><span class="pin p3"></span><span class="route"></span><span class="scooter">🛵</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SEUL / AVEC ===== -->
+  <section class="section" aria-labelledby="vs-title">
+    <div class="wrap wrap-narrow">
+      <h2 id="vs-title" class="center">Pourquoi Sakurya plutôt que te débrouiller seul ?</h2>
+      <div class="vs" role="table" aria-label="Seul ou avec Sakurya">
+        <div class="vs-col vs-alone" role="rowgroup">
+          <div class="vs-head" role="columnheader">Seul</div>
+          <div role="cell">Pas de site, ou un site que personne ne voit</div>
+          <div role="cell">Les devis le soir, à la main</div>
+          <div role="cell">Des factures Word, bientôt plus conformes</div>
+          <div role="cell">Les appels manqués pendant le chantier</div>
+          <div role="cell">Personne à qui demander</div>
+          <div role="cell">Tu cherches tes clients seul</div>
+        </div>
+        <div class="vs-col vs-with" role="rowgroup">
+          <div class="vs-head" role="columnheader">Avec Sakurya</div>
+          <div role="cell">Un site suivi et des statistiques claires</div>
+          <div role="cell">Un devis prêt en une phrase</div>
+          <div role="cell">Des factures électroniques aux normes</div>
+          <div role="cell">Une secrétaire IA qui répond pour toi</div>
+          <div role="cell">Une communauté qui s'entraide</div>
+          <div role="cell">Des membres qui se recommandent</div>
+        </div>
+      </div>
+      <p class="punch center">Seul, tu cours partout.<br><span class="grad">Avec Sakurya, tu avances.</span></p>
+    </div>
+  </section>
+
+  <!-- ===== QUI EST DERRIÈRE ===== -->
+  <section class="section section-alt" aria-labelledby="who-title">
+    <div class="wrap who">
+      <div class="who-badge" aria-hidden="true">桜</div>
+      <div>
+        <p class="kicker">Qui est derrière Sakurya</p>
+        <h2 id="who-title">Un ancien artisan, pour les artisans.</h2>
+        <p>Pendant 13 ans, j'ai été peintre en bâtiment. Puis une chute, et du jour au lendemain, plus le droit de remonter sur un échafaudage. J'ai tout réappris seul : le web, puis l'intelligence artificielle. J'ai créé Sakura Group, à Toulouse.</p>
+        <p>Les devis tard le soir, les appels qu'on ne peut pas prendre, le site qu'on n'a jamais le temps de faire : je connais. Sakurya, c'est l'outil que j'aurais voulu avoir.</p>
+        <p class="sign">Mr NGUYEN VAN, fondateur de Sakura Group</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TARIFS ===== -->
+  <section class="section" id="tarifs" aria-labelledby="tarifs-title">
+    <div class="wrap">
+      <p class="kicker center">Tarifs pros</p>
+      <h2 id="tarifs-title" class="center">Deux formules. Sans engagement au mois.</h2>
+      <p class="sub center">Pour les particuliers et les clients, l'inscription est gratuite.</p>
+
+      <div class="billing" role="group" aria-label="Fréquence de paiement">
+        <button type="button" data-billing="monthly" aria-pressed="false">Au mois</button>
+        <button type="button" data-billing="yearly" aria-pressed="true">À l'année <span class="save">2 mois offerts</span></button>
+      </div>
+
+      <div class="plans">
+        <article class="plan">
+          <p class="plan-name">Essentiel</p>
+          <p class="plan-tag">Pour lancer ton activité sur de bonnes bases.</p>
+          <p class="price"><span class="amount" data-monthly="39" data-yearly="390">390</span> € <span class="per" data-monthly="par mois" data-yearly="par an">par an</span></p>
+          <p class="price-note" data-monthly="Sans engagement, tu arrêtes quand tu veux." data-yearly="Payé en une fois, soit 32,50 € par mois.">Payé en une fois, soit 32,50 € par mois.</p>
+          <a class="btn btn-ghost-dark" href="#" data-soon>Choisir Essentiel</a>
+          <ul class="features">
+            <li>L'île Sakurya et la tour Sakura Group</li>
+            <li>Devis et factures avec l'IA, au format de la facture électronique</li>
+            <li>Statistiques de ton site</li>
+            <li>Le Café : messagerie et annuaire des membres</li>
+            <li>Les leçons de base</li>
+            <li>Hébergement et maintenance de ton site</li>
+            <li>Secrétaire « légère » : SMS automatique après un appel manqué</li>
+          </ul>
+        </article>
+
+        <article class="plan plan-pro">
+          <span class="plan-badge">Le plus complet</span>
+          <p class="plan-name">Pro</p>
+          <p class="plan-tag">Pour ne plus rien laisser passer.</p>
+          <p class="price"><span class="amount" data-monthly="89" data-yearly="890">890</span> € <span class="per" data-monthly="par mois" data-yearly="par an">par an</span></p>
+          <p class="price-note" data-monthly="Sans engagement, tu arrêtes quand tu veux." data-yearly="Payé en une fois, soit 74,17 € par mois. Site vitrine offert.">Payé en une fois, soit 74,17 € par mois. Site vitrine offert.</p>
+          <a class="btn btn-primary" href="#" data-soon>Choisir Pro</a>
+          <p class="features-intro">Tout Essentiel, et :</p>
+          <ul class="features">
+            <li><strong>Ta secrétaire IA</strong> : 150 minutes d'appels incluses par mois</li>
+            <li>Un point d'accompagnement chaque mois avec Sakura Group</li>
+            <li>Toutes les leçons</li>
+            <li>L'île premium</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="extras">
+        <div class="extra glow-card"><b>Gratuit</b><span>Particuliers et clients : inscription, annonces, recherche de pros</span></div>
+        <div class="extra glow-card"><b>5 € / mois</b><span>Demande urgente mise en avant</span></div>
+        <div class="extra glow-card"><b>Dès 5 €</b><span>Leçon à l'unité, pour tout le monde</span></div>
+        <div class="extra glow-card"><b>Sites web</b><span>Faits par Sakura Group : tarif membre réduit pour les pros abonnés</span></div>
+      </div>
+
+      <p class="fine center">TVA non applicable, art. 293 B du CGI : les prix affichés sont les prix que tu paies. Au-delà des 150 minutes incluses, les minutes de la secrétaire IA sont facturées au tarif affiché dans les conditions de vente, avec une alerte avant chaque dépassement. Paiement sécurisé.</p>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="section section-alt" id="faq" aria-labelledby="faq-title">
+    <div class="wrap wrap-narrow">
+      <h2 id="faq-title" class="center">Les questions qu'on nous pose.</h2>
+      <div class="faq">
+        <details><summary>Sakurya, c'est pour qui ?</summary><p>Pour tout le monde, sur un seul chemin. Tu débutes : tu apprends et on t'aide à devenir pro. Tu es pro (artisan, commerçant, auto-entrepreneur, petite entreprise) : tu as ta secrétaire IA, tes devis et factures, et des clients. Tu cherches un pro : c'est gratuit.</p></details>
+        <details><summary>La facture électronique, ça me concerne ?</summary><p>Oui, toutes les entreprises sont concernées, micro-entrepreneurs compris. La réforme se fait en deux temps : d'abord savoir recevoir des factures électroniques, puis devoir en envoyer. Pour les micro-entreprises et les petites entreprises, l'envoi devient obligatoire à partir de septembre 2027, selon le calendrier officiel. Avec Sakurya, tes factures sont préparées dans ce format.</p></details>
+        <details><summary>C'est vraiment gratuit pour les particuliers ?</summary><p>Oui. L'inscription, les annonces et la recherche de pros sont gratuites. Tu ne paies que si tu le choisis : une demande urgente mise en avant (5 € le mois), une leçon à l'unité ou un site web.</p></details>
+        <details><summary>Pourquoi un SIRET pour les pros ?</summary><p>Pour que chaque service proposé sur Sakurya le soit par un vrai professionnel déclaré. Le SIRET est vérifié automatiquement à l'inscription. C'est ce qui rend la ville fiable pour tout le monde.</p></details>
+        <details><summary>Je fais du ménage sans statut, comment faire ?</summary><p>Deux solutions simples et légales : devenir auto-entrepreneur (gratuit, en quelques minutes sur le site de l'Urssaf, et on t'accompagne), ou être déclarée par ton client avec le CESU, le chèque emploi service. On t'explique tout dans une leçon dédiée.</p></details>
+        <details><summary>Je n'ai pas encore de site, c'est un problème ?</summary><p>Non. Sakura Group peut le créer pour toi. Avec la formule Pro à l'année, le site vitrine est offert.</p></details>
+        <details><summary>Un devis préparé par l'IA, c'est fiable ?</summary><p>L'IA prépare le devis à partir de ce que tu écris, avec les mentions obligatoires. Tu le relis et tu le corriges avant de l'envoyer : c'est toi qui valides. Ce n'est pas un conseil juridique ou comptable personnalisé.</p></details>
+        <details><summary>Comment marche la secrétaire IA ?</summary><p>Quand tu ne décroches pas, l'appel est renvoyé vers ton assistante. Elle prévient l'appelant qu'il parle à un assistant automatique, répond aux questions simples (horaires, zone, tarifs), prend le message et t'envoie un résumé. Tu vois ton compteur de minutes dans ton espace.</p></details>
+        <details><summary>Mensuel ou annuel : quel engagement ?</summary><p>Au mois, aucun engagement : tu arrêtes quand tu veux depuis ton espace. À l'année, tu paies 12 mois en une fois et tu as 2 mois offerts.</p></details>
+        <details><summary>Et si j'arrête ?</summary><p>Ton accès à la ville s'arrête à la fin de la période payée. Tes devis et factures restent téléchargeables en PDF : ils sont à toi.</p></details>
+        <details><summary>Quelle différence avec Sakura Group ?</summary><p>Sakura Group est l'agence web qui crée et suit les sites. Sakurya est la plateforme des membres : la ville, les outils, les leçons et la communauté. Les deux travaillent main dans la main.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LISTE D'ATTENTE ===== -->
+  <section class="final" id="liste" aria-labelledby="liste-title">
+    <div class="wrap">
+      <div class="waitlist glow-card">
+        <div class="wl-text">
+          <p class="kicker">Ouverture à Toulouse</p>
+          <h2 id="liste-title">Rejoins les premiers membres.</h2>
+          <p class="sub">Inscris-toi sur la liste : tu es prévenu en premier à l'ouverture, avec l'offre des membres fondateurs.</p>
+          <ul class="ticks">
+            <li>Gratuit, sans engagement</li>
+            <li>Un seul e-mail à l'ouverture, pas de spam</li>
+          </ul>
+        </div>
+        <form class="wl-form" id="waitlist" novalidate>
+          <fieldset class="wl-who">
+            <legend>Tu es…</legend>
+            <label><input type="radio" name="profil" value="debutant" checked><span>🌱 Je débute</span></label>
+            <label><input type="radio" name="profil" value="pro"><span>⚒ Je suis pro</span></label>
+            <label><input type="radio" name="profil" value="client"><span>⌕ Je cherche un pro</span></label>
+          </fieldset>
+          <label class="wl-field"><span>Ton prénom</span><input name="prenom" autocomplete="given-name" placeholder="Prénom"></label>
+          <label class="wl-field"><span>Ton e-mail</span><input name="email" type="email" autocomplete="email" placeholder="ton@email.fr" required></label>
+          <div class="wl-row">
+            <label class="wl-field"><span>Ton métier</span><input name="metier" placeholder="Ménage, peinture…"></label>
+            <label class="wl-field"><span>Ta ville</span><input name="ville" autocomplete="address-level2" placeholder="Toulouse"></label>
+          </div>
+          <label class="wl-consent"><input type="checkbox" name="rgpd" required> <span>J'accepte de recevoir l'e-mail d'ouverture de Sakurya. Je peux me désinscrire à tout moment.</span></label>
+          <button class="btn btn-primary" type="submit">Je rejoins la liste <span aria-hidden="true">→</span></button>
+          <p class="wl-msg" id="wlMsg" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-in">
+    <div>
+      <span class="logo-text">Sakurya</span>
+      <p>par <a href="/">Sakura Group</a>, Toulouse</p>
+    </div>
+    <nav aria-label="Liens légaux">
+      <a href="#" data-soon>Mentions légales</a>
+      <a href="#" data-soon>Conditions de vente</a>
+      <a href="#" data-soon>Confidentialité</a>
+      <a href="mailto:contact@sakuragroup.fr">contact@sakuragroup.fr</a>
+    </nav>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="app.js"></script>
+</body>
+</html>
