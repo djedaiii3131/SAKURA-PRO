@@ -85,3 +85,5 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .bg img { animation: none; }
   .card, .join, .legal { animation: none; opacity: 1; transform: none; }
 }
+
+@media (max-width: 899px), (hover: none) and (pointer: coarse) { .ville-pc { display: none; } }

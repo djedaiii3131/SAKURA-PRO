@@ -5,6 +5,7 @@
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
   const small = innerWidth < 700;
+  const mob = !!window.SAKURA_MOBILE || matchMedia('(max-width: 899px), (hover: none) and (pointer: coarse)').matches; // téléphone / tablette : effets allégés
   const hasGsap = !!(window.gsap && window.ScrollTrigger);
   const pointer = { x: 0, y: 0, tx: 0, ty: 0 };
   addEventListener('pointermove', (e) => {
@@ -12,9 +13,11 @@
     pointer.ty = e.clientY / innerHeight - 0.5;
   }, { passive: true });
 
-  /* ---------- Défilement fluide (Lenis) ---------- */
+  if (mob) $$('a[href="/sakurya/ville/"]').forEach((a) => { a.href = '/sakurya/'; });
+
+  /* ---------- Défilement fluide (Lenis), ordinateur seulement ---------- */
   let lenis = null;
-  if (window.Lenis && hasGsap && !reduce) {
+  if (window.Lenis && hasGsap && !reduce && !mob) {
     lenis = new Lenis({ lerp: 0.09, smoothWheel: true });
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add((t) => lenis.raf(t * 1000));
@@ -72,8 +75,10 @@
         size(); addEventListener('resize', size);
         let vis = true, t0 = performance.now();
         new IntersectionObserver(([e]) => { vis = e.isIntersecting; }).observe(aur);
+        let lastA = 0;
         const frame = (now) => {
-          if (vis) {
+          if (vis && (!mob || now - lastA > 50)) {
+            lastA = now;
             gl.uniform2f(uR, aur.width, aur.height);
             gl.uniform1f(uT, (now - t0) / 1000);
             gl.uniform2f(uM, pointer.x, -pointer.y);
@@ -92,7 +97,7 @@
   if (pc && !reduce) {
     const x = pc.getContext('2d');
     let W, H, dpr, vis = true;
-    const N = small ? 34 : 80, F = 520;
+    const N = mob ? 16 : small ? 34 : 80, F = 520;
     const P = [];
     const size = () => { dpr = Math.min(devicePixelRatio || 1, 2); W = pc.clientWidth; H = pc.clientHeight; pc.width = W * dpr; pc.height = H * dpr; x.setTransform(dpr, 0, 0, dpr, 0, 0); };
     const spawn = (p, top) => {
@@ -105,8 +110,10 @@
     size(); addEventListener('resize', size);
     for (let i = 0; i < N; i++) P.push(spawn({}, false));
     new IntersectionObserver(([e]) => { vis = e.isIntersecting; }).observe(pc);
-    const draw = () => {
-      if (vis) {
+    let lastP = 0;
+    const draw = (now = 0) => {
+      if (vis && (!mob || now - lastP > 33)) {
+        lastP = now;
         x.clearRect(0, 0, W, H);
         P.sort((a, b) => b.z - a.z);
         for (const p of P) {
@@ -144,12 +151,13 @@
 
   /* Lissage du pointeur et de la vitesse de défilement */
   let lastY = scrollY;
+  const chips = fine ? $$('.chip') : [];
   const smooth = () => {
     pointer.x += (pointer.tx - pointer.x) * 0.06;
     pointer.y += (pointer.ty - pointer.y) * 0.06;
     const v = scrollY - lastY; lastY = scrollY;
     scrollVel += (v - scrollVel) * 0.2;
-    $$('.chip').forEach((c) => {
+    chips.forEach((c) => {
       const d = +c.dataset.depth;
       c.style.transform = `translate(${pointer.x * -40 * d}px, ${pointer.y * -30 * d}px)`;
     });

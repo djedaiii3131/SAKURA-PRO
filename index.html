@@ -23,14 +23,16 @@
 </head>
 <body class="home">
 
-<!-- Intro : le dragon doré dans les cerisiers -->
+<script>window.SAKURA_MOBILE = matchMedia("(max-width: 899px), (hover: none) and (pointer: coarse)").matches;</script>
+<!-- Intro : le dragon doré dans les cerisiers (ordinateur seulement) -->
 <div class="intro" id="intro" aria-hidden="true">
-  <video id="intro-video" muted playsinline preload="auto" poster="assets/img/poster.jpg">
+  <video id="intro-video" muted playsinline preload="none" poster="assets/img/poster.jpg">
     <source src="assets/video/transition.mp4" type="video/mp4">
   </video>
   <div class="intro-veil"></div>
   <button class="intro-skip" id="intro-skip" type="button">Passer l'intro</button>
 </div>
+<script>if (window.SAKURA_MOBILE) document.getElementById("intro").remove();</script>
 
 <div class="progress" id="progress"></div>
 <div class="cursor" id="cursor" aria-hidden="true"></div>
@@ -388,12 +390,12 @@
         </ol>
         <div class="agence-links">
           <a class="btn magnet" href="/sakurya/">Découvrir Sakurya</a>
-          <a class="btn btn-ghost magnet" href="/sakurya/ville/">Visiter la ville</a>
+          <a class="btn btn-ghost magnet pc-only" href="/sakurya/ville/">Visiter la ville</a>
         </div>
       </div>
       <a class="sk-visual tilt reveal-up" href="/sakurya/ville/" aria-label="Visiter la ville Sakurya">
         <img src="/sakurya/img/ville-nuit-1600.webp" alt="La ville Sakurya de nuit, avec la tour Sakura Group au centre" loading="lazy">
-        <span class="sk-badge">La ville des membres · aperçu</span>
+        <span class="sk-badge">La ville des membres · aperçu<span class="mob-only"> · à visiter sur ordinateur</span></span>
       </a>
     </div>
   </section>

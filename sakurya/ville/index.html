@@ -96,6 +96,22 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="ville.js"></script>
+<div class="pc-gate" id="pcGate" hidden>
+  <img src="../img/ville-nuit-1600.webp" alt="La ville Sakurya de nuit">
+  <div class="pc-gate-box">
+    <p class="pc-gate-kicker">La ville Sakurya</p>
+    <h1>La ville se visite sur ordinateur.</h1>
+    <p>Elle est faite pour un grand écran et une souris. Ouvre <strong>sakuragroup.fr/sakurya</strong> sur ton PC pour entrer dedans.</p>
+    <a class="pc-gate-btn" href="../">Découvrir Sakurya</a>
+  </div>
+</div>
+<script>
+  if (matchMedia("(max-width: 899px), (hover: none) and (pointer: coarse)").matches) {
+    document.getElementById("pcGate").hidden = false;
+    document.body.classList.add("gated");
+  } else {
+    var s = document.createElement("script"); s.src = "ville.js"; document.body.appendChild(s);
+  }
+</script>
 </body>
 </html>

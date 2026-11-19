@@ -390,3 +390,11 @@ em { font-style: italic; color: var(--pink); }
 .pack-pay.light small { color: #6b4a63; }
 .pack-pay.light { grid-template-columns: 1fr; max-width: 260px; }
 @media (max-width: 420px) { .pack-pay { grid-template-columns: 1fr; } }
+
+/* Ordinateur seulement / mobile seulement */
+.mob-only { display: none; }
+@media (max-width: 899px), (hover: none) and (pointer: coarse) {
+  .pc-only { display: none !important; }
+  .mob-only { display: inline; }
+  .intro { display: none !important; }
+}
